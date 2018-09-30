@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="search">
+
+    </div>
     <nav class="mui-bar mui-bar-tab">
       <a class="mui-tab-item mui-active" href="#tabbar">
         <span class="mui-icon icon iconfont icon-gongzuo"></span>
@@ -16,7 +19,6 @@
     </nav>
 
     <div class="main-win">
-
       <div class="mui-slider">
         <div class="mui-slider-group mui-slider-loop">
           <!--支持循环，需要重复图片节点-->
@@ -36,18 +38,22 @@
         </div>
       </div>
       <div class="recruit-list">
-        <ul class="mui-table-view">
-          <li class="mui-table-view-cell mui-media" v-for="(item,index) in list" :key="index">
-            <a href="javascript:;">
-              <img class="mui-media-object mui-pull-left" :src="item.img">
-              <div class="mui-media-body">
-                {{item.name}}
-                <p class='mui-ellipsis'>{{item.detail}}</p>
+        <div class="mui-table-view">
+          <div class="recruit-item" v-for="(item,index) in list" :key="index">
+            <img :src="item.img" alt="" class="item-left">
+            <div class="item-con">
+              <div class="title">昆山联滔补差价小时工</div>
+              <div class="subtitle">男18-40，女18-42</div>
+              <div class="price">
+               <span>4500-6500</span> 元/月
               </div>
-            </a>
-          </li>
-
-        </ul>
+            </div>
+            <div class="item-right">
+              <div class="btn-one">补贴</div>
+              <div class="btn-span">35.8元/小时</div>
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -111,13 +117,16 @@ export default {
               "https://cos.niuzhigongzuo.com/company/fastdfs/fb790a2a-4806-4540-a865-467fba974bcc-1503244555826.jpg"
           });
         }
-      }, 10000);
+      }, 1000);
     }
   }
 };
 </script>
 
 <style scoped>
+.mui-bar{
+  box-shadow: none;
+}
 .main-win {
   height: 100vh;
 }
@@ -145,7 +154,64 @@ export default {
   margin-top: 0.3rem;
   display: inline-block;
 }
-.recruit-list{
+.recruit-list {
   padding-bottom: 50px;
+}
+.recruit-item {
+  display: flex;
+  padding: 0 10px;
+  border: 1px #f1f1f1 solid;
+}
+.recruit-item .item-left {
+  width: 29%;
+  height: 68px;
+  padding: 5px 5px 5px 0;
+}
+.recruit-item .item-con {
+  flex: 1;
+  width: 100%;
+}
+.recruit-item .item-con .title {
+  font-size: 15px;
+  line-height: 28px;
+}
+.recruit-item .item-con .subtitle {
+  font-size: 12px;
+}
+.recruit-item .item-con .price{
+  font-size: 12px;
+}
+.recruit-item .item-right {
+  margin-left: 10px;
+  width: 75px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+.recruit-item .item-right .btn-one {
+  height: 25px;
+  overflow: hidden;
+  background-color: #0894ec !important;
+  line-height: 25px;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+}
+.recruit-item .item-right .btn-span {
+  font-size: 12px;
+  color: rgb(255, 106, 15);
+  height: 25px;
+  line-height: 25px;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid #e6e6e6;
+}
+.mui-table-view-cell a {
+  display: flex;
+}
+.mui-table-view .mui-media-object {
+  line-height: 50px;
+  max-width: 100%;
+  height: 50px;
 }
 </style>
