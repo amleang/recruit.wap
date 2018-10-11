@@ -11,7 +11,7 @@
     </div>
 
     <nav class="mui-bar mui-bar-tab">
-      <a class="mui-tab-item mui-active" @click="home_handle" >
+      <a class="mui-tab-item mui-active" @click="home_handle">
         <span class="mui-icon icon iconfont icon-gongzuo"></span>
         <span class="mui-tab-label">找工作</span>
       </a>
@@ -19,7 +19,7 @@
         <span class="mui-icon icon iconfont icon-tuijianyoujiang"></span>
         <span class="mui-tab-label">推荐有奖</span>
       </a>
-      <a class="mui-tab-item" @click="my_handle" >
+      <a class="mui-tab-item" @click="my_handle">
         <span class="mui-icon icon iconfont icon-yonghu"></span>
         <span class="mui-tab-label">个人中心</span>
       </a>
@@ -126,15 +126,13 @@ export default {
         }
       }, 1000);
     },
-    home_handle(){
-      this.$router.push({path:"/"})
+    home_handle() {
+      this.$router.push({ path: "/" });
     },
-    recommend_handle(){
-      this.$router.push({path:"/login"})
+    recommend_handle() {
+      this.$router.push({ path: "/login" });
     },
-    my_handle(){
-
-    }
+    my_handle() {}
   }
 };
 </script>
@@ -148,10 +146,9 @@ export default {
   background-color: #f7f7f8;
   color: #5f5f5f;
   text-align: left;
-
 }
-#search::-webkit-input-placeholder{
- color:#ccc;
+#search::-webkit-input-placeholder {
+  color: #ccc;
 }
 .search-label {
   display: block;
@@ -307,6 +304,10 @@ export default {
 }
 .recruit-item .item-con .price {
   font-size: 0.35rem;
+}
+.recruit-item .item-con .price span {
+  color: rgb(255, 106, 15);
+  font-family: "ArialMT";
 }
 .recruit-item .item-right {
   margin-left: 10px;
