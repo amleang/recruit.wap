@@ -65,23 +65,26 @@
       </div>
 
     </div>
-    <div class="nav-index-foat">
-      <p class="nav-index-text">
-        <a href="javascript:callNzJob();" class="external">免费<br>咨询</a>
-      </p>
-    </div>
+    <consult></consult>
   </div>
 </template>
 
 <script>
 import imgT from "../../assets/images/yuantiao.jpg";
+import { checkLogin } from "@/components/lib/util";
+import consult from "@/components/consult";
 export default {
+  components: {
+    consult
+  },
   data() {
     return {
+      isLogin: false,
       list: []
     };
   },
   mounted() {
+    this.isLogin = this.checkLogin();
     const that = this;
     that.loadData();
     this.mui.init({
@@ -112,6 +115,7 @@ export default {
     });
   },
   methods: {
+    checkLogin,
     loadData() {
       console.log("下拉刷新");
       setTimeout(() => {
@@ -130,9 +134,13 @@ export default {
       this.$router.push({ path: "/" });
     },
     recommend_handle() {
-      this.$router.push({ path: "/login" });
+      if (this.isLogin) this.$router.push({ path: "/recommend" });
+      else this.$router.push({ path: "/login" });
     },
-    my_handle() {}
+    my_handle() {
+      if (this.isLogin) this.$router.push({ path: "/user" });
+      else this.$router.push({ path: "/login" });
+    }
   }
 };
 </script>
@@ -257,27 +265,7 @@ export default {
 .mui-slider-item {
   height: 5rem !important;
 }
-/* 页面的免费咨询 */
-.nav-index-foat {
-  position: fixed;
-  right: 0.3rem;
-  bottom: 2rem;
-  z-index: 9999999;
-}
-.nav-index-foat p {
-  width: 1.4rem;
-  height: 1.4rem;
-  background-color: rgba(57, 94, 169, 0.8);
-  border-radius: 100%;
-  text-align: center;
-  box-shadow: 0 0 10px 3px rgba(57, 94, 169, 0.45);
-}
-.nav-index-foat p a {
-  color: #fff;
-  font-size: 0.3rem;
-  margin-top: 0.15rem;
-  display: inline-block;
-}
+
 .recruit-list {
   padding-bottom: 50px;
 }
@@ -336,6 +324,9 @@ export default {
 }
 .mui-table-view-cell a {
   display: flex;
+}
+.mui-table-view{
+  margin-bottom: 1.2rem;
 }
 .mui-table-view .mui-media-object {
   line-height: 50px;

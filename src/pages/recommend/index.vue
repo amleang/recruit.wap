@@ -14,12 +14,8 @@
         <span class="mui-tab-label">个人中心</span>
       </a>
     </nav>
-    <header class="bar-nav">
-      <span class="mui-icon mui-icon-arrowleft btn-back"></span>
-      <div class="head-title">
-        推荐有奖
-      </div>
-    </header>
+    <head-title header="推荐有奖"></head-title>
+
     <div class="content">
       <div class="promptRefer">
         <img src="@/assets/images/recommend.png" alt="">
@@ -48,7 +44,11 @@
 </template>
 
 <script>
+import headTitle from "@/components/header";
 export default {
+  components:{
+    headTitle,
+  },
   data() {
     return {};
   },
@@ -64,26 +64,6 @@ export default {
 </script>
 
 <style scoped>
-.bar-nav {
-  height: 1.2rem;
-  background-color: rgba(8, 148, 246, 0.6);
-  display: flex;
-  align-items: center;
-  position: fixed;
-  width: 100%;
-}
-.btn-back {
-  margin-left: 0.2rem;
-  color: #0894ec;
-  font-size: 0.8rem;
-}
-.head-title {
-  width: 100%;
-  margin-left: -1rem;
-  text-align: center;
-  font-size: 0.45rem;
-  color: #fff;
-}
 
 .content {
   padding-top: 1.2rem;
