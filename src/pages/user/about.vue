@@ -13,6 +13,9 @@ import headTitle from "@/components/header";
 export default {
   components: {
     headTitle
+  },
+  mounted(){
+     document.title = "牛职工作网";
   }
 };
 </script>

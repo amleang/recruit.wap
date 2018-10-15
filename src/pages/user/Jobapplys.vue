@@ -17,6 +17,9 @@ export default {
   components: {
     headTitle,
     consult
+  },
+  mounted(){
+    document.title = "我的工作";
   }
 };
 </script>

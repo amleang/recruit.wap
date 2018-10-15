@@ -22,6 +22,9 @@ import headTitle from "@/components/header";
 export default {
   components: {
     headTitle
+  },
+  mounted(){
+     document.title = "余额明细";
   }
 };
 </script>

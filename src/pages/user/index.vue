@@ -107,7 +107,7 @@
           <div class="user-icon">
             <i class="iconfont icon-mendian"></i>
           </div>
-          <div class="item-title">我的门店</div>
+          <div class="item-title" @click="$router.push({path:'/store'})">我的门店</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>

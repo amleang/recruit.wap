@@ -1,9 +1,9 @@
 <template>
-    <div class="nav-index-foat">
-        <p class="nav-index-text">
-            <a class="external">免费<br>咨询</a>
-        </p>
-    </div>
+  <div class="nav-index-foat">
+    <p class="nav-index-text" @click="$router.push({path:'/store'})">
+      <a class="external">免费<br>咨询</a>
+    </p>
+  </div>
 </template>
 
 <script>

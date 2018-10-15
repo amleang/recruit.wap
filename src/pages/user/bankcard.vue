@@ -86,6 +86,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "我的补贴银行卡";
     this.provinces = this.cityData();
   },
   methods: {

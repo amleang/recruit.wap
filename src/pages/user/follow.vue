@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <head-title header="我的关注"></head-title>
-        <div class="content">
-            <div class="content-ul">
-                <div class="ul-empt">您还没有关注过任何岗位哦！</div>
-            </div>
-        </div>
-
-        <consult></consult>
+  <div>
+    <head-title header="我的关注"></head-title>
+    <div class="content">
+      <div class="content-ul">
+        <div class="ul-empt">您还没有关注过任何岗位哦！</div>
+      </div>
     </div>
+
+    <consult></consult>
+  </div>
 </template>
 
 <script>
@@ -18,6 +18,9 @@ export default {
   components: {
     headTitle,
     consult
+  },
+  mounted() {
+    document.title = "我的关注";
   }
 };
 </script>
