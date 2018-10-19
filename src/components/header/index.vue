@@ -33,6 +33,7 @@ export default {
   align-items: center;
   position: fixed;
   width: 100%;
+  z-index: 99;
 }
 .btn-back {
   position: absolute;
@@ -46,4 +47,5 @@ export default {
   font-size: 0.45rem;
   color: #fff;
 }
+
 </style>

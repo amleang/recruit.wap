@@ -46,7 +46,7 @@
       </div>
       <div class="recruit-list">
         <div class="mui-table-view">
-          <div class="recruit-item" v-for="(item,index) in list" :key="index">
+          <div class="recruit-item" v-for="(item,index) in list" :key="index" @click="detail_handle(item)">
             <img :src="item.img" alt="" class="item-left">
             <div class="item-con">
               <div class="title">昆山联滔补差价小时工</div>
@@ -140,6 +140,9 @@ export default {
     my_handle() {
       if (this.isLogin) this.$router.push({ path: "/user" });
       else this.$router.push({ path: "/login" });
+    },
+    detail_handle(item) {
+      this.$router.push({ path: "/jobdetail" });
     }
   }
 };
@@ -325,7 +328,7 @@ export default {
 .mui-table-view-cell a {
   display: flex;
 }
-.mui-table-view{
+.mui-table-view {
   margin-bottom: 1.2rem;
 }
 .mui-table-view .mui-media-object {
