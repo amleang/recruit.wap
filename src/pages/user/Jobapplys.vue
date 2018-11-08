@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <head-title header="我的工作"></head-title>
-        <div class="content">
-            <div class="content-ul">
-                <div class="ul-empt">您还没有工作过哦！</div>
-            </div>
-        </div>
-        <consult></consult>
+  <div>
+    <head-title header="我的工作"></head-title>
+    <div class="content">
+      <div class="content-ul">
+        <div class="ul-empt">您还没有工作过哦！</div>
+      </div>
     </div>
+    <consult></consult>
+  </div>
 </template>
 
 <script>
@@ -18,8 +18,9 @@ export default {
     headTitle,
     consult
   },
-  mounted(){
+  mounted() {
     document.title = "我的工作";
+    
   }
 };
 </script>

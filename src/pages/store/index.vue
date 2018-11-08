@@ -7,18 +7,18 @@
           <img src="@/assets/images/logo.png" alt="">
         </div>
         <div class="link-info">
-          <div class="coName">潍坊英杰人力</div>
-          <div class="phone">罗经理：<a href="tel:13031675675">13031675675</a></div>
-          <div class="phone">罗经理：<a href="tel:13031675675">13031675675</a></div>
+          <div class="coName">{{form.coName}}</div>
+          <div class="phone" v-for="(item,index) in form.links" :key="index">
+            {{item.link}}<a :href="`tel:${item.phone}`">{{item.phone}}</a></div>
         </div>
       </div>
-      <div class="address">山东省 潍坊市 经济开发区 鸢飞路1518号鑫润香岸花园26号楼15号房</div>
+      <div class="address">{{form.address}}</div>
       <div class="tencent-map">
-        <iframe src="https://apis.map.qq.com/tools/poimarker?type=0&marker=coord:36.7561416626,119.1249237061;title:潍坊英杰人力;addr:潍坊市经济开发区鸢飞路1518号鑫润香岸花园26号楼15号房&key=DE2BZ-47CRU-5LPVV-BXXAB-MWLRQ-D7FXQ&referer=recruit" frameborder="0"></iframe>
+        <iframe v-if="isLoad" :src="`https://apis.map.qq.com/tools/poimarker?type=0&marker=coord:${form.lat},${form.lng};title:${form.coName};addr:潍坊市经济开发区鸢飞路1518号鑫润香岸花园26号楼15号房&key=DE2BZ-47CRU-5LPVV-BXXAB-MWLRQ-D7FXQ&referer=recruit`" frameborder="0"></iframe>
       </div>
 
       <div class="serviceLink">
-        平台客服电话：<a href="tel:400-829-1113">400-829-1113</a>
+        平台客服电话：<a :href="`tel:${form.platPhone}`">{{form.platPhone}}</a>
       </div>
     </div>
 
@@ -31,8 +31,22 @@ export default {
   components: {
     headTitle
   },
+  data() {
+    return {
+      isLoad: false,
+      form: {
+        coName: "",
+        cover: ""
+      }
+    };
+  },
   mounted() {
     document.title = "我的门店";
+    this.http.get("/api/app/co").then(res => {
+      console.log("res=>", res);
+      this.form = res.data[0];
+      this.isLoad = true;
+    });
   }
 };
 </script>

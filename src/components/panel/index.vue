@@ -6,7 +6,7 @@
                 <slot name="reright"></slot>
             </div>
         </div>
-        <div class="content">
+        <div class="content panle-content">
             <slot></slot>
         </div>
     </div>
@@ -52,4 +52,5 @@ export default {
   font-size: 0.35rem;
   color: #333;
 }
+
 </style>

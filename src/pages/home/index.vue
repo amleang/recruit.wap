@@ -2,10 +2,10 @@
   <div>
     <div id="listSearch" class="bar bar-header-secondary" style="top:0;">
       <div class="searchbar searchbar-active" style="background-color: #fff;">
-        <a class="searchbar-cancel">搜索</a>
+        <a class="searchbar-cancel" @click="search_handle">搜索</a>
         <div class="search-input">
           <label class="search-label mui-icon mui-icon-search"></label>
-          <input type="search" id="search" name="jobName" placeholder="搜索岗位名称或关键字" value="">
+          <input type="search" id="search" name="jobName" placeholder="搜索岗位名称或关键字" v-model="searchParam">
         </div>
       </div>
     </div>
@@ -27,37 +27,47 @@
 
     <div class="main-win">
       <div class="mui-slider">
-        <div class="mui-slider-group mui-slider-loop">
+        <div class="mui-slider-group mui-slider-loop" v-if="topImgList.length>1">
           <!--支持循环，需要重复图片节点-->
-          <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div>
+          <!-- <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div> -->
+          <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[0])"><img :src="topImgList[0].cover" /></a></div>
+          <!--  <div class="mui-slider-item"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div>
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/muwu.jpg" /></a></div>
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/cbd.jpg" /></a></div>
-          <div class="mui-slider-item"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div>
+          <div class="mui-slider-item"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div> -->
+          <div class="mui-slider-item" v-for="(item,index) in topImgList" :key="index"><a @click="top_detail_handle(item)"><img :src="item.cover" /></a></div>
           <!--支持循环，需要重复图片节点-->
-          <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div>
+          <!--  <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div> -->
+          <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[topImgList.length-1])"><img :src="topImgList[topImgList.length-1].cover" /></a></div>
         </div>
-        <div class="mui-slider-indicator">
-          <div class="mui-indicator mui-active"></div>
-          <div class="mui-indicator"></div>
-          <div class="mui-indicator"></div>
-          <div class="mui-indicator"></div>
+        <div class="mui-slider-group" v-else>
+          <div class="mui-slider-item"><a @click="top_detail_handle(topImgList[0])"><img :src="topImgList[0].cover" /></a></div>
+        </div>
+        <div class="mui-slider-indicator" v-if="topImgList.length>1">
+          <div :class="`mui-indicator ${index==0?'mui-active' :''}`" v-for="(item,index) in topImgList" :key="index"></div>
         </div>
       </div>
       <div class="recruit-list">
-        <div class="mui-table-view">
+        <div :class="`mui-table-view ${isNo?'no-bottom':''}`">
+          <div class="recruit-item" v-if="isNo">
+            <div class="nothing">暂无招工信息</div>
+          </div>
           <div class="recruit-item" v-for="(item,index) in list" :key="index" @click="detail_handle(item)">
-            <img :src="item.img" alt="" class="item-left">
+            <img :src="item.cover" alt="" class="item-left">
             <div class="item-con">
-              <div class="title">昆山联滔补差价小时工</div>
-              <div class="subtitle">男18-40，女18-42</div>
+              <div class="title">{{item.name}}</div>
+              <div class="subtitle">{{item.subname}}</div>
               <div class="price">
-                <span>4500-6500</span> 元/月
+                <span>{{item.salaryStart}}-{{item.salaryEnd}}</span> 元/月
               </div>
             </div>
-            <div class="item-right">
+            <div class="item-right" v-if="item.type==1">
+              <div class="btn-one">工价</div>
+              <div class="btn-span">{{item.laborPrice}}元/小时</div>
+            </div>
+            <div class="item-right" v-if="item.type==2">
               <div class="btn-one">补贴</div>
-              <div class="btn-span">35.8元/小时</div>
+              <div class="btn-span">{{item.subsidyExplain}}</div>
             </div>
           </div>
         </div>
@@ -79,21 +89,29 @@ export default {
   },
   data() {
     return {
+      topImgList: [{}],
       isLogin: false,
+      searchParam: "",
+      queryParam: "",
+      pageNo: 1,
+      pageSize: 10,
+      rowCout: 100,
+      isNo: false,
       list: []
     };
   },
   mounted() {
+    document.body.scrollTop = 0;
     this.isLogin = this.checkLogin();
     const that = this;
-    that.loadData();
-    this.mui.init({
+    that.loadData(that);
+    /*  this.mui.init({
       swipeBack: true //启用右滑关闭功能
-    });
+    }); */
     //获得slider插件对象
     var slider = this.mui(".mui-slider");
     slider.slider({
-      interval: 2000
+      interval: 3000
     });
     window.addEventListener("scroll", () => {
       //下面这句主要是获取网页的总高度，主要是考虑兼容性所以把Ie支持的documentElement也写了，这个方法至少支持IE8
@@ -108,27 +126,64 @@ export default {
         document.body.scrollTop || document.documentElement.scrollTop;
       /* console.log("htmlHeight", htmlHeight, scrollTop, clientHeight); */
       //通过判断滚动条的top位置与可视网页之和与整个网页的高度是否相等来决定是否加载内容；
-      if (scrollTop + clientHeight == htmlHeight) {
+      if (scrollTop != 0 && scrollTop + clientHeight == htmlHeight) {
         //上拉加载逻辑代码
-        that.loadData();
+        that.loadData(that);
       }
     });
   },
   methods: {
     checkLogin,
-    loadData() {
-      console.log("下拉刷新");
-      setTimeout(() => {
-        for (var i = 0; i < 20; i++) {
-          this.list.push({
-            id: i,
-            name: "幸福" + i,
-            detail: "想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.",
-            img:
-              "https://cos.niuzhigongzuo.com/company/fastdfs/fb790a2a-4806-4540-a865-467fba974bcc-1503244555826.jpg"
+    search_handle() {
+      this.pageNo = 1;
+      this.queryParam = this.searchParam;
+      this.rowCout = 100;
+      this.list = [];
+      this.loadData(this);
+    },
+    loadData(that) {
+      if (that.rowCout > (that.pageNo - 1) * that.pageSize) {
+        that.http
+          .get("/api/app/recruit", {
+            params: {
+              page: that.pageNo,
+              size: that.pageSize,
+              name: that.queryParam
+            }
+          })
+          .then(res => {
+            console.log("res=>", res);
+            if (res.code == 200) {
+              that.rowCout = res.count;
+              if (that.pageNo == 1) {
+                var onePageList = [];
+                let topList = res.data.filter(x => x.isTop == 1);
+                if (topList.length == 0) {
+                  if (res.data.length > 0) that.topImgList = [res.data[0]];
+                } else {
+                  if (topList.length > 5) {
+                    topList.forEach((item, index) => {
+                      if (index < 5) that.topImgList.push(item);
+                    });
+                  } else {
+                    that.topImgList = topList;
+                  }
+                }
+                res.data.forEach(item => {
+                  if (that.topImgList.filter(x => x.id == item.id).length == 0)
+                    that.list.push(item);
+                });
+              } else {
+                that.list.concat(res.data);
+              }
+              if (that.list.length > 0) that.isNo = false;
+              else that.isNo = true;
+            } else {
+              that.mui.toast(res.msg, { duration: "long", type: "div" });
+            }
           });
-        }
-      }, 1000);
+        console.log("下拉刷新");
+      } else return;
     },
     home_handle() {
       this.$router.push({ path: "/" });
@@ -141,12 +196,20 @@ export default {
       if (this.isLogin) this.$router.push({ path: "/user" });
       else this.$router.push({ path: "/login" });
     },
+    top_detail_handle(item) {
+      this.$router.push({ path: "/jobdetail?id=" + item.id });
+    },
     detail_handle(item) {
-      this.$router.push({ path: "/jobdetail" });
+      this.$router.push({ path: "/jobdetail?id=" + item.id });
     }
   }
 };
 </script>
+<style>
+.mui-toast-container {
+  bottom: 50% !important;
+}
+</style>
 
 <style scoped>
 #listSearch {
@@ -277,6 +340,13 @@ export default {
   padding: 0 10px;
   border: 1px #f1f1f1 solid;
 }
+.recruit-item .nothing {
+  font-size: 0.4rem;
+  text-align: center;
+  width: 100%;
+  height: 5rem;
+  line-height: 5rem;
+}
 .recruit-item .item-left {
   width: 29%;
   height: 2rem;
@@ -289,6 +359,8 @@ export default {
 .recruit-item .item-con .title {
   font-size: 0.4rem;
   line-height: 0.7rem;
+  height: 0.7rem;
+  overflow: hidden;
 }
 .recruit-item .item-con .subtitle {
   font-size: 0.35rem;
@@ -335,5 +407,8 @@ export default {
   line-height: 50px;
   max-width: 100%;
   height: 50px;
+}
+.no-bottom {
+  position: inherit !important;
 }
 </style>

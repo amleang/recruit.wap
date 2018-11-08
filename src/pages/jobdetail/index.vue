@@ -1,139 +1,163 @@
 <template>
-    <div>
-        <div class="bar-nav">
-            <span class="mui-icon mui-icon-arrowleft btn-back" @click="back_handle"></span>
-            <div class="head-title">
-                <marquee direction="left" width="100%" behavior="scroll" scrollamount="5" scrolldelay="5" onmouseout="this.start()" onmouseover="this.stop()">
-                    <span class="ad-slogan">只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保</span>
-                </marquee>
-            </div>
-        </div>
-        <div class="content">
-            <div class="mui-slider">
-                <div class="mui-slider-group mui-slider-loop">
-                    <!--支持循环，需要重复图片节点-->
-                    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div>
-                    <div class="mui-slider-item"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div>
-                    <div class="mui-slider-item"><a href="#"><img src="../../assets/images/muwu.jpg" /></a></div>
-                    <div class="mui-slider-item"><a href="#"><img src="../../assets/images/cbd.jpg" /></a></div>
-                    <div class="mui-slider-item"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div>
-                    <!--支持循环，需要重复图片节点-->
-                    <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div>
-                </div>
-                <div class="mui-slider-indicator">
-                    <div class="mui-indicator mui-active"></div>
-                    <div class="mui-indicator"></div>
-                    <div class="mui-indicator"></div>
-                    <div class="mui-indicator"></div>
-                </div>
-
-            </div>
-            <div class="company">
-                <div class="title">
-                    <div class="name">山东歌尔声学股份有限公司</div>
-                    <div class="price">
-                        <span>15</span>元/小时
-                    </div>
-                </div>
-                <div class="subtitle">
-                    18-40岁，环境好
-                </div>
-                <div class="sign-num">已报名468人
-                </div>
-            </div>
-            <re-panel title="补贴">
-                <div slot="reright">
-                    <div style="font-size:0.3rem;">查看企业全部补贴 ></div>
-                </div>
-                <div>
-                    自 2018年10月16日
-                    起
-                    入职即可领取
-                </div>
-            </re-panel>
-            <re-panel title="工资福利">
-                <div>
-                    自 2018年10月16日
-                    起
-                    入职即可领取
-                </div>
-            </re-panel>
-            <re-panel title="岗位介绍">
-                <div>
-                    自 2018年10月16日
-                    起
-                    入职即可领取
-                </div>
-            </re-panel>
-            <re-panel title="注意事项">
-                <div>
-                    自 2018年10月16日
-                    起
-                    入职即可领取
-                </div>
-            </re-panel>
-            <re-panel title="企业介绍">
-                <div>
-                    自 2018年10月16日
-                    起
-                    入职即可领取
-                </div>
-            </re-panel>
-            <re-panel title="岗位推荐">
-                <div style="margin:0 -0.5rem;">
-                    <div class="rem-item" v-for="(item,index) in recommends" :key="index">
-                        <div>
-                            <img :src="item.img" alt="">
-                        </div>
-                        <div class="price">{{item.price}}</div>
-                        <div class="name">{{item.name}}</div>
-                    </div>
-                    <div style="clear:both;"></div>
-                </div>
-            </re-panel>
-
-            <div class="con-bottom"></div>
-        </div>
-
-        <div class="nav-index-foat">
-            <p class="nav-index-text">
-                <a class="external">免费<br>咨询</a>
-            </p>
-        </div>
-
-        <div class="nav-index-foat-my">
-            <p class="nav-index-text-my">
-                <a class="external">纠错<br>报告</a>
-            </p>
-        </div>
-
-        <div class="foot-bottom">
-            <div class="apply-btn" @click="dialog=true;">免费报名</div>
-            <div class="follow-btn">关注</div>
-            <div class="share-btn">分享</div>
-        </div>
-        <div v-if="dialog" class="mui-popup-backdrop"></div>
-        <div v-if="dialog" class="dialog">
-            <div class="form-item">
-                <label for="">姓名</label>
-                <div>
-                    <input type="text" placeholder="姓名">
-                </div>
-            </div>
-
-            <div class="form-item">
-                <label for="">邀请码</label>
-                <div>
-                    <input type="text" placeholder="邀请码">
-                </div>
-            </div>
-            <div class="btn-success">确定</div>
-        </div>
+  <div>
+    <div class="bar-nav">
+      <span class="mui-icon mui-icon-arrowleft btn-back" @click="back_handle"></span>
+      <div class="head-title">
+        <marquee direction="left" width="100%" behavior="scroll" scrollamount="5" scrolldelay="5" onmouseout="this.start()" onmouseover="this.stop()">
+          <span class="ad-slogan">只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保</span>
+        </marquee>
+      </div>
     </div>
+    <div class="content">
+      <div class="mui-slider">
+        <div class="mui-slider-group mui-slider-loop" v-if="form.imgs.length>1">
+          <!--支持循环，需要重复图片节点-->
+          <div class="mui-slider-item mui-slider-item-duplicate"><a><img :src="form.imgs[0]" /></a></div>
+          <div class="mui-slider-item" v-for="(item,index) in form.imgs" :key="index"><a><img :src="item" /></a></div>
+          <!--支持循环，需要重复图片节点-->
+          <div class="mui-slider-item mui-slider-item-duplicate"><a><img :src="form.imgs[form.imgs.length-1]" /></a></div>
+        </div>
+        <div class="mui-slider-group" v-else>
+          <div class="mui-slider-item"><a><img :src="form.imgs[0]" /></a></div>
+        </div>
+        <div class="mui-slider-indicator" v-if="form.imgs.length>1">
+          <div :class="`mui-indicator ${index==0?'mui-active' :''}`" v-for="(item,index) in form.imgs" :key="index"></div>
+        </div>
+      </div>
+      <div class="company">
+        <div class="title">
+          <div class="name">{{form.name}}</div>
+          <div class="price" v-if="form.type==1">
+            <span>{{form.laborPrice}}</span>元/小时
+          </div>
+          <div class="price" v-if="form.type==2">
+            <span>{{form.salaryStart}}-{{form.salaryEnd}}</span>元
+          </div>
+        </div>
+        <div class="subtitle">
+          {{form.subname}}
+        </div>
+        <div class="sign-num">已报名{{form.signupCount?form.signupCount:0}}人
+        </div>
+      </div>
+      <re-panel title="补贴">
+        <div slot="reright">
+          <div style="font-size:0.3rem;" v-if="form.subsidys.length>1" @click="isSubsidys=!isSubsidys">{{isSubsidys?'隐藏企业全部补贴':'查看企业全部补贴'}} ></div>
+        </div>
+        <div>
+          <div v-html="form.subsidys[0].value"></div>
+
+          <div v-if="isSubsidys" style="border-top:1px dashed #adadad;margin-top:0.45rem;padding-top:0.3rem;">
+            <div v-if="index!=0" v-for="(item,index) in form.subsidys" :key="index">
+              <p>补贴：</p>
+              <div v-html="item.value"></div>
+            </div>
+          </div>
+        </div>
+      </re-panel>
+      <re-panel title="工资福利">
+        <div v-html="form.wages">
+        </div>
+      </re-panel>
+      <re-panel title="岗位介绍">
+        <div v-html="form.post">
+        </div>
+      </re-panel>
+      <re-panel title="注意事项">
+        <div v-html="coinfo.attention">
+        </div>
+      </re-panel>
+      <re-panel title="企业介绍">
+        <div v-html="form.introduce">
+        </div>
+      </re-panel>
+      <re-panel title="岗位推荐">
+        <div style="margin:0 -0.5rem;">
+          <div class="rem-item" v-for="(item,index) in recommends" :key="index" @click="rem_item_handle(item)">
+            <div>
+              <img :src="item.cover" alt="">
+            </div>
+            <div class="price">{{item.salaryStart}}-{{item.salaryEnd}}</div>
+            <div class="name">{{item.name}}</div>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+      </re-panel>
+
+      <div class="con-bottom"></div>
     </div>
+
+    <div class="nav-index-foat" @click="$router.push({path:'/store'})">
+      <p class="nav-index-text">
+        <a class="external">免费<br>咨询</a>
+      </p>
+    </div>
+
+    <div class="nav-index-foat-my" @click="dialogCorrection=true">
+      <p class="nav-index-text-my">
+        <a class="external">纠错<br>报告</a>
+      </p>
+    </div>
+
+    <div class="foot-bottom">
+      <div class="apply-btn" @click="dialog=true;">免费报名</div>
+      <div class="follow-btn">关注</div>
+      <div class="share-btn">分享</div>
+    </div>
+    <div v-if="dialog" class="mui-popup-backdrop"></div>
+    <div v-if="dialog" class="dialog">
+      <div class="dialog-close" @click="dialog_close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
+      <div class="form-item">
+        <label for="">姓名</label>
+        <div>
+          <input type="text" placeholder="姓名">
+        </div>
+      </div>
+
+      <div class="form-item">
+        <label for="">邀请码</label>
+        <div>
+          <input type="text" placeholder="邀请码">
+        </div>
+      </div>
+      <div class="btn-success">确定</div>
+    </div>
+    <!-- 纠错表单 -->
+    <div v-if="dialogCorrection" class="mui-popup-backdrop"></div>
+    <div v-if="dialogCorrection" class="dialog">
+      <div class="dialog-close" @click="correction_close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
+      <div class="form-item1">
+        <label for="">内容</label>
+        <div>
+          <textarea style="width:5rem;" v-model="correctionForm.content" name="" id="" cols="30" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="form-item2">
+        <label for="" style="width:1.5rem;">图片</label>
+        <div style="max-width:5.5rem;">
+          <div class="avatar-uploader" v-for="(item,index) in correctionForm.imgs" :key="index">
+            <div class="form-img">
+              <i class="mui-icon mui-icon-trash" @click="delete_img_handle(index)"></i>
+              <img :src="item" alt="">
+            </div>
+          </div>
+          <div class="avatar-uploader" @click="uplaod_handle">
+            <div class="form-img">
+              <span class="mui-icon mui-icon-plusempty"></span>
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+
+        </div>
+      </div>
+      <div class="btn-success" @click="correctionSubmit">提交</div>
+    </div>
+    <input style="display:none;" type="file" id="upload" accept="image/gif,image/jpeg,image/jpg,image/png" @change="img_update_handle">
+  </div>
 </template>
 
 <script>
+import axios from "axios";
 import rePanel from "@/components/panel";
 import consult from "@/components/consult";
 import imgT from "../../assets/images/yuantiao.jpg";
@@ -145,48 +169,140 @@ export default {
   data() {
     return {
       dialog: false,
-      recommends: [
-        {
-          img: imgT,
-          price: "3500-5500 元/月",
-          name: "太原富士康"
-        },
-        {
-          img: imgT,
-          price: "3500-5500 元/月",
-          name: "太原富士康"
-        },
-        {
-          img: imgT,
-          price: "3500-5500 元/月",
-          name: "太原富士康"
-        },
-        {
-          img: imgT,
-          price: "3500-5500 元/月",
-          name: "太原富士康"
-        }
-      ]
+      isSubsidys: false,
+      dialogCorrection: false,
+      form: {
+        imgs: [""],
+        subsidys: [{}]
+      },
+      correctionForm: {
+        content: "",
+        imgs: []
+      },
+      /**注意事项 */
+      coinfo: { attention: "" },
+      recommends: [{}]
     };
   },
   mounted() {
-    this.mui.init({
-      swipeBack: true //启用右滑关闭功能
-    });
+    document.body.scrollTop = 0;
+    //console.log(this.$route);
+    const id = this.$route.query.id;
+    if (!id) {
+      this.mui.toast("获取信息失败!", { duration: "long", type: "div" });
+      return;
+    }
     //获得slider插件对象
     var slider = this.mui(".mui-slider");
     slider.slider({
-      interval: 2000
+      interval: 3000
+    });
+    this.http.get("/api/app/recruititem", { params: { id: id } }).then(res => {
+      console.log("res=>", res);
+      if (res.code == 200) {
+        this.form = res.data;
+      } else {
+        this.mui.toast(res.msg, { duration: "long", type: "div" });
+      }
+    });
+    this.http.get("/api/app/recommend").then(res => {
+      console.log("recommend=>", res);
+      if (res.code == 200) {
+        this.recommends = res.data;
+      } else this.mui.toast(res.msg, { duration: "long", type: "div" });
+    });
+    this.http.get("/api/app/co").then(res => {
+      console.log("co=>", res);
+      if (res.code == 200) {
+        this.coinfo = res.data[0];
+      } else this.mui.toast(res.msg, { duration: "long", type: "div" });
     });
   },
   methods: {
     back_handle() {
       this.$router.back();
+    },
+    dialog_close_handle() {
+      //form 清空
+      this.dialog = false;
+    },
+    correction_close_handle() {
+      this.dialogCorrection = false;
+    },
+    /**
+     * 推荐商品跳转
+     */
+    rem_item_handle(item) {
+      this.$router.push({ path: "/jobdetail?id=" + item.id });
+    },
+    /**
+     * 上传图片
+     */
+    uplaod_handle(index) {
+      document.getElementById("upload").click();
+    },
+    /**
+     * 上传图片
+     */
+    img_update_handle(e) {
+      debugger;
+      if (this.correctionForm.imgs.length >= 5) {
+        this.mui.toast("纠错图片最多只能上传5张", {
+          duration: "long",
+          type: "div"
+        });
+        return;
+      }
+      var self = this;
+      if (e.target.files.length == 0) return;
+      let file = e.target.files[0];
+      /* eslint-disable no-undef */
+      let param = new FormData(); // 创建form对象
+      param.append("file", file, file.name); // 通过append向form对象添加数据
+      param.append("chunk", "0"); // 添加form表单中其他数据
+      let config = {
+        headers: { "Content-Type": "multipart/form-data" }
+      };
+      // 添加请求头
+      axios.post("/api/upload", param, config).then(response => {
+        if (response.data.code == 200) {
+          this.correctionForm.imgs.push(response.data.data);
+          e.target.value = "";
+        } else
+          this.mui.toast(response.data.msg, { duration: "long", type: "div" });
+      });
+    },
+    /**删除图片 */
+    delete_img_handle(index) {
+      this.correctionForm.imgs.splice(index, 1);
+    },
+    /**纠错提交 */
+    correctionSubmit() {
+      if (!this.correctionForm.content) {
+        this.mui.toast("请输入纠错内容", { duration: "long", type: "div" });
+        return;
+      }
+      let postData = this.correctionForm;
+      postData.recruitid = this.$route.query.id;
+      this.http.post("/api/app/correction", postData).then(res => {
+        if (res.code == 200) {
+          this.dialogCorrection = false;
+          this.mui.toast("纠错信息已经提交", { duration: "long", type: "div" });
+        } else this.mui.toast(res.msg, { duration: "long", type: "div" });
+      });
     }
   }
 };
 </script>
-
+<style>
+.mui-toast-container {
+  bottom: 50% !important;
+  z-index: 10000000000;
+}
+.panle-content p {
+  margin-bottom: 1px;
+}
+</style>
 <style scoped>
 .bar-nav {
   height: 1.2rem;
@@ -230,6 +346,9 @@ export default {
   align-items: center;
   font-size: 0.43rem;
   margin-bottom: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .company .title .name {
   width: 60%;
@@ -342,6 +461,9 @@ export default {
 .rem-item .name {
   font-size: 12px;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .form-item {
   display: flex;
@@ -376,14 +498,70 @@ export default {
   padding: 1rem 0.4rem;
   border-radius: 0.2rem;
 }
+.dialog-close {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.2rem;
+  font-size: 0.5rem;
+  width: 0.8rem;
+  text-align: center;
+  height: 0.8rem;
+  line-height: 0.8rem;
+}
 .btn-success {
   text-align: center;
   background: #4cd964;
   color: #fff;
-  height: 1.2rem;
-  line-height: 1.2rem;
+  height: 1rem;
+  line-height: 1rem;
   font-size: 0.4rem;
   border-radius: 0.1rem;
   margin-top: 0.5rem;
+}
+.form-item1 {
+  display: flex;
+  min-height: 1.2rem;
+  margin-top: 10px;
+  border-bottom: 1px solid #e9e9e9;
+}
+.form-item1 label {
+  display: block;
+  width: 2rem;
+  font-size: 0.38rem;
+}
+.form-item1 div {
+  width: 100%;
+}
+.form-item2 {
+  display: flex;
+  min-height: 1.2rem;
+  margin-top: 10px;
+  border-bottom: 1px solid #e9e9e9;
+}
+.form-item2 label {
+  display: block;
+  width: 2rem;
+  font-size: 0.38rem;
+}
+.avatar-uploader {
+  position: relative;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.avatar-uploader i {
+  position: absolute;
+  color: #f00;
+}
+.form-img {
+  border: 1px dashed #d9d9d9;
+  width: 120px !important;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-img img {
+  max-width: 100%;
 }
 </style>
