@@ -93,34 +93,35 @@
       </p>
     </div>
 
-    <div class="nav-index-foat-my" @click="dialogCorrection=true">
+    <div class="nav-index-foat-my" @click="correction_show_handle">
       <p class="nav-index-text-my">
         <a class="external">纠错<br>报告</a>
       </p>
     </div>
 
     <div class="foot-bottom">
-      <div class="apply-btn" @click="dialog=true;">免费报名</div>
-      <div class="follow-btn">关注</div>
+      <div class="apply-btn" @click="signup_handle">免费报名</div>
+      <div class="follow-btn" v-if="form.att==0" @click="attention_handle">关注</div>
+      <div class="follow-btn" v-else @click="attention_del_handle">取消关注</div>
       <div class="share-btn">分享</div>
     </div>
     <div v-if="dialog" class="mui-popup-backdrop"></div>
     <div v-if="dialog" class="dialog">
       <div class="dialog-close" @click="dialog_close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
       <div class="form-item">
-        <label for="">姓名</label>
+        <label for="">邀请人姓名</label>
         <div>
-          <input type="text" placeholder="姓名">
+          <input type="text" v-model="enrollForm.inviter" maxlength="10" placeholder="请输入邀请人姓名">
         </div>
       </div>
 
       <div class="form-item">
         <label for="">邀请码</label>
         <div>
-          <input type="text" placeholder="邀请码">
+          <input type="text" v-model="enrollForm.inviterCode" placeholder="请输入邀请码">
         </div>
       </div>
-      <div class="btn-success">确定</div>
+      <div class="btn-success" @click="enroll_submit_handle">确定</div>
     </div>
     <!-- 纠错表单 -->
     <div v-if="dialogCorrection" class="mui-popup-backdrop"></div>
@@ -160,7 +161,7 @@
 import axios from "axios";
 import rePanel from "@/components/panel";
 import consult from "@/components/consult";
-import imgT from "../../assets/images/yuantiao.jpg";
+import { checkLogin, getWxItem } from "@/components/lib/util";
 export default {
   components: {
     rePanel,
@@ -173,8 +174,17 @@ export default {
       dialogCorrection: false,
       form: {
         imgs: [""],
-        subsidys: [{}]
+        subsidys: [{}],
+        att: 0
       },
+      /**报名表单 */
+      enrollForm: {
+        recruitid: "",
+        unionid: "",
+        inviter: "",
+        inviterCode: ""
+      },
+      /**纠错form */
       correctionForm: {
         content: "",
         imgs: []
@@ -197,14 +207,18 @@ export default {
     slider.slider({
       interval: 3000
     });
-    this.http.get("/api/app/recruititem", { params: { id: id } }).then(res => {
-      console.log("res=>", res);
-      if (res.code == 200) {
-        this.form = res.data;
-      } else {
-        this.mui.toast(res.msg, { duration: "long", type: "div" });
-      }
-    });
+    const wxUser = this.getWxItem();
+    const unionid = wxUser ? wxUser.unionid : "";
+    this.http
+      .get("/api/app/recruititem", { params: { id: id, unionid: unionid } })
+      .then(res => {
+        console.log("res=>", res);
+        if (res.code == 200) {
+          this.form = res.data;
+        } else {
+          this.mui.toast(res.msg, { duration: "long", type: "div" });
+        }
+      });
     this.http.get("/api/app/recommend").then(res => {
       console.log("recommend=>", res);
       if (res.code == 200) {
@@ -219,12 +233,83 @@ export default {
     });
   },
   methods: {
+    checkLogin,
+    getWxItem,
+    signup_handle() {
+      if (!this.checkLogin()) {
+        this.$router.push({
+          path: "/login?ref=jobdetail|" + this.$route.query.id
+        });
+        return;
+      }
+      this.dialog = true;
+      this.enrollForm = {
+        recruitid: "",
+        unionid: "",
+        inviter: "",
+        inviterCode: ""
+      };
+    },
+    /**关注 */
+    attention_handle() {
+      if (!this.checkLogin()) {
+        this.$router.push({
+          path: "/login?ref=jobdetail|" + this.$route.query.id
+        });
+        return;
+      }
+      let wxUser = this.getWxItem();
+      let attentionForm = {
+        unionid: wxUser.unionid,
+        recruitid: this.$route.query.id
+      };
+      this.http.post("/api/app/attention", attentionForm).then(res => {
+        if (res.code == 200) {
+          this.mui.toast("已关注!", { duration: "long", type: "div" });
+          this.form.att = 1;
+        } else this.mui.toast(res.msg, { duration: "long", type: "div" });
+      });
+    },
+    /**取消关注 */
+    attention_del_handle() {
+      let wxUser = this.getWxItem();
+      let attentionForm = {
+        unionid: wxUser.unionid,
+        recruitid: this.$route.query.id
+      };
+      this.http.post("/api/app/attentiondel", attentionForm).then(res => {
+        if (res.code == 200) {
+          this.mui.toast("已取消关注!", { duration: "long", type: "div" });
+          this.form.att = 0;
+        }
+      });
+    },
     back_handle() {
       this.$router.back();
     },
     dialog_close_handle() {
-      //form 清空
       this.dialog = false;
+    },
+    /**免费报名 */
+    enroll_submit_handle() {
+      let wxUser = this.getWxItem();
+      this.enrollForm.recruitid = this.$route.query.id;
+      this.enrollForm.unionid = wxUser.unionid;
+      this.http.post("/api/app/enroll", this.enrollForm).then(res => {
+        if (res.code == 200) {
+          this.mui.toast("报名成功!", { duration: "long", type: "div" });
+          this.dialog = false;
+        } else {
+          this.mui.toast(res.msg, { duration: "long", type: "div" });
+        }
+      });
+    },
+    correction_show_handle() {
+      this.dialogCorrection = true;
+      this.correctionForm = {
+        content: "",
+        imgs: []
+      };
     },
     correction_close_handle() {
       this.dialogCorrection = false;
@@ -473,7 +558,7 @@ export default {
 }
 .form-item label {
   display: block;
-  width: 2rem;
+  width: 2.6rem;
   font-size: 0.38rem;
 }
 .form-item div {

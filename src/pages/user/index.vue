@@ -19,11 +19,11 @@
         <div class="top"></div>
         <div class="avatar">
           <div class="user-img">
-            <img src="https://cos.niuzhigongzuo.com/avatar/785e7cd5-62dd-4a07-a727-40c53af6da70-1538326932685.png" alt="">
+            <img :src="wxUser.headimgurl" alt="">
           </div>
           <div class="man-box">
-            <div>安良</div>
-            <div>15050474495</div>
+            <div>{{wxUser.username}}</div>
+            <div>{{wxUser.phone}}</div>
           </div>
           <div class="my_qrCode">
             <i class="iconfont icon-erweima" style="font-size: 0.6rem;"></i>
@@ -140,18 +140,26 @@
 </template>
 
 <script>
-import { checkLogin } from "@/components/lib/util";
+import { checkLogin, getWxItem } from "@/components/lib/util";
 export default {
   data() {
     return {
-      isLogin: false
+      isLogin: false,
+      wxUser: {}
     };
   },
   mounted() {
     this.isLogin = this.checkLogin();
+    if (!this.isLogin) {
+      this.$router.push({ path: "/login?ref=my" });
+      return;
+    }
+    //获取用户信息
+    this.wxUser = this.getWxItem();
   },
   methods: {
     checkLogin,
+    getWxItem,
     home_handle() {
       this.$router.push({ path: "/" });
     },

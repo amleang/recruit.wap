@@ -80,7 +80,6 @@
 </template>
 
 <script>
-import imgT from "../../assets/images/yuantiao.jpg";
 import { checkLogin } from "@/components/lib/util";
 import consult from "@/components/consult";
 export default {
@@ -101,8 +100,24 @@ export default {
     };
   },
   mounted() {
+    let wxuser = {
+      openid: "OPENID",
+      nickname: "NICKNAME",
+      sex: "1",
+      province: "PROVINCE",
+      city: "CITY",
+      country: "COUNTRY",
+      headimgurl:
+        "http://thirdwx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46",
+      unionid: "o6_bmasdasdsad6_2sgVt7hMZOPfL",
+      username:"赵安良",
+      phone:"15050473395"
+    };
+    let strWxUser = JSON.stringify(wxuser);
+    localStorage.setItem("hjct_user", strWxUser);
     document.body.scrollTop = 0;
     this.isLogin = this.checkLogin();
+    console.log("isLogin=>", this.isLogin);
     const that = this;
     that.loadData(that);
     /*  this.mui.init({
