@@ -219,7 +219,7 @@ export default {
           this.mui.toast(res.msg, { duration: "long", type: "div" });
         }
       });
-    this.http.get("/api/app/recommend").then(res => {
+    this.http.get("/api/app/recommendlist").then(res => {
       console.log("recommend=>", res);
       if (res.code == 200) {
         this.recommends = res.data;

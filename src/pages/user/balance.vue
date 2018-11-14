@@ -1,30 +1,54 @@
 <template>
-    <div>
-        <head-title header="余额明细"></head-title>
-        <div class="content">
-            <div class="logo">
-                <img src="@/assets/images/logo.png" alt="">
-            </div>
-            <div class="user-wrap">
-                <div class="name">安良</div>
-            </div>
-            <div class="money-wrap">
-                <div class="balance">您的余额为: </div>
-                <div class="money"><span class="money-type">￥</span><span class="money-amount">0</span></div>
-                <div class="look-detail"><a href="/balance-detail?action=jump">查看明细</a></div>
-            </div>
-        </div>
+  <div>
+    <head-title header="余额明细"></head-title>
+    <div class="content">
+      <div class="logo">
+        <img src="@/assets/images/logo.png" alt="">
+      </div>
+      <div class="user-wrap">
+        <div class="name">{{form.username}}</div>
+      </div>
+      <div class="money-wrap">
+        <div class="balance">您的余额为: </div>
+        <div class="money"><span class="money-type">￥</span><span class="money-amount">{{form.totalprice}}</span></div>
+        <div class="look-detail"><a @click="detail_handle">查看明细</a></div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 import headTitle from "@/components/header";
+import { checkLogin, getWxItem } from "@/components/lib/util";
 export default {
   components: {
     headTitle
   },
-  mounted(){
-     document.title = "余额明细";
+  data() {
+    return {
+      form: {
+        username: ""
+      }
+    };
+  },
+  mounted() {
+    document.title = "余额明细";
+    if (this.checkLogin()) {
+      let wxUser = this.getWxItem();
+      this.http.get("/api/app/balance?unionid=" + wxUser.unionid).then(res => {
+        if (res.code == 200) {
+          this.form = res.data;
+          this.form.username = wxUser.username;
+        } else this.mui.toast(res.msg, { duration: "long", type: "div" });
+      });
+    }
+  },
+  methods: {
+    checkLogin,
+    getWxItem,
+    detail_handle(){
+      this.$router.push({path:"/balancelist"});
+    }
   }
 };
 </script>
@@ -34,20 +58,19 @@ export default {
   padding-top: 1.2rem;
   height: 100vh;
   width: 100vw;
-  background-color: #eee;
+  background-color: #fff;
 }
 .logo {
   width: 45%;
   display: block;
   margin: 1rem auto;
-  margin-top: -1rem;
 }
 .logo img {
   max-width: 100%;
 }
 .user-wrap {
   transform: translateX(-50%);
-  top: 25%;
+  top: 35%;
   position: absolute;
   left: 50%;
 }
@@ -57,7 +80,7 @@ export default {
 }
 .money-wrap {
   transform: translate(-50%, -50%);
-  top: 50%;
+  top: 60%;
   position: absolute;
   left: 50%;
 }

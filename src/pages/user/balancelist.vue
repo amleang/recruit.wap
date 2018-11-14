@@ -1,34 +1,31 @@
 <template>
   <div>
-    <head-title header="我的补贴"></head-title>
+    <head-title header="余额详情"></head-title>
     <div class="content">
       <div class="content-ul" v-if="list.length==0">
-        <div class="ul-empt">暂无补贴</div>
+        <div class="ul-empt">暂无任何余额记录！</div>
       </div>
       <div v-else>
         <div class="form-item" v-for="(item,index) in list" :key="index">
           <div class="money">
-            <div class="time">{{formatDate(item.createAt)}}</div>
+            <div class="time">{{formatDate(item.updateAt)}}</div>
             <div class="price">+{{item.price}}</div>
           </div>
           <div class="remarks">
-            {{item.name}}
+            {{item.name==""?"推荐记录":item.name}}
           </div>
         </div>
       </div>
     </div>
-    <consult></consult>
   </div>
 </template>
 
 <script>
 import headTitle from "@/components/header";
-import consult from "@/components/consult";
 import { checkLogin, getWxItem, formatDate } from "@/components/lib/util";
 export default {
   components: {
-    headTitle,
-    consult
+    headTitle
   },
   data() {
     return {
@@ -36,16 +33,16 @@ export default {
     };
   },
   mounted() {
-    document.title = "我的补贴";
+    document.title = "余额详情";
     if (!this.checkLogin()) {
       this.$router.push({
-        path: "/login?ref=subsidy"
+        path: "/login?ref=balancelist"
       });
       return;
     } else {
       const wxUser = this.getWxItem();
       this.http
-        .get("/api/app/cashbacklist?unionid=" + wxUser.unionid)
+        .get("/api/app/balancelist?unionid=" + wxUser.unionid)
         .then(res => {
           if (res.code == 200) {
             this.list = res.data;
@@ -62,6 +59,7 @@ export default {
   }
 };
 </script>
+
 <style>
 .mui-toast-container {
   bottom: 50% !important;

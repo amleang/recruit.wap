@@ -205,11 +205,11 @@ export default {
     },
     recommend_handle() {
       if (this.isLogin) this.$router.push({ path: "/recommend" });
-      else this.$router.push({ path: "/login" });
+      else this.$router.push({ path: "/login?ref=recommend" });
     },
     my_handle() {
       if (this.isLogin) this.$router.push({ path: "/user" });
-      else this.$router.push({ path: "/login" });
+      else this.$router.push({ path: "/login?ref=user" });
     },
     top_detail_handle(item) {
       this.$router.push({ path: "/jobdetail?id=" + item.id });

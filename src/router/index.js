@@ -5,6 +5,7 @@ import login from "@/pages/login"
 import recommend from "@/pages/recommend"
 import user from "@/pages/user"
 import balance from "@/pages/user/balance"
+import balancelist from "@/pages/user/balancelist"
 import bankcard from "@/pages/user/bankcard"
 import jobapplys from "@/pages/user/jobapplys"
 import follow from "@/pages/user/follow"
@@ -12,6 +13,7 @@ import subsidy from "@/pages/user/subsidy"
 import about from "@/pages/user/about"
 import store from "@/pages/store"
 import jobdetail from "@/pages/jobdetail"
+
 Vue.use(Router)
 
 export default new Router({
@@ -37,6 +39,11 @@ export default new Router({
     path: "/balance",
     name: "balance",
     component: balance
+  },
+  {
+    path: "/balancelist",
+    name: "balancelist",
+    component: balancelist
   }, {
     path: "/bankcard",
     name: "bankcard",

@@ -25,9 +25,9 @@
             <div>{{wxUser.username}}</div>
             <div>{{wxUser.phone}}</div>
           </div>
-          <div class="my_qrCode">
+         <!--  <div class="my_qrCode">
             <i class="iconfont icon-erweima" style="font-size: 0.6rem;"></i>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="list-user">
@@ -149,9 +149,10 @@ export default {
     };
   },
   mounted() {
+    document.title = "个人中心";
     this.isLogin = this.checkLogin();
     if (!this.isLogin) {
-      this.$router.push({ path: "/login?ref=my" });
+      this.$router.push({ path: "/login?ref=user" });
       return;
     }
     //获取用户信息
@@ -165,11 +166,11 @@ export default {
     },
     recommend_handle() {
       if (this.isLogin) this.$router.push({ path: "/recommend" });
-      else this.$router.push({ path: "/login" });
+      else this.$router.push({ path: "/login?ref=recommend" });
     },
     my_handle() {
       if (this.isLogin) this.$router.push({ path: "/user" });
-      else this.$router.push({ path: "/login" });
+      else this.$router.push({ path: "/login?ref=user" });
     }
   }
 };

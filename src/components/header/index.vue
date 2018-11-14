@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .bar-nav {
   height: 1.2rem;
-  background-color: rgba(8, 148, 246, 0.6);
+  background-color:#39a9f0;
   display: flex;
   align-items: center;
   position: fixed;
