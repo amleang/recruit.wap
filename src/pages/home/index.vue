@@ -81,7 +81,9 @@
 
 <script>
 import { checkLogin } from "@/components/lib/util";
+import { wxShareConfig } from "@/components/lib/wxShare";
 import consult from "@/components/consult";
+import wx from "weixin-js-sdk";
 export default {
   components: {
     consult
@@ -100,6 +102,7 @@ export default {
     };
   },
   mounted() {
+    /* this.wxShareConfig();
     let wxuser = {
       openid: "OPENID",
       nickname: "NICKNAME",
@@ -110,11 +113,12 @@ export default {
       headimgurl:
         "http://thirdwx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46",
       unionid: "o6_bmasdasdsad6_2sgVt7hMZOPfL",
-      username:"赵安良",
-      phone:"15050473395"
-    };
-    let strWxUser = JSON.stringify(wxuser);
-    localStorage.setItem("hjct_user", strWxUser);
+      username: "赵安良",
+      phone: "15050473395"
+    }; */
+/*     let strWxUser = JSON.stringify(wxuser);
+    localStorage.setItem("hjct_user", strWxUser); */
+    localStorage.removeItem("hjct_user")
     document.body.scrollTop = 0;
     this.isLogin = this.checkLogin();
     console.log("isLogin=>", this.isLogin);
@@ -149,6 +153,7 @@ export default {
   },
   methods: {
     checkLogin,
+    wxShareConfig,
     search_handle() {
       this.pageNo = 1;
       this.queryParam = this.searchParam;
@@ -157,6 +162,7 @@ export default {
       this.loadData(this);
     },
     loadData(that) {
+      console.log("pageNo=>", that.pageNo);
       if (that.rowCout > (that.pageNo - 1) * that.pageSize) {
         that.http
           .get("/api/app/recruit", {
@@ -196,6 +202,7 @@ export default {
             } else {
               that.mui.toast(res.msg, { duration: "long", type: "div" });
             }
+            that.pageNo++;
           });
         console.log("下拉刷新");
       } else return;
@@ -216,7 +223,7 @@ export default {
     },
     detail_handle(item) {
       this.$router.push({ path: "/jobdetail?id=" + item.id });
-    }
+    },
   }
 };
 </script>

@@ -26,17 +26,17 @@
       <div class="content-block" @click="just_handle">
         立即推荐
       </div>
-      <div class="refer-ranking">
+      <div class="refer-ranking" @click="ranking_handle">
         查看排行榜
       </div>
     </div>
-    <div class="nav-index-foat">
+    <div class="nav-index-foat" @click="$router.push({path:'/store'})">
       <p class="nav-index-text">
         <a class="external">免费<br>咨询</a>
       </p>
     </div>
 
-    <div class="nav-index-foat-my">
+    <div class="nav-index-foat-my" @click="$router.push({path:'/recommendlist'})">
       <p class="nav-index-text-my">
         <a class="external">我的<br>推荐</a>
       </p>
@@ -60,19 +60,26 @@
       </div>
       <div class="btn-success" @click="submit_handle">确定</div>
     </div>
+    <ranking-form :dialog="rankingdialog" :unionid="unionid" @dialogHandle="dialog_handle">
+
+    </ranking-form>
   </div>
 </template>
 
 <script>
 import headTitle from "@/components/header";
 import { checkLogin, getWxItem } from "@/components/lib/util";
+import rankingForm from "@/components/ranking";
 export default {
   components: {
-    headTitle
+    headTitle,
+    rankingForm
   },
   data() {
     return {
       dialog: false,
+      rankingdialog: false,
+      unionid: "",
       form: {
         username: "",
         phone: ""
@@ -104,9 +111,18 @@ export default {
     just_handle() {
       this.dialog = true;
     },
+    ranking_handle() {
+      const wxUser = this.getWxItem();
+      this.unionid = wxUser.unionid;
+      this.rankingdialog = true;
+    },
+    dialog_handle() {
+      this.rankingdialog = false;
+    },
     dialog_close_handle() {
       this.dialog = false;
     },
+
     submit_handle() {
       const wxUser = this.getWxItem();
       if (!this.form.username) {

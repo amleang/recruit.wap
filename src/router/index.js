@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import home from "@/pages/home"
 import login from "@/pages/login"
 import recommend from "@/pages/recommend"
+import recommendlist from "@/pages/recommend/list"
 import user from "@/pages/user"
 import balance from "@/pages/user/balance"
 import balancelist from "@/pages/user/balancelist"
@@ -30,6 +31,11 @@ export default new Router({
     path: "/recommend",
     name: "recommend",
     component: recommend
+  },
+  {
+    path:"/recommendlist",
+    name:"recommendlist",
+    component:recommendlist
   },
   {
     path: "/user",

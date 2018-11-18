@@ -16,4 +16,7 @@ export default {
 /* @import url("./assets/css/mui.picker.css");
 @import url("./assets/css/mui.poppicker.css"); */
 /* @import url("//at.alicdn.com/t/font_816809_f8ojixb913b.css?v=20180928215215"); */
+* {
+  touch-action: pan-y;
+}
 </style>
