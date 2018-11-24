@@ -14,7 +14,7 @@
       </div>
       <div class="address">{{form.address}}</div>
       <div class="tencent-map">
-        <iframe v-if="isLoad" :src="`https://apis.map.qq.com/tools/poimarker?type=0&marker=coord:${form.lat},${form.lng};title:${form.coName};addr:潍坊市经济开发区鸢飞路1518号鑫润香岸花园26号楼15号房&key=DE2BZ-47CRU-5LPVV-BXXAB-MWLRQ-D7FXQ&referer=recruit`" frameborder="0"></iframe>
+        <iframe v-if="isLoad" :src="`https://apis.map.qq.com/tools/poimarker?type=0&marker=coord:${form.lat},${form.lng};title:${form.coName};addr:${form.address}&key=DE2BZ-47CRU-5LPVV-BXXAB-MWLRQ-D7FXQ&referer=recruit`" frameborder="0"></iframe>
       </div>
 
       <div class="serviceLink">
@@ -72,10 +72,16 @@ export default {
 .coName {
   font-size: 0.45rem;
   line-height: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .phone {
   font-size: 0.45rem;
   line-height: 0.8rem;
+}
+.phone a{
+  margin-left: 10px;
 }
 .address {
   color: #939393;
@@ -90,7 +96,7 @@ export default {
 .tencent-map {
   overflow: hidden;
   width: 100%;
-  height: 7rem;
+  height: 10rem;
   margin-top: 0.25rem;
 }
 .tencent-map iframe {

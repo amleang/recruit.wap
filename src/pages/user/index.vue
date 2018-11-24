@@ -82,7 +82,7 @@
       </div>
 
       <div class="list-user">
-        <div class="item-content">
+        <!-- <div class="item-content">
           <div class="user-icon">
             <i class="iconfont icon-weixin"></i>
           </div>
@@ -90,8 +90,8 @@
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
-        </div>
-        <div class="item-content">
+        </div> -->
+        <div class="item-content" @click="$router.push({path:'/phone'})">
           <div class="user-icon">
             <i class="iconfont icon-shouji"></i>
           </div>

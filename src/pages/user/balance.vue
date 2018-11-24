@@ -52,7 +52,12 @@ export default {
   }
 };
 </script>
-
+<style>
+.mui-toast-container {
+  bottom: 50% !important;
+  z-index: 10000000000;
+}
+</style>
 <style scoped>
 .content {
   padding-top: 1.2rem;

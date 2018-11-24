@@ -23,11 +23,19 @@ export default {
       if (res.code == 200) {
         this.abstract = res.data[0].abstract;
       }
+      else{
+        this.mui.toast(res.msg, { duration: "long", type: "div" });
+      }
     });
   }
 };
 </script>
-
+<style>
+.mui-toast-container {
+  bottom: 50% !important;
+  z-index: 10000000000;
+}
+</style>
 <style scoped>
 .content {
   padding: 0 0.3rem;

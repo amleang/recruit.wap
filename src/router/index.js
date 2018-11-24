@@ -14,7 +14,7 @@ import subsidy from "@/pages/user/subsidy"
 import about from "@/pages/user/about"
 import store from "@/pages/store"
 import jobdetail from "@/pages/jobdetail"
-
+import uphone from "@/pages/user/phone"
 Vue.use(Router)
 
 export default new Router({
@@ -79,6 +79,10 @@ export default new Router({
     path: "/jobdetail",
     name: "jobdetail",
     component: jobdetail
+  },{
+    path:"/phone",
+    name:"phone",
+    component:uphone
   }
   ]
 })

@@ -29,7 +29,7 @@ export default {
   border-bottom: 1px solid #ccc;
   background-color: #fff;
 }
-.title {
+.re-panel .title {
   height: 1.2rem;
   border-bottom: 1px solid #eee;
   padding: 0 0.5rem;
@@ -39,15 +39,15 @@ export default {
   display: flex;
   align-items: center;
 }
-.title .name {
+.re-panel .title .name {
   width: 60%;
 }
-.title .right {
+.re-panel .title .right {
   width: 40%;
   text-align: right;
   flex: 1;
 }
-.content {
+.re-panel .content {
   padding: 0.2rem 0.5rem;
   font-size: 0.35rem;
   color: #333;

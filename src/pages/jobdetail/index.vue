@@ -42,7 +42,7 @@
       </div>
       <re-panel title="补贴">
         <div slot="reright">
-          <div style="font-size:0.3rem;" v-if="form.subsidys.length>1" @click="isSubsidys=!isSubsidys">{{isSubsidys?'隐藏企业全部补贴':'查看企业全部补贴'}} ></div>
+          <div style="font-size:0.3rem;" v-if="form.subsidys.length>1" @click="isSubsidys=!isSubsidys">{{isSubsidys?'隐藏企业全部补贴':'查看企业全部补贴'}}" ></div>
         </div>
         <div>
           <div v-html="form.subsidys[0].value"></div>
@@ -195,6 +195,7 @@ export default {
     };
   },
   mounted() {
+    document.title="招工详情";
     document.body.scrollTop = 0;
     //console.log(this.$route);
     const id = this.$route.query.id;
@@ -648,5 +649,6 @@ export default {
 }
 .form-img img {
   max-width: 100%;
+  amx-height:100%;
 }
 </style>

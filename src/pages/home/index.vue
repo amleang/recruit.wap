@@ -102,7 +102,7 @@ export default {
     };
   },
   mounted() {
-    /* this.wxShareConfig();
+    //this.wxShareConfig();
     let wxuser = {
       openid: "OPENID",
       nickname: "NICKNAME",
@@ -115,10 +115,10 @@ export default {
       unionid: "o6_bmasdasdsad6_2sgVt7hMZOPfL",
       username: "赵安良",
       phone: "15050473395"
-    }; */
-/*     let strWxUser = JSON.stringify(wxuser);
-    localStorage.setItem("hjct_user", strWxUser); */
-    localStorage.removeItem("hjct_user")
+    };
+    let strWxUser = JSON.stringify(wxuser);
+    localStorage.setItem("hjct_user", strWxUser);
+    /* localStorage.removeItem("hjct_user"); */
     document.body.scrollTop = 0;
     this.isLogin = this.checkLogin();
     console.log("isLogin=>", this.isLogin);
@@ -223,7 +223,7 @@ export default {
     },
     detail_handle(item) {
       this.$router.push({ path: "/jobdetail?id=" + item.id });
-    },
+    }
   }
 };
 </script>
