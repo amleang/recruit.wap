@@ -15,6 +15,7 @@ import about from "@/pages/user/about"
 import store from "@/pages/store"
 import jobdetail from "@/pages/jobdetail"
 import uphone from "@/pages/user/phone"
+import myinfo from "@/pages/user/myinfo"
 Vue.use(Router)
 
 export default new Router({
@@ -33,9 +34,9 @@ export default new Router({
     component: recommend
   },
   {
-    path:"/recommendlist",
-    name:"recommendlist",
-    component:recommendlist
+    path: "/recommendlist",
+    name: "recommendlist",
+    component: recommendlist
   },
   {
     path: "/user",
@@ -79,10 +80,14 @@ export default new Router({
     path: "/jobdetail",
     name: "jobdetail",
     component: jobdetail
-  },{
-    path:"/phone",
-    name:"phone",
-    component:uphone
+  }, {
+    path: "/phone",
+    name: "phone",
+    component: uphone
+  }, {
+    path: "/myinfo",
+    name: "myinfo",
+    component: myinfo
   }
   ]
 })

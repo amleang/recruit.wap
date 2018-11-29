@@ -86,7 +86,9 @@
 
       <div class="con-bottom"></div>
     </div>
-
+    <div class="share" v-if="isShare" @click="isShare=false;">
+      <img src="@/assets/images/share.gif" alt="">
+    </div>
     <div class="nav-index-foat" @click="$router.push({path:'/store'})">
       <p class="nav-index-text">
         <a class="external">免费<br>咨询</a>
@@ -103,7 +105,7 @@
       <div class="apply-btn" @click="signup_handle">免费报名</div>
       <div class="follow-btn" v-if="form.att==0" @click="attention_handle">关注</div>
       <div class="follow-btn" v-else @click="attention_del_handle">取消关注</div>
-      <div class="share-btn">分享</div>
+      <div class="share-btn" @click="isShare=true;">分享</div>
     </div>
     <div v-if="dialog" class="mui-popup-backdrop"></div>
     <div v-if="dialog" class="dialog">
@@ -172,6 +174,7 @@ export default {
       dialog: false,
       isSubsidys: false,
       dialogCorrection: false,
+      isShare: false,
       form: {
         imgs: [""],
         subsidys: [{}],
@@ -195,7 +198,7 @@ export default {
     };
   },
   mounted() {
-    document.title="招工详情";
+    
     document.body.scrollTop = 0;
     //console.log(this.$route);
     const id = this.$route.query.id;
@@ -216,6 +219,7 @@ export default {
         console.log("res=>", res);
         if (res.code == 200) {
           this.form = res.data;
+          document.title = this.form.name;
         } else {
           this.mui.toast(res.msg, { duration: "long", type: "div" });
         }
@@ -649,6 +653,20 @@ export default {
 }
 .form-img img {
   max-width: 100%;
-  amx-height:100%;
+  amx-height: 100%;
+}
+.share {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  left: 0;
+  z-index: 9999999999;
+}
+.share img {
+  position: absolute;
+  right: 15px;
+  top: 0;
 }
 </style>

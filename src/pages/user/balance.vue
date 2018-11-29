@@ -41,13 +41,17 @@ export default {
           this.form.username = wxUser.username;
         } else this.mui.toast(res.msg, { duration: "long", type: "div" });
       });
+    } else {
+      this.$router.push({
+        path: "/login?ref=balance"
+      });
     }
   },
   methods: {
     checkLogin,
     getWxItem,
-    detail_handle(){
-      this.$router.push({path:"/balancelist"});
+    detail_handle() {
+      this.$router.push({ path: "/balancelist" });
     }
   }
 };

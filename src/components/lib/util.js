@@ -51,7 +51,7 @@ function padLeftZero(str) {
  * 获取微信用户信息
  */
 export const getWxItem = function () {
-  let wxuser = localStorage.getItem("hjct_user");
+  let wxuser = window.localStorage.getItem("hjct_user");
   if (wxuser) {
     return JSON.parse(wxuser);
   }
@@ -64,5 +64,5 @@ export const getWxItem = function () {
  */
 export const setWxItem = function (wxUser) {
   let wxuserStr = JSON.stringify(wxUser);
-  localStorage.setItem("hjct_user", wxuserStr);
+  window.localStorage.setItem("hjct_user", wxuserStr);
 }

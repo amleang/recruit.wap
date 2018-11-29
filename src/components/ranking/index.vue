@@ -2,7 +2,7 @@
     <div v-if="dialog">
         <div class="mui-popup-backdrop"></div>
         <div class="dialog">
-            <div class="title">11月份推荐排行榜TOP10</div>
+            <div class="title">{{new Date().getMonth()+1}}月份推荐排行榜TOP10</div>
             <div class="empt" v-if="list.length==0">暂无推荐信息</div>
             <div v-else>
                 <div class="item" v-for="(item,index) in list" :key="index">
@@ -64,7 +64,7 @@ export default {
               if (res.data.mylist.length > 0) {
                 const myobj = res.data.mylist[0];
                 this.list.forEach((item, index) => {
-                  if (item.unionid == item.unionid) this.my.ranking = index + 1;
+                  if (item.unionid == this.unionid) this.my.ranking = index + 1;
                 });
                 this.my.total = myobj.total;
               }

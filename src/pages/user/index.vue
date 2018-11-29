@@ -15,7 +15,7 @@
       </a>
     </nav>
     <div class="content">
-      <div class="header-img">
+      <div class="header-img" @click="$router.push({path:'/myinfo'})">
         <div class="top"></div>
         <div class="avatar">
           <div class="user-img">
@@ -25,7 +25,7 @@
             <div>{{wxUser.username}}</div>
             <div>{{wxUser.phone}}</div>
           </div>
-         <!--  <div class="my_qrCode">
+          <!--  <div class="my_qrCode">
             <i class="iconfont icon-erweima" style="font-size: 0.6rem;"></i>
           </div> -->
         </div>
@@ -132,7 +132,7 @@
         </div>
       </div>
 
-      <div class="login-bottom">退出登录</div>
+      <div class="login-bottom" @click="outlogin_handle">退出登录</div>
 
     </div>
   </div>
@@ -149,6 +149,7 @@ export default {
     };
   },
   mounted() {
+    debugger;
     document.title = "个人中心";
     this.isLogin = this.checkLogin();
     if (!this.isLogin) {
@@ -157,6 +158,7 @@ export default {
     }
     //获取用户信息
     this.wxUser = this.getWxItem();
+    console.log("wxuser=>", this.wxUser);
   },
   methods: {
     checkLogin,
@@ -171,6 +173,11 @@ export default {
     my_handle() {
       if (this.isLogin) this.$router.push({ path: "/user" });
       else this.$router.push({ path: "/login?ref=user" });
+    },
+    outlogin_handle() {
+      window.localStorage.removeItem("hjct_user");
+      console.log(window.localStorage.getItem("hjct_user"));
+      this.$router.push("/login");
     }
   }
 };

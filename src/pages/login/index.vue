@@ -12,9 +12,9 @@
           <i class="mui-icon mui-icon-weixin"></i>微信快捷登录
         </div>
       </div>
-      <div class="footer-login-btn" @click="isType=false;">
+      <!-- <div class="footer-login-btn" @click="isType=false;">
         使用手机登录注册
-      </div>
+      </div> -->
     </div>
     <div class="content-block" v-else>
       <div class="form">
@@ -31,6 +31,12 @@
           </div>
           <div class="form-yzm">
             获取验证码
+          </div>
+        </div>
+        <div class="form-item">
+          <label for="">身份证</label>
+          <div>
+            <input type="text" v-model="loginForm.idCode" placeholder="请输入身份证号码">
           </div>
         </div>
       </div>
@@ -51,23 +57,22 @@ export default {
   data() {
     return {
       isType: true,
-      loginForm:{
-        phone:"",
-        verificationCode:""
+      loginForm: {
+        phone: "",
+        verificationCode: ""
       }
     };
   },
   methods: {
     login_reg_handle() {
-
       this.mui.toast("登陆成功", { duration: "long", type: "div" });
     }
   }
 };
 </script>
 <style>
-.mui-toast-container{
-  top:50% !important;
+.mui-toast-container {
+  top: 50% !important;
 }
 </style>
 
@@ -133,5 +138,4 @@ export default {
   font-size: 0.4rem;
   color: #0794ec;
 }
-
 </style>
