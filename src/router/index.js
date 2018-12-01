@@ -16,6 +16,8 @@ import store from "@/pages/store"
 import jobdetail from "@/pages/jobdetail"
 import uphone from "@/pages/user/phone"
 import myinfo from "@/pages/user/myinfo"
+import download from "@/pages/download"
+import ref from "@/pages/ref"
 Vue.use(Router)
 
 export default new Router({
@@ -88,6 +90,14 @@ export default new Router({
     path: "/myinfo",
     name: "myinfo",
     component: myinfo
+  }, {
+    path: "/download",
+    name: "download",
+    component: download
+  },{
+    path:"/ref",
+    name:"ref",
+    component:ref
   }
   ]
 })

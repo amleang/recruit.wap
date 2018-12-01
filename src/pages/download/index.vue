@@ -1,0 +1,56 @@
+<template>
+  <div class="content">
+    <a
+      href="javascript:;"
+      class="download-App"
+    >
+      <div class="load-wrap">
+        <p>仅供安卓机使用</p>
+        <div>立即下载</div>
+      </div>
+    </a>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style scoped>
+.content {
+  height: 100vh;
+  width: 100vw;
+  background-color: #eee;
+}
+.download-App {
+  display: block;
+  height: 100%;
+  background: url("../../assets/images/downloadImg.jpg") no-repeat 0 0/100% 100%;
+  text-decoration: none;
+  font-size: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.download-App .load-wrap {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.download-App .load-wrap p {
+  font-size: 0.35rem;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.download-App .load-wrap div {
+  font-size: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid #f5b375;
+  display: inline-block;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(to right, #f0831e, #e9af77);
+  -webkit-background-clip: text;
+  font-weight: bold;
+  border-radius: 0.5rem;
+}
+</style>

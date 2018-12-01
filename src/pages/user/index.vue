@@ -116,7 +116,7 @@
           <div class="user-icon">
             <i class="iconfont icon-shouji"></i>
           </div>
-          <div class="item-title">下载App</div>
+          <div class="item-title" @click="$router.push({path:'/download'})">下载App</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -149,7 +149,6 @@ export default {
     };
   },
   mounted() {
-    debugger;
     document.title = "个人中心";
     this.isLogin = this.checkLogin();
     if (!this.isLogin) {

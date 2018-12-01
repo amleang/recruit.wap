@@ -1,33 +1,52 @@
 <template>
   <div class="page">
     <div class="banner">
-      <img src="@/assets/images/login.jpg" alt="">
+      <img
+        src="@/assets/images/login.jpg"
+        alt=""
+      >
     </div>
-    <div class="content-block" v-if="isType">
+    <div
+      class="content-block"
+      v-if="isType"
+    >
       <div class="recommend-way">
         推荐登陆方式
       </div>
       <div class="reg">
-        <div class="button button-fill login-btn">
+        <div
+          class="button button-fill login-btn"
+          @click="login_handle"
+        >
           <i class="mui-icon mui-icon-weixin"></i>微信快捷登录
         </div>
       </div>
-      <!-- <div class="footer-login-btn" @click="isType=false;">
-        使用手机登录注册
-      </div> -->
     </div>
-    <div class="content-block" v-else>
+    <div
+      class="content-block"
+      v-else
+    >
       <div class="form">
         <div class="form-item">
           <label for="">手机号码</label>
           <div>
-            <input type="text" v-model="loginForm.phone" placeholder="请输入手机号码">
+            <input
+              type="text"
+              v-model="loginForm.phone"
+              placeholder="请输入手机号码"
+            >
           </div>
         </div>
         <div class="form-item">
           <label for="verificationCode">验证码</label>
           <div>
-            <input id="verificationCode" name="verificationCode" type="text" v-model="loginForm.verificationCode" placeholder="请输入验证码">
+            <input
+              id="verificationCode"
+              name="verificationCode"
+              type="text"
+              v-model="loginForm.verificationCode"
+              placeholder="请输入验证码"
+            >
           </div>
           <div class="form-yzm">
             获取验证码
@@ -36,18 +55,23 @@
         <div class="form-item">
           <label for="">身份证</label>
           <div>
-            <input type="text" v-model="loginForm.idCode" placeholder="请输入身份证号码">
+            <input
+              type="text"
+              v-model="loginForm.idCode"
+              placeholder="请输入身份证号码"
+            >
           </div>
         </div>
       </div>
       <div class="reg">
-        <div class="button button-fill login-btn" @click="login_reg_handle">
+        <div
+          class="button button-fill login-btn"
+          @click="login_reg_handle"
+        >
           登录/注册
         </div>
       </div>
-      <div class="footer-login-btn" @click="isType=false;">
-        微信快捷登录
-      </div>
+
     </div>
   </div>
 </template>
@@ -63,9 +87,39 @@ export default {
       }
     };
   },
+  mounted() {
+    const status = this.$route.query.status;
+    if (status) {
+      this.isType = false;
+    }
+    else{
+      this.isType=true;
+    }
+  },
   methods: {
     login_reg_handle() {
       this.mui.toast("登陆成功", { duration: "long", type: "div" });
+    },
+    /**
+     * 登陆
+     */
+    login_handle() {
+      //获取code
+      const refUrl = encodeURI("http://www.szdejurenhe.com/ref");
+      const wx = {
+        appid: "wx1124be6bc1512298"
+      };
+      this.http
+        .get(
+          "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
+            wx.appid +
+            "&redirect_uri=" +
+            refUrl +
+            "0&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+        )
+        .then(res => {
+          console.log("login=>", res);
+        });
     }
   }
 };
