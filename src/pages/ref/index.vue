@@ -19,22 +19,16 @@ export default {
   },
   mounted() {
     this.code = this.$route.query.code;
-
-    alert("code=>" + this.code);
     const wx = {
       appid: "wx1124be6bc1512298",
       secret: "091885925a2232c6b7bf89f2eed30972"
     };
     this.url =
-      "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" +
-      wx.appid +
-      "&secret=" +
-      wx.secret +
-      "&code=" +
+      "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx1124be6bc1512298&secret=091885925a2232c6b7bf89f2eed30972&code=" +
       this.code +
       "&grant_type=authorization_code";
     axios.get(this.url).then(res => {
-      this.res = JSON.stringify(res);
+      alert(res);
       alert(JSON.stringify(res));
       if (res.errcode) {
         this.mui.toast("获取用户授权失败！", {
