@@ -1,5 +1,6 @@
 <template>
   <div>
+      <div>oldUrl:{{JSON.stringify($route)}}</div>
     <div>code:{{code}}</div>
     <div>url:{{url}}</div>
     <div>res:{{res}}</div>
