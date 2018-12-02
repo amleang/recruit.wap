@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <nav class="mui-bar mui-bar-tab">
+    <!-- <nav class="mui-bar mui-bar-tab">
       <a class="mui-tab-item " @click="home_handle">
         <span class="mui-icon icon iconfont icon-gongzuo"></span>
         <span class="mui-tab-label">找工作</span>
@@ -13,54 +13,95 @@
         <span class="mui-icon icon iconfont icon-yonghu"></span>
         <span class="mui-tab-label">个人中心</span>
       </a>
-    </nav>
-
+    </nav> -->
+    <bottom :page="'rem'"></bottom>
     <head-title header="推荐有奖"></head-title>
 
     <div class="content">
       <div class="promptRefer">
-        <img src="@/assets/images/recommend.png" alt="">
+        <img
+          src="@/assets/images/recommend.png"
+          alt=""
+        >
       </div>
       <p class="text-center recommend-txt">推荐好友入职满3天可领取100元推荐费</p>
       <p class="text-center recommend-txt">平台核对与打款需一周左右</p>
-      <div class="content-block" @click="just_handle">
+      <div
+        class="content-block"
+        @click="just_handle"
+      >
         立即推荐
       </div>
-      <div class="refer-ranking" @click="ranking_handle">
+      <div
+        class="refer-ranking"
+        @click="ranking_handle"
+      >
         查看排行榜
       </div>
     </div>
-    <div class="nav-index-foat" @click="$router.push({path:'/store'})">
+    <div
+      class="nav-index-foat"
+      @click="$router.push({path:'/store'})"
+    >
       <p class="nav-index-text">
         <a class="external">免费<br>咨询</a>
       </p>
     </div>
 
-    <div class="nav-index-foat-my" @click="$router.push({path:'/recommendlist'})">
+    <div
+      class="nav-index-foat-my"
+      @click="$router.push({path:'/recommendlist'})"
+    >
       <p class="nav-index-text-my">
         <a class="external">我的<br>推荐</a>
       </p>
     </div>
 
-    <div v-if="dialog" class="mui-popup-backdrop"></div>
-    <div v-if="dialog" class="dialog">
-      <div class="dialog-close" @click="dialog_close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
+    <div
+      v-if="dialog"
+      class="mui-popup-backdrop"
+    ></div>
+    <div
+      v-if="dialog"
+      class="dialog"
+    >
+      <div
+        class="dialog-close"
+        @click="dialog_close_handle"
+      ><span class="mui-icon mui-icon-closeempty"></span></div>
       <div class="form-item">
         <label for="">姓名</label>
         <div>
-          <input type="text" v-model="form.username" maxlength="10" placeholder="请输入推荐人姓名">
+          <input
+            type="text"
+            v-model="form.username"
+            maxlength="10"
+            placeholder="请输入推荐人姓名"
+          >
         </div>
       </div>
 
       <div class="form-item">
         <label for="">手机号</label>
         <div>
-          <input type="text" v-model="form.phone" maxlength="11" placeholder="请输入推荐人手机号">
+          <input
+            type="text"
+            v-model="form.phone"
+            maxlength="11"
+            placeholder="请输入推荐人手机号"
+          >
         </div>
       </div>
-      <div class="btn-success" @click="submit_handle">确定</div>
+      <div
+        class="btn-success"
+        @click="submit_handle"
+      >确定</div>
     </div>
-    <ranking-form :dialog="rankingdialog" :unionid="unionid" @dialogHandle="dialog_handle">
+    <ranking-form
+      :dialog="rankingdialog"
+      :unionid="unionid"
+      @dialogHandle="dialog_handle"
+    >
 
     </ranking-form>
   </div>
@@ -68,12 +109,14 @@
 
 <script>
 import headTitle from "@/components/header";
+import bottom from "@/components/bottom";
 import { checkLogin, getWxItem } from "@/components/lib/util";
 import rankingForm from "@/components/ranking";
 export default {
   components: {
     headTitle,
-    rankingForm
+    rankingForm,
+    bottom
   },
   data() {
     return {

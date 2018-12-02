@@ -46,7 +46,7 @@
         <span class="mui-tab-label">个人中心</span>
       </a>
     </nav> -->
-    <bottom></bottom>
+    <bottom :page="'/'"></bottom>
 
     <div class="main-win">
       <div class="mui-slider">

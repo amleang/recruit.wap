@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="mui-bar mui-bar-tab">
+    <!--  <nav class="mui-bar mui-bar-tab">
       <a class="mui-tab-item " @click="home_handle">
         <span class="mui-icon icon iconfont icon-gongzuo"></span>
         <span class="mui-tab-label">找工作</span>
@@ -13,13 +13,20 @@
         <span class="mui-icon icon iconfont icon-yonghu"></span>
         <span class="mui-tab-label">个人中心</span>
       </a>
-    </nav>
+    </nav> -->
+    <bottom :page="'user'"></bottom>
     <div class="content">
-      <div class="header-img" @click="$router.push({path:'/myinfo'})">
+      <div
+        class="header-img"
+        @click="$router.push({path:'/myinfo'})"
+      >
         <div class="top"></div>
         <div class="avatar">
           <div class="user-img">
-            <img :src="wxUser.headimgurl" alt="">
+            <img
+              :src="wxUser.headimgurl"
+              alt=""
+            >
           </div>
           <div class="man-box">
             <div>{{wxUser.username}}</div>
@@ -35,7 +42,10 @@
           <div class="user-icon">
             <i class="iconfont icon-wallet_icon"></i>
           </div>
-          <div class="item-title" @click="$router.push({path:'/balance'})">我的余额</div>
+          <div
+            class="item-title"
+            @click="$router.push({path:'/balance'})"
+          >我的余额</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -44,7 +54,10 @@
           <div class="user-icon">
             <i class="iconfont icon-yinxingqia-copy"></i>
           </div>
-          <div class="item-title" @click="$router.push({path:'/bankcard'})">绑定补贴卡</div>
+          <div
+            class="item-title"
+            @click="$router.push({path:'/bankcard'})"
+          >绑定补贴卡</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -56,7 +69,10 @@
           <div class="user-icon">
             <i class="iconfont icon-job"></i>
           </div>
-          <div class="item-title" @click="$router.push({path:'/jobapplys'})">我的工作</div>
+          <div
+            class="item-title"
+            @click="$router.push({path:'/jobapplys'})"
+          >我的工作</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -65,7 +81,10 @@
           <div class="user-icon">
             <i class="iconfont icon-icon-guanzhu"></i>
           </div>
-          <div class="item-title" @click="$router.push({path:'/follow'})">我的关注</div>
+          <div
+            class="item-title"
+            @click="$router.push({path:'/follow'})"
+          >我的关注</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -74,7 +93,10 @@
           <div class="user-icon">
             <i class="iconfont icon-butie"></i>
           </div>
-          <div class="item-title" @click="$router.push({path:'/subsidy'})">我的补贴</div>
+          <div
+            class="item-title"
+            @click="$router.push({path:'/subsidy'})"
+          >我的补贴</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -91,7 +113,10 @@
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
         </div> -->
-        <div class="item-content" @click="$router.push({path:'/phone'})">
+        <div
+          class="item-content"
+          @click="$router.push({path:'/phone'})"
+        >
           <div class="user-icon">
             <i class="iconfont icon-shouji"></i>
           </div>
@@ -107,7 +132,10 @@
           <div class="user-icon">
             <i class="iconfont icon-mendian"></i>
           </div>
-          <div class="item-title" @click="$router.push({path:'/store'})">我的门店</div>
+          <div
+            class="item-title"
+            @click="$router.push({path:'/store'})"
+          >我的门店</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -116,7 +144,10 @@
           <div class="user-icon">
             <i class="iconfont icon-shouji"></i>
           </div>
-          <div class="item-title" @click="$router.push({path:'/download'})">下载App</div>
+          <div
+            class="item-title"
+            @click="$router.push({path:'/download'})"
+          >下载App</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -125,14 +156,20 @@
           <div class="user-icon">
             <i class="iconfont icon-guanyu"></i>
           </div>
-          <div class="item-title" @click="$router.push({path:'/about'})">关于我们</div>
+          <div
+            class="item-title"
+            @click="$router.push({path:'/about'})"
+          >关于我们</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
         </div>
       </div>
 
-      <div class="login-bottom" @click="outlogin_handle">退出登录</div>
+      <div
+        class="login-bottom"
+        @click="outlogin_handle"
+      >退出登录</div>
 
     </div>
   </div>
@@ -141,7 +178,11 @@
 
 <script>
 import { checkLogin, getWxItem } from "@/components/lib/util";
+import bottom from "@/components/bottom";
 export default {
+  components: {
+    bottom
+  },
   data() {
     return {
       isLogin: false,
