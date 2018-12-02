@@ -1,5 +1,6 @@
 import axios from 'axios'
 import mui from '../../assets/js/mui.js'
+/* axios.defaults.baseURL = "http://localhost:7012";  // 默认地址 */
 axios.defaults.baseURL = "http://www.szdejurenhe.com";  // 默认地址
 var instanceAxios = axios.create()
 const that = this;

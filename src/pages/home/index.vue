@@ -27,22 +27,20 @@
     </div>
 
     <nav class="mui-bar mui-bar-tab">
-      <a
-        class="mui-tab-item mui-active"
-      >
+      <a class="mui-tab-item mui-active">
         <span class="mui-icon icon iconfont icon-gongzuo"></span>
         <span class="mui-tab-label">找工作</span>
       </a>
       <a
         class="mui-tab-item"
-       @click="$router.push({path:'/recommend'})"
+        @click="$router.push({path:'/recommend'})"
       >
         <span class="mui-icon icon iconfont icon-tuijianyoujiang"></span>
         <span class="mui-tab-label">推荐有奖</span>
       </a>
       <a
         class="mui-tab-item"
-       @click="$router.push({path:'/user'})"
+        @click="$router.push({path:'/user'})"
       >
         <span class="mui-icon icon iconfont icon-yonghu"></span>
         <span class="mui-tab-label">个人中心</span>
@@ -157,12 +155,13 @@ export default {
       pageSize: 10,
       rowCout: 100,
       isNo: false,
+      isLoad: false,
       list: []
     };
   },
   mounted() {
     //this.wxShareConfig();
-    let wxuser = {
+    /*     let wxuser = {
       openid: "OPENID",
       nickname: "NICKNAME",
       sex: "1",
@@ -176,7 +175,7 @@ export default {
       phone: "15050473395"
     };
     let strWxUser = JSON.stringify(wxuser);
-    localStorage.setItem("hjct_user", strWxUser);
+    localStorage.setItem("hjct_user", strWxUser); */
     /* localStorage.removeItem("hjct_user"); */
     document.body.scrollTop = 0;
     this.isLogin = this.checkLogin();
@@ -235,7 +234,8 @@ export default {
             console.log("res=>", res);
             if (res.code == 200) {
               that.rowCout = res.count;
-              if (that.pageNo == 1) {
+
+              if (that.pageNo == 1 && !that.isLoad) {
                 var onePageList = [];
                 let topList = res.data.filter(x => x.isTop == 1);
                 if (topList.length == 0) {
@@ -253,8 +253,10 @@ export default {
                   if (that.topImgList.filter(x => x.id == item.id).length == 0)
                     that.list.push(item);
                 });
+                that.isLoad = true;
               } else {
-                that.list.concat(res.data);
+                if (that.pageNo == 0) that.list = res.data;
+                else that.list = that.list.concat(res.data);
               }
               if (that.list.length > 0) that.isNo = false;
               else that.isNo = true;
@@ -268,17 +270,17 @@ export default {
     },
     home_handle() {
       //this.$router.push({ path: "/" });
-      alert("跳转首页")
+      alert("跳转首页");
       location.href = "/";
     },
     recommend_handle() {
-       alert("跳转推荐")
+      alert("跳转推荐");
       if (this.isLogin) {
         location.href = "/recommend";
       } else this.$router.push({ path: "/login?ref=recommend" });
     },
     my_handle() {
-      alert("跳转会员")
+      alert("跳转会员");
       if (this.isLogin) {
         location.href = "/user";
       } else this.$router.push({ path: "/login?ref=user" });
