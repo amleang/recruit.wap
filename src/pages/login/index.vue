@@ -104,6 +104,7 @@ export default {
      * 登陆
      */
     login_handle() {
+      alert("开始")
       //获取code
       const refUrl = encodeURI("http://www.szdejurenhe.com/ref");
       const wx = {
@@ -118,7 +119,8 @@ export default {
             "0&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
         )
         .then(res => {
-          console.log("login=>", res);
+          alert(JSON.stringify(res))
+          console.log("login=>",JSON.stringify(res));
         });
     }
   }
