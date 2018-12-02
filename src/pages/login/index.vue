@@ -91,26 +91,37 @@ export default {
     const status = this.$route.query.status;
     if (status) {
       this.isType = false;
-    }
-    else{
-      this.isType=true;
+    } else {
+      this.isType = true;
     }
   },
   methods: {
     login_reg_handle() {
       this.mui.toast("登陆成功", { duration: "long", type: "div" });
     },
+    isWechat() {
+      let ua = window.navigator.userAgent.toLowerCase();
+      return ua.match(/MicroMessenger/i) == "micromessenger";
+    },
     /**
      * 登陆
      */
     login_handle() {
-      alert("开始")
-      //获取code
-      const refUrl = encodeURI("http://www.szdejurenhe.com/ref");
+      alert("开始");
+      alert(this.isWechat());
       const wx = {
         appid: "wx1124be6bc1512298"
       };
-      this.http
+      //获取code
+      const refUrl = encodeURI("http://www.szdejurenhe.com/ref");
+      location.href =
+        "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
+        wx.appid +
+        "&redirect_uri=" +
+        refUrl +
+        "0&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+
+      /*  this.http
         .get(
           "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
             wx.appid +
@@ -119,9 +130,9 @@ export default {
             "0&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
         )
         .then(res => {
-          alert(JSON.stringify(res))
-          console.log("login=>",JSON.stringify(res));
-        });
+          alert(JSON.stringify(res));
+          console.log("login=>", JSON.stringify(res));
+        }); */
     }
   }
 };
