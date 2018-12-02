@@ -2,7 +2,9 @@
   <div>
     <button @click="fz_handle">复制</button>
     <div>code:{{code}}</div>
-    <div id="url">url:{{url}}</div>
+    <div id="url">url:{{url}}
+        <input v-model="url">
+    </div>
     <div>res:{{res}}</div>
   </div>
 </template>
