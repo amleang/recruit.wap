@@ -140,10 +140,12 @@
 import { checkLogin } from "@/components/lib/util";
 import { wxShareConfig } from "@/components/lib/wxShare";
 import consult from "@/components/consult";
+import bottom from "@/components/bottom";
 import wx from "weixin-js-sdk";
 export default {
   components: {
-    consult
+    consult,
+    bottom
   },
   data() {
     return {
@@ -411,7 +413,7 @@ export default {
 }
 
 .mui-bar {
-  box-shadow: none;
+  z-index: 1000000000000;
 }
 .main-win {
   height: 100vh;
