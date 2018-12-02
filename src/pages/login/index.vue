@@ -119,7 +119,7 @@ export default {
         wx.appid +
         "&redirect_uri=" +
         refUrl +
-        "0&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+        "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
 
       /*  this.http
         .get(
@@ -127,7 +127,7 @@ export default {
             wx.appid +
             "&redirect_uri=" +
             refUrl +
-            "0&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+            "&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
         )
         .then(res => {
           alert(JSON.stringify(res));
