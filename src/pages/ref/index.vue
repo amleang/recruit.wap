@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>oldUrl:{{location.href}}</div>
     <button @click="fz_handle">复制</button>
     <div>code:{{code}}</div>
     <div id="url">url:{{url}}</div>
