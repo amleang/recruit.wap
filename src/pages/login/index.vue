@@ -2,7 +2,7 @@
   <div class="page">
     <div class="banner">
       <img
-        src="@/assets/images/login.jpg"
+        src="@/assets/images/logo.png"
         alt=""
       >
     </div>
