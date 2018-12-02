@@ -269,14 +269,17 @@ export default {
     },
     home_handle() {
       //this.$router.push({ path: "/" });
+      alert("跳转首页")
       location.href = "/";
     },
     recommend_handle() {
+       alert("跳转推荐")
       if (this.isLogin) {
         location.href = "/recommend";
       } else this.$router.push({ path: "/login?ref=recommend" });
     },
     my_handle() {
+      alert("跳转会员")
       if (this.isLogin) {
         location.href = "/user";
       } else this.$router.push({ path: "/login?ref=user" });
