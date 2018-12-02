@@ -47,7 +47,7 @@
       </a>
     </nav> -->
     <bottom :page="'/'"></bottom>
-
+    
     <div class="main-win">
       <div class="mui-slider">
         <div
@@ -87,6 +87,7 @@
           ></div>
         </div>
       </div>
+     
       <div class="recruit-list">
         <div :class="`mui-table-view ${isNo?'no-bottom':''}`">
           <div
@@ -293,7 +294,8 @@ export default {
     },
     detail_handle(item) {
       this.$router.push({ path: "/jobdetail?id=" + item.id });
-    }
+    },
+    
   }
 };
 </script>
