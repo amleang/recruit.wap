@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button @click="fz_handle">复制</button>
+  <div>
+      <input type="text" v-model="oldUrl">
+  </div>
     <div>code:{{code}}</div>
     <div id="url">url:{{url}}
         <input v-model="url">
@@ -23,6 +25,7 @@ export default {
   mounted() {
     this.code = this.$route.query.code;
     alert(location.href);
+    this.oldUrl=location.href;
     const wx = {
       appid: "wx1124be6bc1512298",
       secret: "091885925a2232c6b7bf89f2eed30972"
@@ -64,11 +67,7 @@ export default {
   },
   methods: {
     setWxItem,
-    fz_handle() {
-      var link = document.getElementById("url");
-      link.select(); // 选择对象
-      document.execCommand("Copy"); // 执行浏览器复制命令
-    }
+   
   }
 };
 </script>
