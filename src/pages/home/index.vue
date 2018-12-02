@@ -29,21 +29,21 @@
     <nav class="mui-bar mui-bar-tab">
       <a
         class="mui-tab-item mui-active"
-        @click="home_handle"
+       
       >
         <span class="mui-icon icon iconfont icon-gongzuo"></span>
         <span class="mui-tab-label">找工作</span>
       </a>
       <a
         class="mui-tab-item"
-        @click="recommend_handle"
+       @click="$router.push({path:'/recommend'})"
       >
         <span class="mui-icon icon iconfont icon-tuijianyoujiang"></span>
         <span class="mui-tab-label">推荐有奖</span>
       </a>
       <a
         class="mui-tab-item"
-        @click="my_handle"
+       @click="$router.push({path:'/user'})"
       >
         <span class="mui-icon icon iconfont icon-yonghu"></span>
         <span class="mui-tab-label">个人中心</span>
