@@ -1,6 +1,5 @@
 <template>
   <div>
-      <div>oldUrl:{{window.location.href}}</div>
     <div>code:{{code}}</div>
     <div>url:{{url}}</div>
     <div>res:{{res}}</div>
@@ -20,6 +19,7 @@ export default {
   },
   mounted() {
     this.code = this.$route.query.code;
+    alert(location.href);
     const wx = {
       appid: "wx1124be6bc1512298",
       secret: "091885925a2232c6b7bf89f2eed30972"
