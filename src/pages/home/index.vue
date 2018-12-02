@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <nav class="mui-bar mui-bar-tab">
+    <!-- <nav class="mui-bar mui-bar-tab">
       <a class="mui-tab-item mui-active">
         <span class="mui-icon icon iconfont icon-gongzuo"></span>
         <span class="mui-tab-label">找工作</span>
@@ -45,7 +45,8 @@
         <span class="mui-icon icon iconfont icon-yonghu"></span>
         <span class="mui-tab-label">个人中心</span>
       </a>
-    </nav>
+    </nav> -->
+    <bottom></bottom>
 
     <div class="main-win">
       <div class="mui-slider">
