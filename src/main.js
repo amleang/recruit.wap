@@ -7,8 +7,8 @@ import mui from './assets/js/mui.js'
 import 'lib-flexible/flexible'
 Vue.prototype.mui = mui;
 Vue.config.productionTip = false;
-router.afterEach((to,from,next) => {
-  window.scrollTo(0,0);
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0);
 });
 import http from '@/components/api/http'
 Vue.prototype.http = http;

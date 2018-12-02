@@ -1,25 +1,50 @@
 <template>
   <div>
-    <div id="listSearch" class="bar bar-header-secondary" style="top:0;">
-      <div class="searchbar searchbar-active" style="background-color: #fff;">
-        <a class="searchbar-cancel" @click="search_handle">搜索</a>
+    <div
+      id="listSearch"
+      class="bar bar-header-secondary"
+      style="top:0;"
+    >
+      <div
+        class="searchbar searchbar-active"
+        style="background-color: #fff;"
+      >
+        <a
+          class="searchbar-cancel"
+          @click="search_handle"
+        >搜索</a>
         <div class="search-input">
           <label class="search-label mui-icon mui-icon-search"></label>
-          <input type="search" id="search" name="jobName" placeholder="搜索岗位名称或关键字" v-model="searchParam">
+          <input
+            type="search"
+            id="search"
+            name="jobName"
+            placeholder="搜索岗位名称或关键字"
+            v-model="searchParam"
+          >
         </div>
       </div>
     </div>
 
     <nav class="mui-bar mui-bar-tab">
-      <a class="mui-tab-item mui-active" @click="home_handle">
+      <a
+        class="mui-tab-item mui-active"
+        @click="home_handle"
+      >
         <span class="mui-icon icon iconfont icon-gongzuo"></span>
         <span class="mui-tab-label">找工作</span>
       </a>
-      <a class="mui-tab-item" @click="recommend_handle">
+      <a
+        class="mui-tab-item"
+        @click="recommend_handle"
+      >
         <span class="mui-icon icon iconfont icon-tuijianyoujiang"></span>
         <span class="mui-tab-label">推荐有奖</span>
       </a>
-      <a class="mui-tab-item" @click="my_handle">
+      <a
+        class="mui-tab-item"
+        @click="my_handle"
+      >
         <span class="mui-icon icon iconfont icon-yonghu"></span>
         <span class="mui-tab-label">个人中心</span>
       </a>
@@ -27,7 +52,10 @@
 
     <div class="main-win">
       <div class="mui-slider">
-        <div class="mui-slider-group mui-slider-loop" v-if="topImgList.length>1">
+        <div
+          class="mui-slider-group mui-slider-loop"
+          v-if="topImgList.length>1"
+        >
           <!--支持循环，需要重复图片节点-->
           <!-- <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div> -->
           <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[0])"><img :src="topImgList[0].cover" /></a></div>
@@ -35,25 +63,51 @@
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/muwu.jpg" /></a></div>
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/cbd.jpg" /></a></div>
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div> -->
-          <div class="mui-slider-item" v-for="(item,index) in topImgList" :key="index"><a @click="top_detail_handle(item)"><img :src="item.cover" /></a></div>
+          <div
+            class="mui-slider-item"
+            v-for="(item,index) in topImgList"
+            :key="index"
+          ><a @click="top_detail_handle(item)"><img :src="item.cover" /></a></div>
           <!--支持循环，需要重复图片节点-->
           <!--  <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div> -->
           <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[topImgList.length-1])"><img :src="topImgList[topImgList.length-1].cover" /></a></div>
         </div>
-        <div class="mui-slider-group" v-else>
+        <div
+          class="mui-slider-group"
+          v-else
+        >
           <div class="mui-slider-item"><a @click="top_detail_handle(topImgList[0])"><img :src="topImgList[0].cover" /></a></div>
         </div>
-        <div class="mui-slider-indicator" v-if="topImgList.length>1">
-          <div :class="`mui-indicator ${index==0?'mui-active' :''}`" v-for="(item,index) in topImgList" :key="index"></div>
+        <div
+          class="mui-slider-indicator"
+          v-if="topImgList.length>1"
+        >
+          <div
+            :class="`mui-indicator ${index==0?'mui-active' :''}`"
+            v-for="(item,index) in topImgList"
+            :key="index"
+          ></div>
         </div>
       </div>
       <div class="recruit-list">
         <div :class="`mui-table-view ${isNo?'no-bottom':''}`">
-          <div class="recruit-item" v-if="isNo">
+          <div
+            class="recruit-item"
+            v-if="isNo"
+          >
             <div class="nothing">暂无招工信息</div>
           </div>
-          <div class="recruit-item" v-for="(item,index) in list" :key="index" @click="detail_handle(item)">
-            <img :src="item.cover" alt="" class="item-left">
+          <div
+            class="recruit-item"
+            v-for="(item,index) in list"
+            :key="index"
+            @click="detail_handle(item)"
+          >
+            <img
+              :src="item.cover"
+              alt=""
+              class="item-left"
+            >
             <div class="item-con">
               <div class="title">{{item.name}}</div>
               <div class="subtitle">{{item.subname}}</div>
@@ -61,11 +115,17 @@
                 <span>{{item.salaryStart}}-{{item.salaryEnd}}</span> 元/月
               </div>
             </div>
-            <div class="item-right" v-if="item.type==1">
+            <div
+              class="item-right"
+              v-if="item.type==1"
+            >
               <div class="btn-one">工价</div>
               <div class="btn-span">{{item.laborPrice}}元/小时</div>
             </div>
-            <div class="item-right" v-if="item.type==2">
+            <div
+              class="item-right"
+              v-if="item.type==2"
+            >
               <div class="btn-one">补贴</div>
               <div class="btn-span">{{item.subsidyExplain}}</div>
             </div>
@@ -208,15 +268,18 @@ export default {
       } else return;
     },
     home_handle() {
-      this.$router.push({ path: "/" });
+      //this.$router.push({ path: "/" });
+      location.href = "/";
     },
     recommend_handle() {
-      if (this.isLogin) this.$router.push({ path: "/recommend" });
-      else this.$router.push({ path: "/login?ref=recommend" });
+      if (this.isLogin) {
+        location.href = "/recommend";
+      } else this.$router.push({ path: "/login?ref=recommend" });
     },
     my_handle() {
-      if (this.isLogin) this.$router.push({ path: "/user" });
-      else this.$router.push({ path: "/login?ref=user" });
+      if (this.isLogin) {
+        location.href = "/user";
+      } else this.$router.push({ path: "/login?ref=user" });
     },
     top_detail_handle(item) {
       this.$router.push({ path: "/jobdetail?id=" + item.id });
