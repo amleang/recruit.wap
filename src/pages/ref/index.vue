@@ -1,11 +1,14 @@
 <template>
   <div>
-  <div>
-      <input type="text" v-model="oldUrl">
-  </div>
+    <div>
+      <input
+        type="text"
+        v-model="oldUrl"
+      >
+    </div>
     <div>code:{{code}}</div>
     <div id="url">url:{{url}}
-        <input v-model="url">
+      <input v-model="url">
     </div>
     <div>res:{{res}}</div>
   </div>
@@ -25,12 +28,19 @@ export default {
   mounted() {
     this.code = this.$route.query.code;
     alert(location.href);
-    this.oldUrl=location.href;
+    this.oldUrl = location.href;
     const wx = {
       appid: "wx1124be6bc1512298",
       secret: "091885925a2232c6b7bf89f2eed30972"
     };
     this.url =
+      "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx1124be6bc1512298&secret=091885925a2232c6b7bf89f2eed30972&code=" +
+      this.code +
+      "&grant_type=authorization_code";
+      this.mui.get(this.url,function(res){
+          alert(JSON.stringify(res));
+      })
+    /* this.url =
       "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx1124be6bc1512298&secret=091885925a2232c6b7bf89f2eed30972&code=" +
       this.code +
       "&grant_type=authorization_code";
@@ -63,11 +73,10 @@ export default {
             });
           });
       }
-    });
+    }); */
   },
   methods: {
-    setWxItem,
-   
+    setWxItem
   }
 };
 </script>
