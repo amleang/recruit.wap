@@ -37,9 +37,18 @@ export default {
       "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx1124be6bc1512298&secret=091885925a2232c6b7bf89f2eed30972&code=" +
       this.code +
       "&grant_type=authorization_code";
-      this.mui.get(this.url,function(res){
-          alert(JSON.stringify(res));
+    axios
+      .get(this.url, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST",
+          "Access-Control-Allow-Headers":
+            "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With"
+        }
       })
+      .then(res => {
+        alert(JSON.stringify(res));
+      });
     /* this.url =
       "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx1124be6bc1512298&secret=091885925a2232c6b7bf89f2eed30972&code=" +
       this.code +
