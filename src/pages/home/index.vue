@@ -29,7 +29,6 @@
     <nav class="mui-bar mui-bar-tab">
       <a
         class="mui-tab-item mui-active"
-       
       >
         <span class="mui-icon icon iconfont icon-gongzuo"></span>
         <span class="mui-tab-label">找工作</span>
