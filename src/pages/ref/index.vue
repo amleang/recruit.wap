@@ -1,7 +1,9 @@
 <template>
   <div>
+    <div>oldUrl:{{location.href}}</div>
+    <button @click="fz_handle">复制</button>
     <div>code:{{code}}</div>
-    <div>url:{{url}}</div>
+    <div id="url">url:{{url}}</div>
     <div>res:{{res}}</div>
   </div>
 </template>
@@ -60,7 +62,12 @@ export default {
     });
   },
   methods: {
-    setWxItem
+    setWxItem,
+    fz_handle() {
+      var link = document.getElementById("url");
+      link.select(); // 选择对象
+      document.execCommand("Copy"); // 执行浏览器复制命令
+    }
   }
 };
 </script>
