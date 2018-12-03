@@ -27,9 +27,18 @@ export default {
   },
   mounted() {
     this.code = this.$route.query.code;
-    this.http.get("/api/app/oathuser?code=" + this.code).then(res => {
+    this.http
+      .get(
+        "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx1124be6bc1512298&secret=091885925a2232c6b7bf89f2eed30972&code=" +
+          this.code +
+          "&grant_type=authorization_code"
+      )
+      .then(res => {
+        console.log("res=>", res);
+      });
+    /*  this.http.get("/api/app/oathuser?code=" + this.code).then(res => {
       alert(JSON.stringify(res));
-    });
+    }); */
   },
   methods: {
     setWxItem
