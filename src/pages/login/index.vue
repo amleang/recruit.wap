@@ -88,6 +88,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "用户登录";
     const status = this.$route.query.status;
     if (status) {
       this.isType = false;
@@ -107,8 +108,13 @@ export default {
      * 登陆
      */
     login_handle() {
-      alert("开始");
-      alert(this.isWechat());
+      if (!this.isWechat()) {
+        this.mui.toast("请在微信中打开该页面", {
+          duration: "long",
+          type: "div"
+        });
+        return;
+      }
       const wx = {
         appid: "wx1124be6bc1512298"
       };
@@ -120,19 +126,6 @@ export default {
         "&redirect_uri=" +
         refUrl +
         "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
-
-      /*  this.http
-        .get(
-          "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
-            wx.appid +
-            "&redirect_uri=" +
-            refUrl +
-            "&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
-        )
-        .then(res => {
-          alert(JSON.stringify(res));
-          console.log("login=>", JSON.stringify(res));
-        }); */
     }
   }
 };

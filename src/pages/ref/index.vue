@@ -13,6 +13,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "用户授权";
     this.code = this.$route.query.code;
 
     this.http.get("/api/app/oathuser?code=" + this.code).then(re => {

@@ -47,7 +47,7 @@
       </a>
     </nav> -->
     <bottom :page="'/'"></bottom>
-    
+
     <div class="main-win">
       <div class="mui-slider">
         <div
@@ -87,7 +87,7 @@
           ></div>
         </div>
       </div>
-     
+
       <div class="recruit-list">
         <div :class="`mui-table-view ${isNo?'no-bottom':''}`">
           <div
@@ -164,6 +164,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "苏州德聚仁合招工网";
     //this.wxShareConfig();
     /*     let wxuser = {
       openid: "OPENID",
@@ -294,8 +295,7 @@ export default {
     },
     detail_handle(item) {
       this.$router.push({ path: "/jobdetail?id=" + item.id });
-    },
-    
+    }
   }
 };
 </script>
