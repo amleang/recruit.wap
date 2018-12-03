@@ -113,7 +113,7 @@ export default {
         appid: "wx1124be6bc1512298"
       };
       //获取code
-      const refUrl = encodeURI("http://www.szdejurenhe.com/ref");
+      const refUrl = encodeURI("http://localhost:7012/ref");
       location.href =
         "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
         wx.appid +
