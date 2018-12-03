@@ -1,14 +1,6 @@
 <template>
-  <div>
-    <div>
-      <input
-        type="text"
-        v-model="oldUrl"
-      >
-    </div>
-    <div>code:{{code}}</div>
-   
-    <div>res:{{res}}</div>
+  <div class="loading">
+    获取授权加载中...
   </div>
 </template>
 
@@ -17,17 +9,14 @@ import { setWxItem } from "@/components/lib/util";
 export default {
   data() {
     return {
-      code: "",
-      oldUrl: "",
-      res:""
+      code: ""
     };
   },
   mounted() {
     this.code = this.$route.query.code;
-    this.oldUrl = location.href;
+
     this.http.get("/api/app/oathuser?code=" + this.code).then(re => {
       alert(JSON.stringify(re));
-    
     });
   },
   methods: {
@@ -36,5 +25,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.loading{
+    width:100vw;
+    height:100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+}
 </style>
