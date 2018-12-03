@@ -27,7 +27,7 @@ export default {
   },
   mounted() {
     this.code = this.$route.query.code;
-    this.http.get("/api/app/oathuser?code=" + code).then(res => {
+    this.http.get("/api/app/oathuser?code=" + this.code).then(res => {
       alert(JSON.stringify(res));
     });
   },
