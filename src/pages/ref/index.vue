@@ -25,10 +25,10 @@ export default {
   mounted() {
     this.code = this.$route.query.code;
     this.oldUrl = location.href;
-    /* this.http.get("/api/app/oathuser?code=" + this.code).then(re => {
+    this.http.get("/api/app/oathuser?code=" + this.code).then(re => {
       alert(JSON.stringify(re));
     
-    }); */
+    });
   },
   methods: {
     setWxItem
