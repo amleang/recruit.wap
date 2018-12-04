@@ -1,3 +1,4 @@
+import wx from 'weixin-js-sdk';
 export const wxShareConfig = function () {
     this.http.post("/api/app/getwxshare", { url: location.href }).then(res => {
         wx.config({
