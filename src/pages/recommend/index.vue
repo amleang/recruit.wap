@@ -142,7 +142,7 @@ export default {
   methods: {
     checkLogin,
     getWxItem,
-    wxhideMenu(),
+    wxhideMenu,
     home_handle() {
       this.$router.push({ path: "/" });
     },
