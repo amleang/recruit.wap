@@ -165,6 +165,7 @@ export default {
   },
   mounted() {
     document.title = "苏州德聚仁合招工网";
+    this.wxShareConfig();
     //this.wxShareConfig();
     /*     let wxuser = {
       openid: "OPENID",

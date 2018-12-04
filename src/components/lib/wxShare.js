@@ -1,5 +1,5 @@
 export const wxShareConfig = function () {
-    this.http.get("").then(res => {
+    this.http.post("/api/app/getwxshare", { url: location.href }).then(res => {
         wx.config({
             debug: false,
             appId: res.data.appId,
@@ -56,7 +56,7 @@ export const wxShareConfig = function () {
 }
 
 export const wxhideMenu = function () {
-    this.http.get("").then(res => {
+    this.http.post("/api/app/getwxshare", { url: location.href }).then(res => {
         wx.config({
             debug: false,
             appId: res.data.appId,

@@ -164,6 +164,7 @@ import axios from "axios";
 import rePanel from "@/components/panel";
 import consult from "@/components/consult";
 import { checkLogin, getWxItem } from "@/components/lib/util";
+import { wxShareConfig } from "@/components/lib/wxShare";
 export default {
   components: {
     rePanel,
@@ -200,6 +201,7 @@ export default {
   mounted() {
     
     document.body.scrollTop = 0;
+    this.wxShareConfig();
     //console.log(this.$route);
     const id = this.$route.query.id;
     if (!id) {
@@ -240,6 +242,7 @@ export default {
   methods: {
     checkLogin,
     getWxItem,
+    wxShareConfig,
     signup_handle() {
       if (!this.checkLogin()) {
         this.$router.push({
