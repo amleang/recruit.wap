@@ -201,7 +201,7 @@ export default {
   mounted() {
     
     document.body.scrollTop = 0;
-    this.wxShareConfig();
+    
     //console.log(this.$route);
     const id = this.$route.query.id;
     if (!id) {
@@ -222,6 +222,7 @@ export default {
         if (res.code == 200) {
           this.form = res.data;
           document.title = this.form.name;
+          this.wxShareConfig(this.form.name);
         } else {
           this.mui.toast(res.msg, { duration: "long", type: "div" });
         }

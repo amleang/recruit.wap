@@ -164,8 +164,8 @@ export default {
     };
   },
   mounted() {
-    document.title = "苏州德聚仁合招工网";
-    this.wxShareConfig();
+    document.title = "苏州德聚仁合招工网首页";
+    this.wxShareConfig("苏州德聚仁合招工网首页");
     //this.wxShareConfig();
     /*     let wxuser = {
       openid: "OPENID",

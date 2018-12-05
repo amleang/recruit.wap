@@ -1,5 +1,5 @@
 import wx from 'weixin-js-sdk';
-export const wxShareConfig = function () {
+export const wxShareConfig = function (title) {
     this.http.post("/api/app/getwxshare", { url: location.href }).then(res => {
         wx.config({
             debug: false,
@@ -20,9 +20,9 @@ export const wxShareConfig = function () {
         });
         // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
         wx.onMenuShareTimeline({
-            title: "牛职工作网",
+            title: title,
             link: location.href,
-            imgUrl: "https://niuzhigongzuo.com/static/images/logo@x1024.jpg",
+            imgUrl: "http://www.szdejurenhe.com/static/img/logo.f4caee2.png",
             success: function () {
                 alertStr("分享成功！");
             },
@@ -37,10 +37,10 @@ export const wxShareConfig = function () {
 
         // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
         wx.onMenuShareAppMessage({
-            title: "牛职工作网",
+            title: title,
             desc: "让求职者高薪就业，从业者终生受益！",
             link: location.href,
-            imgUrl: "https://niuzhigongzuo.com/static/images/logo@x1024.jpg",
+            imgUrl: "http://www.szdejurenhe.com/static/img/logo.f4caee2.png",
             type: "link",
             success: function () {
                 alertStr("分享成功！");
