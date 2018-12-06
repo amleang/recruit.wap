@@ -429,7 +429,7 @@ export default {
   padding-top: 1.1rem;
 }
 .mui-slider{
-  max-height:192px;
+  max-height:5rem;
 }
 .mui-slider-item {
   height: 5rem !important;
