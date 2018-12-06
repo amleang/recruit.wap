@@ -4,17 +4,34 @@
     <div class="content">
       <div class="con-card">
         <div>
-          <img src="@/assets/images/logo.png" alt="">
+          <img
+            src="@/assets/images/logo.png"
+            alt=""
+          >
         </div>
         <div class="link-info">
           <div class="coName">{{form.coName}}</div>
-          <div class="phone" v-for="(item,index) in form.links" :key="index">
+          <div
+            class="phone"
+            v-for="(item,index) in form.links"
+            :key="index"
+          >
             {{item.link}}<a :href="`tel:${item.phone}`">{{item.phone}}</a></div>
         </div>
       </div>
+      <div class="qrcode">
+        <img
+          :src="form.qrcode"
+          alt=""
+        >
+      </div>
       <div class="address">{{form.address}}</div>
       <div class="tencent-map">
-        <iframe v-if="isLoad" :src="`https://apis.map.qq.com/tools/poimarker?type=0&marker=coord:${form.lat},${form.lng};title:${form.coName};addr:${form.address}&key=DE2BZ-47CRU-5LPVV-BXXAB-MWLRQ-D7FXQ&referer=recruit`" frameborder="0"></iframe>
+        <iframe
+          v-if="isLoad"
+          :src="`https://apis.map.qq.com/tools/poimarker?type=0&marker=coord:${form.lat},${form.lng};title:${form.coName};addr:${form.address}&key=DE2BZ-47CRU-5LPVV-BXXAB-MWLRQ-D7FXQ&referer=recruit`"
+          frameborder="0"
+        ></iframe>
       </div>
 
       <div class="serviceLink">
@@ -80,7 +97,7 @@ export default {
   font-size: 0.45rem;
   line-height: 0.8rem;
 }
-.phone a{
+.phone a {
   margin-left: 10px;
 }
 .address {
@@ -108,5 +125,14 @@ export default {
   font-size: 0.35rem;
   margin: 0 auto 1rem;
   margin-top: 2rem;
+}
+.qrcode {
+  width: 85%;
+  margin: 0.7rem auto;
+  text-align: center;
+}
+.qrcode img{
+  width:100%;
+  height:100%;
 }
 </style>

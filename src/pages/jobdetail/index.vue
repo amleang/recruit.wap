@@ -1,54 +1,105 @@
 <template>
   <div>
     <div class="bar-nav">
-      <span class="mui-icon mui-icon-arrowleft btn-back" @click="back_handle"></span>
+      <span
+        class="mui-icon mui-icon-arrowleft btn-back"
+        @click="back_handle"
+      ></span>
       <div class="head-title">
-        <marquee direction="left" width="100%" behavior="scroll" scrollamount="5" scrolldelay="5" onmouseout="this.start()" onmouseover="this.stop()">
+        <marquee
+          direction="left"
+          width="100%"
+          behavior="scroll"
+          scrollamount="5"
+          scrolldelay="5"
+          onmouseout="this.start()"
+          onmouseover="this.stop()"
+        >
           <span class="ad-slogan">只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保证自己的利益！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只有在平台报名才能保</span>
         </marquee>
       </div>
     </div>
     <div class="content">
       <div class="mui-slider">
-        <div class="mui-slider-group mui-slider-loop" v-if="form.imgs.length>1">
-          <!--支持循环，需要重复图片节点-->
-          <div class="mui-slider-item mui-slider-item-duplicate"><a><img :src="form.imgs[0]" /></a></div>
-          <div class="mui-slider-item" v-for="(item,index) in form.imgs" :key="index"><a><img :src="item" /></a></div>
+        <div
+          class="mui-slider-group mui-slider-loop"
+          v-if="form.imgs.length>1"
+        >
           <!--支持循环，需要重复图片节点-->
           <div class="mui-slider-item mui-slider-item-duplicate"><a><img :src="form.imgs[form.imgs.length-1]" /></a></div>
+          <div
+            class="mui-slider-item"
+            v-for="(item,index) in form.imgs"
+            :key="index"
+          ><a><img :src="item" /></a></div>
+          <!--支持循环，需要重复图片节点-->
+          <div class="mui-slider-item mui-slider-item-duplicate"><a><img :src="form.imgs[0]" /></a></div>
         </div>
-        <div class="mui-slider-group" v-else>
+        <div
+          class="mui-slider-group"
+          v-else
+        >
           <div class="mui-slider-item"><a><img :src="form.imgs[0]" /></a></div>
         </div>
-        <div class="mui-slider-indicator" v-if="form.imgs.length>1">
-          <div :class="`mui-indicator ${index==0?'mui-active' :''}`" v-for="(item,index) in form.imgs" :key="index"></div>
+        <div
+          class="mui-slider-indicator"
+          v-if="form.imgs.length>1"
+        >
+          <div
+            :class="`mui-indicator ${index==0?'mui-active' :''}`"
+            v-for="(item,index) in form.imgs"
+            :key="index"
+          ></div>
         </div>
       </div>
       <div class="company">
         <div class="title">
           <div class="name">{{form.name}}</div>
-          <div class="price" v-if="form.type==1">
+          <div
+            class="price"
+            v-if="form.type==1"
+          >
             <span>{{form.laborPrice}}</span>元/小时
           </div>
-          <div class="price" v-if="form.type==2">
+          <div
+            class="price"
+            v-if="form.type==2"
+          >
             <span>{{form.salaryStart}}-{{form.salaryEnd}}</span>元
           </div>
         </div>
         <div class="subtitle">
           {{form.subname}}
         </div>
+        <div
+          class="job-stop"
+          v-if="form.active==0"
+        >
+          <span>暂停招聘</span>
+        </div>
         <div class="sign-num">已报名{{form.signupCount?form.signupCount:0}}人
         </div>
       </div>
       <re-panel title="补贴">
         <div slot="reright">
-          <div style="font-size:0.3rem;" v-if="form.subsidys.length>1" @click="isSubsidys=!isSubsidys">{{isSubsidys?'隐藏企业全部补贴':'查看企业全部补贴'}}" ></div>
+          <div
+            style="font-size:0.3rem;"
+            v-if="form.subsidys.length>1"
+            @click="isSubsidys=!isSubsidys"
+          >{{isSubsidys?'隐藏企业全部补贴':'查看企业全部补贴'}}" ></div>
         </div>
         <div>
           <div v-html="form.subsidys[0].value"></div>
 
-          <div v-if="isSubsidys" style="border-top:1px dashed #adadad;margin-top:0.45rem;padding-top:0.3rem;">
-            <div v-if="index!=0" v-for="(item,index) in form.subsidys" :key="index">
+          <div
+            v-if="isSubsidys"
+            style="border-top:1px dashed #adadad;margin-top:0.45rem;padding-top:0.3rem;"
+          >
+            <div
+              v-if="index!=0"
+              v-for="(item,index) in form.subsidys"
+              :key="index"
+            >
               <p>补贴：</p>
               <div v-html="item.value"></div>
             </div>
@@ -73,9 +124,17 @@
       </re-panel>
       <re-panel title="岗位推荐">
         <div style="margin:0 -0.5rem;">
-          <div class="rem-item" v-for="(item,index) in recommends" :key="index" @click="rem_item_handle(item)">
+          <div
+            class="rem-item"
+            v-for="(item,index) in recommends"
+            :key="index"
+            @click="rem_item_handle(item)"
+          >
             <div>
-              <img :src="item.cover" alt="">
+              <img
+                :src="item.cover"
+                alt=""
+              >
             </div>
             <div class="price">{{item.salaryStart}}-{{item.salaryEnd}}</div>
             <div class="name">{{item.name}}</div>
@@ -86,65 +145,145 @@
 
       <div class="con-bottom"></div>
     </div>
-    <div class="share" v-if="isShare" @click="isShare=false;">
-      <img src="@/assets/images/share.gif" alt="">
+    <div
+      class="share"
+      v-if="isShare"
+      @click="isShare=false;"
+    >
+      <img
+        src="@/assets/images/share.gif"
+        alt=""
+      >
     </div>
-    <div class="nav-index-foat" @click="$router.push({path:'/store'})">
+    <div
+      class="nav-index-foat"
+      @click="$router.push({path:'/store'})"
+    >
       <p class="nav-index-text">
         <a class="external">免费<br>咨询</a>
       </p>
     </div>
 
-    <div class="nav-index-foat-my" @click="correction_show_handle">
+    <div
+      class="nav-index-foat-my"
+      @click="correction_show_handle"
+    >
       <p class="nav-index-text-my">
         <a class="external">纠错<br>报告</a>
       </p>
     </div>
 
     <div class="foot-bottom">
-      <div class="apply-btn" @click="signup_handle">免费报名</div>
-      <div class="follow-btn" v-if="form.att==0" @click="attention_handle">关注</div>
-      <div class="follow-btn" v-else @click="attention_del_handle">取消关注</div>
-      <div class="share-btn" @click="isShare=true;">分享</div>
+      <div
+        class="apply-btn"
+        @click="signup_handle"
+      >免费报名</div>
+      <div
+        class="follow-btn"
+        v-if="form.att==0"
+        @click="attention_handle"
+      >关注</div>
+      <div
+        class="follow-btn"
+        v-else
+        @click="attention_del_handle"
+      >取消关注</div>
+      <div
+        class="share-btn"
+        @click="isShare=true;"
+      >分享</div>
     </div>
-    <div v-if="dialog" class="mui-popup-backdrop"></div>
-    <div v-if="dialog" class="dialog">
-      <div class="dialog-close" @click="dialog_close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
+    <div
+      v-if="dialog"
+      class="mui-popup-backdrop"
+    ></div>
+    <div
+      v-if="dialog"
+      class="dialog"
+    >
+      <div
+        class="dialog-close"
+        @click="dialog_close_handle"
+      ><span class="mui-icon mui-icon-closeempty"></span></div>
       <div class="form-item">
         <label for="">邀请人姓名</label>
         <div>
-          <input type="text" v-model="enrollForm.inviter" maxlength="10" placeholder="请输入邀请人姓名">
+          <input
+            type="text"
+            v-model="enrollForm.inviter"
+            maxlength="10"
+            placeholder="请输入邀请人姓名"
+          >
         </div>
       </div>
 
       <div class="form-item">
         <label for="">邀请码</label>
         <div>
-          <input type="text" v-model="enrollForm.inviterCode" placeholder="请输入邀请码">
+          <input
+            type="text"
+            v-model="enrollForm.inviterCode"
+            placeholder="请输入邀请码"
+          >
         </div>
       </div>
-      <div class="btn-success" @click="enroll_submit_handle">确定</div>
+      <div
+        class="btn-success"
+        @click="enroll_submit_handle"
+      >确定</div>
     </div>
     <!-- 纠错表单 -->
-    <div v-if="dialogCorrection" class="mui-popup-backdrop"></div>
-    <div v-if="dialogCorrection" class="dialog">
-      <div class="dialog-close" @click="correction_close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
+    <div
+      v-if="dialogCorrection"
+      class="mui-popup-backdrop"
+    ></div>
+    <div
+      v-if="dialogCorrection"
+      class="dialog"
+    >
+      <div
+        class="dialog-close"
+        @click="correction_close_handle"
+      ><span class="mui-icon mui-icon-closeempty"></span></div>
       <div class="form-item1">
         <label for="">内容</label>
         <div>
-          <textarea style="width:5rem;" v-model="correctionForm.content" name="" id="" cols="30" rows="5"></textarea>
+          <textarea
+            style="width:5rem;"
+            v-model="correctionForm.content"
+            name=""
+            id=""
+            cols="30"
+            rows="5"
+          ></textarea>
         </div>
       </div>
       <div class="form-item2">
-        <label for="" style="width:1.5rem;">图片</label>
+        <label
+          for=""
+          style="width:1.5rem;"
+        >图片</label>
         <div style="max-width:5.5rem;">
-          <div class="avatar-uploader" v-for="(item,index) in correctionForm.imgs" :key="index">
+          <div
+            class="avatar-uploader"
+            v-for="(item,index) in correctionForm.imgs"
+            :key="index"
+          >
             <div class="form-img">
-              <i class="mui-icon mui-icon-trash" @click="delete_img_handle(index)"></i>
-              <img :src="item" alt="">
+              <i
+                class="mui-icon mui-icon-trash"
+                @click="delete_img_handle(index)"
+              ></i>
+              <img
+                :src="item"
+                alt=""
+              >
             </div>
           </div>
-          <div class="avatar-uploader" @click="uplaod_handle">
+          <div
+            class="avatar-uploader"
+            @click="uplaod_handle"
+          >
             <div class="form-img">
               <span class="mui-icon mui-icon-plusempty"></span>
             </div>
@@ -153,9 +292,18 @@
 
         </div>
       </div>
-      <div class="btn-success" @click="correctionSubmit">提交</div>
+      <div
+        class="btn-success"
+        @click="correctionSubmit"
+      >提交</div>
     </div>
-    <input style="display:none;" type="file" id="upload" accept="image/gif,image/jpeg,image/jpg,image/png" @change="img_update_handle">
+    <input
+      style="display:none;"
+      type="file"
+      id="upload"
+      accept="image/gif,image/jpeg,image/jpg,image/png"
+      @change="img_update_handle"
+    >
   </div>
 </template>
 
@@ -199,9 +347,8 @@ export default {
     };
   },
   mounted() {
-    
     document.body.scrollTop = 0;
-    
+
     //console.log(this.$route);
     const id = this.$route.query.id;
     if (!id) {
@@ -245,6 +392,10 @@ export default {
     getWxItem,
     wxShareConfig,
     signup_handle() {
+      if(this.form.active==0){
+        this.mui.toast("暂停招聘，无法报名！", { duration: "long", type: "div" });
+        return;
+      }
       if (!this.checkLogin()) {
         this.$router.push({
           path: "/login?ref=jobdetail|" + this.$route.query.id
@@ -421,7 +572,9 @@ export default {
   padding: 0 1rem;
   margin-top: 0.12rem;
 }
-
+.mui-slider{
+  max-height:192px;
+}
 .content {
   padding-top: 1.21rem;
   height: 100vh;
@@ -434,6 +587,7 @@ export default {
   color: #333333;
   margin-bottom: 0.2rem;
   background-color: #fff;
+  position: relative;
 }
 .company .title {
   display: flex;
@@ -672,5 +826,28 @@ export default {
   position: absolute;
   right: 15px;
   top: 0;
+}
+.job-stop {
+  position: absolute;
+  top: 30%;
+  right: 0.333333rem;
+  min-width: 2rem;
+  line-height: 0.8rem;
+  text-align: center;
+  font-size: 0.35rem;
+  font-weight: bold;
+  background-color: rgba(101, 166, 232, 0.64);
+  color: #fff;
+  -webkit-transform: rotate(-25deg);
+  transform: rotate(-25deg);
+  -webkit-border-radius: 0.026667rem;
+  -moz-border-radius: 0.026667rem;
+  -ms-border-radius: 0.026667rem;
+  -o-border-radius: 0.026667rem;
+  padding: 0 0.35rem;
+}
+.job-stop span {
+  color: #e80608;
+  letter-spacing: 0.1rem;
 }
 </style>

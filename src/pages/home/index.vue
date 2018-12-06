@@ -56,7 +56,7 @@
         >
           <!--支持循环，需要重复图片节点-->
           <!-- <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div> -->
-          <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[0])"><img :src="topImgList[0].cover" /></a></div>
+          <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[topImgList.length-1])"><img :src="topImgList[0].cover" /></a></div>
           <!--  <div class="mui-slider-item"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div>
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/muwu.jpg" /></a></div>
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/cbd.jpg" /></a></div>
@@ -68,7 +68,7 @@
           ><a @click="top_detail_handle(item)"><img :src="item.cover" /></a></div>
           <!--支持循环，需要重复图片节点-->
           <!--  <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div> -->
-          <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[topImgList.length-1])"><img :src="topImgList[topImgList.length-1].cover" /></a></div>
+          <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[0])"><img :src="topImgList[topImgList.length-1].cover" /></a></div>
         </div>
         <div
           class="mui-slider-group"
@@ -114,16 +114,21 @@
                 <span>{{item.salaryStart}}-{{item.salaryEnd}}</span> 元/月
               </div>
             </div>
+            <div  class="item-right" v-if="item.active==0">
+              <div class="btn-one" style="background: #859199!important;">已停招</div>
+               <div class="btn-span" v-if="item.type==1">{{item.laborPrice}}元/小时</div>
+              <div class="btn-span" v-if="item.type==2">{{item.subsidyExplain}}</div>
+            </div>
             <div
               class="item-right"
-              v-if="item.type==1"
+              v-if="item.type==1 && item.active==1"
             >
               <div class="btn-one">工价</div>
               <div class="btn-span">{{item.laborPrice}}元/小时</div>
             </div>
             <div
               class="item-right"
-              v-if="item.type==2"
+              v-if="item.type==2 && item.active==1"
             >
               <div class="btn-one">补贴</div>
               <div class="btn-span">{{item.subsidyExplain}}</div>
@@ -422,6 +427,9 @@ export default {
 .main-win {
   height: 100vh;
   padding-top: 1.1rem;
+}
+.mui-slider{
+  max-height:192px;
 }
 .mui-slider-item {
   height: 5rem !important;
