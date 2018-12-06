@@ -74,7 +74,6 @@ export default {
   padding-top: 1.5rem;
   height: 100vh;
   width: 100vw;
-  background-color: #eee;
 }
 .con-card {
   display: flex;
