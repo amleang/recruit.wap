@@ -391,14 +391,18 @@ export default {
     checkLogin,
     getWxItem,
     wxShareConfig,
+    /**免费报名 */
     signup_handle() {
-      if(this.form.active==0){
-        this.mui.toast("暂停招聘，无法报名！", { duration: "long", type: "div" });
+      if (this.form.active == 0) {
+        this.mui.toast("暂停招聘，无法报名！", {
+          duration: "long",
+          type: "div"
+        });
         return;
       }
       if (!this.checkLogin()) {
         this.$router.push({
-          path: "/login?ref=jobdetail|" + this.$route.query.id
+          path: "/login?ref=jobdetail|id=" + this.$route.query.id
         });
         return;
       }
@@ -414,7 +418,7 @@ export default {
     attention_handle() {
       if (!this.checkLogin()) {
         this.$router.push({
-          path: "/login?ref=jobdetail|" + this.$route.query.id
+          path: "/login?ref=jobdetail|id=" + this.$route.query.id
         });
         return;
       }
@@ -465,6 +469,12 @@ export default {
       });
     },
     correction_show_handle() {
+      if (!this.getWxItem()) {
+        this.$router.push({
+          path: "/login?ref=jobdetail|id=" + this.$route.query.id
+        });
+        return;
+      }
       this.dialogCorrection = true;
       this.correctionForm = {
         content: "",
@@ -572,8 +582,8 @@ export default {
   padding: 0 1rem;
   margin-top: 0.12rem;
 }
-.mui-slider{
-  max-height:5rem;
+.mui-slider {
+  max-height: 5rem;
 }
 .mui-slider-item {
   height: 5rem !important;

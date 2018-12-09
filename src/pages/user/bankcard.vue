@@ -6,21 +6,35 @@
         <div class="form-item">
           <label for="">姓名</label>
           <div>
-            <input type="text" v-model="form.name" placeholder="持卡人与入厂姓名一致">
+            <input
+              type="text"
+              v-model="form.name"
+              placeholder="持卡人与入厂姓名一致"
+            >
           </div>
         </div>
 
         <div class="form-item">
           <label for="">身份证号</label>
           <div>
-            <input type="text" v-model="form.idCard" placeholder="开户人身份证号">
+            <input
+              type="text"
+              v-model="form.idCard"
+              placeholder="开户人身份证号"
+            >
           </div>
         </div>
 
         <div class="form-item">
           <label for="">卡号</label>
           <div>
-            <input type="text" v-model="form.cardNumber" maxlength="23" @keyup="card_keyup_handle" placeholder="开户人银行卡号">
+            <input
+              type="text"
+              v-model="form.cardNumber"
+              maxlength="23"
+              @keyup="card_keyup_handle"
+              placeholder="开户人银行卡号"
+            >
           </div>
         </div>
 
@@ -28,7 +42,11 @@
           <label for="">银行</label>
           <div class="form-select">
             <select v-model="form.bank">
-              <option v-for="(item,index) in banks" :key="index" :value="item">{{item}}</option>
+              <option
+                v-for="(item,index) in banks"
+                :key="index"
+                :value="item"
+              >{{item}}</option>
             </select>
           </div>
         </div>
@@ -36,13 +54,24 @@
           <label for="">开户地区</label>
           <div class="form-item-select">
             <div class="form-select">
-              <select v-model="form.province" @change="province_handle">
-                <option v-for="(item,index) in provinces" :key="index" :value="item.text">{{item.text}}</option>
+              <select
+                v-model="form.province"
+                @change="province_handle"
+              >
+                <option
+                  v-for="(item,index) in provinces"
+                  :key="index"
+                  :value="item.text"
+                >{{item.text}}</option>
               </select>
             </div>
             <div class="form-select">
               <select v-model="form.city">
-                <option v-for="(item,index) in citys" :key="index" :value="item.text">{{item.text}}</option>
+                <option
+                  v-for="(item,index) in citys"
+                  :key="index"
+                  :value="item.text"
+                >{{item.text}}</option>
               </select>
             </div>
           </div>
@@ -51,11 +80,23 @@
 
       </div>
       <div class="bottom-btn">
-        <div class="btn-item" style="padding-right: 0.35rem;">
-          <div class="button-danger" @click="$router.back()">取消</div>
+        <div
+          class="btn-item"
+          style="padding-right: 0.35rem;"
+        >
+          <div
+            class="button-danger"
+            @click="$router.back()"
+          >取消</div>
         </div>
-        <div class="btn-item" style="padding-left: 0.35rem;">
-          <div class="button-success" @click="submit_handle">提交</div>
+        <div
+          class="btn-item"
+          style="padding-left: 0.35rem;"
+        >
+          <div
+            class="button-success"
+            @click="submit_handle"
+          >提交</div>
         </div>
       </div>
     </div>
@@ -112,21 +153,27 @@ export default {
     document.title = "我的补贴银行卡";
     this.provinces = this.cityData();
     const wxUser = this.getWxItem();
-    this.http.get("/api/bank/" + wxUser.unionid).then(res => {
-      if (res.code == 200) {
-        if (res.data) {
-          this.form = res.data;
-          var flist = this.provinces.filter(
-            x => x.text == this.form.province
-          )[0];
-          this.citys = flist.children;
-          this.citys.unshift({
-            value: "0",
-            text: "城市"
-          });
+    if (this.getWxItem()) {
+      this.http.get("/api/bank/" + wxUser.unionid).then(res => {
+        if (res.code == 200) {
+          if (res.data) {
+            this.form = res.data;
+            var flist = this.provinces.filter(
+              x => x.text == this.form.province
+            )[0];
+            this.citys = flist.children;
+            this.citys.unshift({
+              value: "0",
+              text: "城市"
+            });
+          }
         }
-      }
-    });
+      });
+    } else {
+      this.$router.push({
+        path: "/login?ref=bankcard"
+      });
+    }
   },
   methods: {
     cityData,

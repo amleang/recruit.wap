@@ -3,28 +3,47 @@
     <head-title header="更换手机号码"></head-title>
     <div class="content">
       <div class="logo">
-        <img src="@/assets/images/logo.png" alt="">
+        <img
+          src="@/assets/images/logo.png"
+          alt=""
+        >
       </div>
       <div class="content-block">
         <div class="form">
           <div class="form-item">
             <label for="">手机号码</label>
             <div>
-              <input type="number" maxlength="11" v-model="form.phone" placeholder="请输入手机号码">
+              <input
+                type="number"
+                maxlength="11"
+                v-model="form.phone"
+                placeholder="请输入手机号码"
+              >
             </div>
           </div>
           <div class="form-item">
             <label for="verificationCode">验证码</label>
             <div>
-              <input v-model="form.code" type="number" maxlength="4" placeholder="请输入验证码">
+              <input
+                v-model="form.code"
+                type="number"
+                maxlength="4"
+                placeholder="请输入验证码"
+              >
             </div>
-            <div class="form-yzm" @click="sendSMS_handle">
+            <div
+              class="form-yzm"
+              @click="sendSMS_handle"
+            >
               {{isSend?time:'获取验证码'}}
             </div>
           </div>
         </div>
         <div class="reg">
-          <div class="button button-fill login-btn" @click="ok_handle">
+          <div
+            class="button button-fill login-btn"
+            @click="ok_handle"
+          >
             确认更换
           </div>
         </div>
@@ -57,6 +76,12 @@ export default {
   },
   mounted() {
     document.title = "更换手机号码";
+    if (!this.checkLogin()) {
+      this.$router.push({
+        path: "/login?ref=phone"
+      });
+      return;
+    }
   },
   methods: {
     checkLogin,

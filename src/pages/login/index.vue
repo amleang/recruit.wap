@@ -28,6 +28,16 @@
     >
       <div class="form">
         <div class="form-item">
+          <label for="">姓名</label>
+          <div>
+            <input
+              type="text"
+              v-model="loginForm.username"
+              placeholder="请输入姓名"
+            >
+          </div>
+        </div>
+        <div class="form-item">
           <label for="">手机号码</label>
           <div>
             <input
@@ -44,12 +54,15 @@
               id="verificationCode"
               name="verificationCode"
               type="text"
-              v-model="loginForm.verificationCode"
+              v-model="loginForm.code"
               placeholder="请输入验证码"
             >
           </div>
-          <div class="form-yzm">
-            获取验证码
+          <div
+            class="form-yzm"
+            @click="sendSMS_handle"
+          >
+            {{isSend?time:'获取验证码'}}
           </div>
         </div>
         <div class="form-item">
@@ -77,13 +90,18 @@
 </template>
 
 <script>
+import { setWxItem } from "@/components/lib/util";
 export default {
   data() {
     return {
       isType: true,
+      isSend: false,
+      time: 60,
       loginForm: {
+        username,
         phone: "",
-        verificationCode: ""
+        code: "",
+        idCode: ""
       }
     };
   },
@@ -97,8 +115,142 @@ export default {
     }
   },
   methods: {
+    /**
+     * 发送验证码
+     */
+    sendSMS_handle() {
+      if (!this.isSend) {
+        if (!this.loginForm.phone) {
+          this.mui.toast("请输入手机号码！", { duration: "long", type: "div" });
+          return;
+        }
+        if (!/^1[34578]\d{9}$/.test(this.loginForm.phone)) {
+          this.mui.toast("手机号码有误", {
+            duration: "long",
+            type: "div"
+          });
+          return;
+        }
+        this.isSend = true;
+        this.time = 60;
+        const wxUser = this.getWxItem();
+        //调取code
+        this.http
+          .post("/api/app/sendsms", {
+            unionid: wxUser.unionid,
+            phone: this.loginForm.phone
+          })
+          .then(res => {
+            if (res.code == 200) {
+              this.rescode = res.data;
+              this.mui.toast("验证码已成功发送到您的手机上！", {
+                duration: "long",
+                type: "div"
+              });
+            } else {
+              this.mui.toast(res.msg, {
+                duration: "long",
+                type: "div"
+              });
+            }
+          });
+        this.time_chuange();
+      }
+    },
+    time_chuange() {
+      this.interTime = setInterval(() => {
+        if (this.time != 0) {
+          this.time--;
+        } else {
+          this.isSend = false;
+          clearInterval(this.interTime);
+        }
+      }, 1000);
+    },
+    /**
+     * 登录并注册
+     */
     login_reg_handle() {
-      this.mui.toast("登陆成功", { duration: "long", type: "div" });
+      if (!this.loginForm.username) {
+        this.mui.toast("请输入姓名！", {
+          duration: "long",
+          type: "div"
+        });
+        return;
+      }
+      if (!this.loginForm.phone) {
+        this.mui.toast("请输入手机号码！", {
+          duration: "long",
+          type: "div"
+        });
+        return;
+      }
+      if (!/^1[34578]\d{9}$/.test(this.loginForm.phone)) {
+        this.mui.toast("手机号码有误", {
+          duration: "long",
+          type: "div"
+        });
+        return;
+      }
+      if (this.loginForm.code) {
+        if (rescode) {
+          if (form.code != rescode) {
+            this.mui.toast("验证码收入有误，请重新输入！", {
+              duration: "long",
+              type: "div"
+            });
+            return;
+          }
+        }
+      } else {
+        this.mui.toast("请输入验证码！", {
+          duration: "long",
+          type: "div"
+        });
+      }
+      if (!this.loginForm.idCode) {
+        this.mui.toast("请输入身份证号码", {
+          duration: "long",
+          type: "div"
+        });
+        return;
+      }
+      if (
+        !/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(this.loginForm.idCode)
+      ) {
+        this.mui.toast("身份证输入不合法", {
+          duration: "long",
+          type: "div"
+        });
+        return;
+      }
+      var refForm = JSON.parse(localStorage.getItem("djrhtemp"));
+
+      var postFomr = this.loginForm;
+      postFomr.unionid = refForm.unionid;
+      postFomrstatus = 1;
+      this.http.post("/api/app/savereguser", postFomr).then(res => {
+        if (res.code == 200) {
+          //注册成功
+          refForm.username = form.username;
+          refForm.status = 1;
+          refForm.phone = form.phone;
+          refForm.idCode = form.idCode;
+          this.setWxItem(refForm);
+          var params = this.$router.query.ref;
+          if (params) {
+            params = params.replace("|", "?");
+            this.$router.push({ path: "/" + params });
+          } else {
+            this.$router.push({ path: "/" });
+          }
+        } else {
+          this.mui.toast(res.msg, {
+            duration: "long",
+            type: "div"
+          });
+        }
+      });
     },
     isWechat() {
       let ua = window.navigator.userAgent.toLowerCase();
@@ -118,6 +270,7 @@ export default {
       const wx = {
         appid: "wx1124be6bc1512298"
       };
+      var ref = this.$route.query.ref;
       //获取code
       const refUrl = encodeURI("http://www.szdejurenhe.com/ref");
       location.href =
@@ -125,7 +278,9 @@ export default {
         wx.appid +
         "&redirect_uri=" +
         refUrl +
-        "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect";
+        "&response_type=code&scope=snsapi_userinfo&state=" +
+        ref +
+        "#wechat_redirect";
     }
   }
 };

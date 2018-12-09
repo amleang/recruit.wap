@@ -6,14 +6,20 @@
     >
       <div class="load-wrap">
         <p>仅供安卓机使用</p>
-        <div>立即下载</div>
+        <div @click="down_handle">立即下载</div>
       </div>
     </a>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods:{
+    down_handle(){
+      location.href="http://www.szdejurenhe.com/app/djrh.apk"
+    }
+  }
+};
 </script>
 
 <style scoped>
