@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     back_handle() {
-      if (this.oldUrl) this.$router.back();
-      else this.$router.push({ path: "/" });
+      if (window.history.length <= 1) this.$router.push({ path: "/" });
+      else this.$router.back();
     }
   }
 };
