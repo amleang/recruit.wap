@@ -64,19 +64,20 @@ export const wxhideMenu = function () {
             timestamp: res.data.timestamp,
             nonceStr: res.data.nonceStr,
             signature: res.data.signature,
-            jsApiList: ['hideMenuItems']
+            jsApiList: ['hideOptionMenu']
         });
     });
     wx.ready(function () {
         // 判断当前版本是否支持指定 JS 接口，支持批量判断
         wx.checkJsApi({
-            jsApiList: ["hideMenuItems"],
+            jsApiList: ["hideOptionMenu"],
             success: function (res) {
                 console.log(JSON.stringify(res));
             }
         });
-        wx.hideMenuItems({
+        wx.hideOptionMenu();
+        /* wx.hideMenuItems({
             menuList: ["menuItem:share:timeline", "menuItem:copyUrl", "menuItem:share:appMessage", "menuItem:share:qq", "menuItem:share:weiboApp", "menuItem:favorite", "menuItem:share:facebook", "menuItem:share:QZone", "menuItem:editTag", "menuItem:delete", "menuItem:copyUrl", "menuItem:originPage", "menuItem:readMode", "menuItem:openWithQQBrowser", "menuItem:openWithSafari", "menuItem:share:email", "menuItem:share:brand"] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮
-        });
+        }); */
     });
 }
