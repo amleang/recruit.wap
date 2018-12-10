@@ -220,7 +220,7 @@ export default {
     outlogin_handle() {
       window.localStorage.removeItem("hjct_user");
       console.log(window.localStorage.getItem("hjct_user"));
-      this.$router.push("/login");
+      this.$router.push("/login?ref=user");
     }
   }
 };
