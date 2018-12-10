@@ -320,6 +320,7 @@ export default {
   },
   data() {
     return {
+      oldUrl: "",
       dialog: false,
       isSubsidys: false,
       dialogCorrection: false,
@@ -345,6 +346,13 @@ export default {
       coinfo: { attention: "" },
       recommends: [{}]
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      // 通过 `vm` 访问组件实例,将值传入oldUrl
+      vm.oldUrl = from.path;
+      consult.log("oldUrl=>",vm.oldUrl);
+    });
   },
   mounted() {
     document.body.scrollTop = 0;
@@ -449,7 +457,8 @@ export default {
       });
     },
     back_handle() {
-      this.$router.back();
+      if (this.oldUrl) this.$router.back();
+      else this.$router.push({ path: "/" });
     },
     dialog_close_handle() {
       this.dialog = false;

@@ -10,7 +10,7 @@
       </div>
       <div class="money-wrap">
         <div class="balance">您的余额为: </div>
-        <div class="money"><span class="money-type">￥</span><span class="money-amount">{{form.totalprice?0:form.totalprice}}</span></div>
+        <div class="money"><span class="money-type">￥</span><span class="money-amount">{{form.totalprice?form.totalprice:0}}</span></div>
         <div class="look-detail"><a @click="detail_handle">查看明细</a></div>
       </div>
     </div>
