@@ -24,7 +24,7 @@
         <div class="avatar">
           <div class="user-img">
             <img
-              :src="wxUser.headimgurl"
+              :src="`'/head/'+${wxUser.headimgurl}`"
               alt=""
             >
           </div>
