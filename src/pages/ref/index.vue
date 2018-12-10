@@ -24,8 +24,8 @@ export default {
           this.$router.push({path:"/login?status=true"});
           localStorage.setItem("djrhtemp",JSON.stringify(res2.data));
         } else {
+          this.setWxItem(res2.data);
           if (status) {
-            this.setWxItem(res2.data);
             this.status = status.replace("|", "?");
             this.$router.push({ path: "/" + status });
           } else {

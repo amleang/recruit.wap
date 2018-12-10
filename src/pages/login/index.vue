@@ -274,6 +274,7 @@ export default {
         appid: "wx1124be6bc1512298"
       };
       var ref = this.$route.query.ref;
+      console.log("ref=>",ref);
       //获取code
       const refUrl = encodeURI("http://www.szdejurenhe.com/ref");
       location.href =
