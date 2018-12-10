@@ -351,7 +351,7 @@ export default {
   mounted() {
     document.body.scrollTop = 0;
     const id = this.$route.query.id;
-    console.log("$oldUrl=>", this.$oldUrl);
+    console.log("document.referrer=>",document.referrer);
     if (!id) {
       this.mui.toast("获取信息失败!", { duration: "long", type: "div" });
       return;
@@ -386,14 +386,6 @@ export default {
       if (res.code == 200) {
         this.coinfo = res.data[0];
       } else this.mui.toast(res.msg, { duration: "long", type: "div" });
-    });
-  },
-  beforeRouteEnter(to, from, next) {
-    console.log("beforRouteEnter");
-    console.log(this); // 结果为undefined，因为在执行beforRouteEnter时候，组件还没有被创建出来；先执行beforRouteEnter，再执行beforeCreate
-    next(vm => {
-      //参数vm就是当前组件的实例。
-      vm.test = "我被改变了";
     });
   },
   methods: {
@@ -458,7 +450,7 @@ export default {
       });
     },
     back_handle() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+      document.referrer? this.$router.go(-1) : this.$router.push("/");
     },
     dialog_close_handle() {
       this.dialog = false;
