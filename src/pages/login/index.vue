@@ -91,6 +91,7 @@
 
 <script>
 import { setWxItem } from "@/components/lib/util";
+import { wxhideMenu } from "@/components/lib/wxShare";
 export default {
   data() {
     return {
@@ -113,12 +114,10 @@ export default {
     } else {
       this.isType = true;
     }
-    document.addEventListener("WeixinJSBridgeReady", function onBridgeReady() {
-      // 通过下面这个API隐藏右上角按钮
-      WeixinJSBridge.call("hideOptionMenu");
-    });
+    this.wxhideMenu();
   },
   methods: {
+    wxhideMenu,
     /**
      * 发送验证码
      */
