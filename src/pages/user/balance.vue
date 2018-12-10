@@ -10,7 +10,7 @@
       </div>
       <div class="money-wrap">
         <div class="balance">您的余额为: </div>
-        <div class="money"><span class="money-type">￥</span><span class="money-amount">{{form.totalprice}}</span></div>
+        <div class="money"><span class="money-type">￥</span><span class="money-amount">{{form.totalprice?0:form.totalprice}}</span></div>
         <div class="look-detail"><a @click="detail_handle">查看明细</a></div>
       </div>
     </div>
@@ -79,7 +79,7 @@ export default {
 }
 .user-wrap {
   transform: translateX(-50%);
-  top: 35%;
+  top: 40%;
   position: absolute;
   left: 50%;
 }
@@ -89,7 +89,7 @@ export default {
 }
 .money-wrap {
   transform: translate(-50%, -50%);
-  top: 60%;
+  top: 65%;
   position: absolute;
   left: 50%;
 }
