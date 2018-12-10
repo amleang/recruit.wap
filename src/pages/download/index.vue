@@ -34,14 +34,21 @@
 export default {
   data() {
     return {
-      iswx: false
+      iswx: false,
+      downloadname: ""
     };
   },
-  mounted() {},
+  mounted() {
+    this.http.get("/api/app/downloadname").then(res => {
+      this.downloadname = res.data;
+    });
+  },
   methods: {
     down_handle() {
       this.iswx = this.isWechat();
-      if (!this.iswx) location.href = "http://www.szdejurenhe.com/app/djrh.apk";
+      if (!this.iswx)
+        location.href =
+          "http://www.szdejurenhe.com/app/" + this.downloadname + ".apk";
     },
     isWechat() {
       let ua = window.navigator.userAgent.toLowerCase();
@@ -119,7 +126,7 @@ export default {
   width: 3rem;
   height: 3rem;
   border-right: 0.1rem solid rgba(255, 255, 255, 1);
-  border-bottom:0.065rem solid transparent;
+  border-bottom: 0.065rem solid transparent;
   border-radius: 0 0 2.5rem 0;
 }
 .wx-layer p {
@@ -131,31 +138,31 @@ export default {
   vertical-align: middle;
 }
 .wx-layer .allow-top:before {
-    content: '';
-    width: .3rem;
-    height: .08rem;
-    background: rgba(255,255,255,1);
-    position: absolute;
-    top: -4px;
-    right: -2px;
-    transform-origin: right;
-    transform: rotate(247deg);
+  content: "";
+  width: 0.3rem;
+  height: 0.08rem;
+  background: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  transform-origin: right;
+  transform: rotate(247deg);
 }
 .wx-layer .allow-top:after {
-    content: '';
-      width: .3rem;
-    height: .08rem;
-    background: rgba(255,255,255,1);
-    z-index: 99;
-    position: absolute;
-    top: -3px;
-    right: -3px;
-    transform: rotate(-50deg);
-    transform-origin: right;
+  content: "";
+  width: 0.3rem;
+  height: 0.08rem;
+  background: rgba(255, 255, 255, 1);
+  z-index: 99;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  transform: rotate(-50deg);
+  transform-origin: right;
 }
 .wx-layer p img {
-    width: 1.2rem;
-    vertical-align: middle;
-    margin-left: 5px;
+  width: 1.2rem;
+  vertical-align: middle;
+  margin-left: 5px;
 }
 </style>
