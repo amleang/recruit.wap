@@ -25,16 +25,9 @@ export default {
       oldUrl: ""
     };
   },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      // 通过 `vm` 访问组件实例,将值传入oldUrl
-      vm.oldUrl = from.path;
-      console.log("oldUrl=>", vm.oldUrl);
-    });
-  },
   methods: {
     back_handle() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+      this.$oldUrl ? this.$router.go(-1) : this.$router.push("/");
     }
   }
 };
