@@ -98,7 +98,7 @@ export default {
       isSend: false,
       time: 60,
       loginForm: {
-        username,
+        username:"",
         phone: "",
         code: "",
         idCode: ""
@@ -232,10 +232,10 @@ export default {
       this.http.post("/api/app/savereguser", postFomr).then(res => {
         if (res.code == 200) {
           //注册成功
-          refForm.username = form.username;
+          refForm.username = postFomr.username;
           refForm.status = 1;
-          refForm.phone = form.phone;
-          refForm.idCode = form.idCode;
+          refForm.phone = postFomr.phone;
+          refForm.idCode = postFomr.idCode;
           this.setWxItem(refForm);
           var params = this.$router.query.ref;
           if (params) {
