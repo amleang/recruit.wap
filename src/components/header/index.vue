@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     back_handle() {
-      document.referrer? this.$router.go(-1) : this.$router.push("/");
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
     }
   }
 };

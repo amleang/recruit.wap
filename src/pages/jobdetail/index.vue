@@ -320,7 +320,6 @@ export default {
   },
   data() {
     return {
-      oldUrl: "",
       dialog: false,
       isSubsidys: false,
       dialogCorrection: false,
@@ -351,7 +350,6 @@ export default {
   mounted() {
     document.body.scrollTop = 0;
     const id = this.$route.query.id;
-    console.log("document.referrer=>",document.referrer);
     if (!id) {
       this.mui.toast("获取信息失败!", { duration: "long", type: "div" });
       return;
@@ -450,7 +448,7 @@ export default {
       });
     },
     back_handle() {
-      document.referrer? this.$router.go(-1) : this.$router.push("/");
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
     },
     dialog_close_handle() {
       this.dialog = false;

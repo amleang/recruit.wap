@@ -31,6 +31,7 @@
 import headTitle from "@/components/header";
 import consult from "@/components/consult";
 import { checkLogin, getWxItem, formatDate } from "@/components/lib/util";
+import { wxhideMenu } from "@/components/lib/wxShare";
 export default {
   components: {
     headTitle,
@@ -43,6 +44,7 @@ export default {
   },
   mounted() {
     document.title = "我的工作";
+    this.wxhideMenu();
     if (!this.checkLogin()) {
       this.$router.push({
         path: "/login?ref=follow"
@@ -62,7 +64,8 @@ export default {
   methods: {
     checkLogin,
     getWxItem,
-    formatDate
+    formatDate,
+    wxhideMenu
   }
 };
 </script>

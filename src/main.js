@@ -6,17 +6,10 @@ import router from './router'
 import mui from './assets/js/mui.js'
 import 'lib-flexible/flexible'
 Vue.prototype.mui = mui;
-Vue.prototype.$oldUrl="";
 Vue.config.productionTip = false;
 router.afterEach((to, from, next) => {
   window.scrollTo(0, 0);
 });
-/* router.beforeRouteEnter((to, from, next) => {
-  next(vm => {
-    // 通过 `vm` 访问组件实例,将值传入oldUrl
-    Vue.prototype.$oldUrl = from.path
-  })
-}); */
 import http from '@/components/api/http'
 Vue.prototype.http = http;
 

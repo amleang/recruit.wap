@@ -109,6 +109,7 @@ import headTitle from "@/components/header";
 import { cityData } from "@/assets/js/city.data.js";
 import consult from "@/components/consult";
 import { getWxItem } from "@/components/lib/util";
+import { wxhideMenu } from "@/components/lib/wxShare";
 export default {
   components: {
     headTitle,
@@ -151,6 +152,7 @@ export default {
   },
   mounted() {
     document.title = "我的补贴银行卡";
+    this.wxhideMenu();
     this.provinces = this.cityData();
     const wxUser = this.getWxItem();
     if (this.getWxItem()) {
@@ -178,6 +180,7 @@ export default {
   methods: {
     cityData,
     getWxItem,
+    wxhideMenu,
     province_handle() {
       var flist = this.provinces.filter(x => x.text == this.form.province)[0];
       this.citys = flist.children;
