@@ -351,6 +351,7 @@ export default {
   mounted() {
     document.body.scrollTop = 0;
     const id = this.$route.query.id;
+    console.log("window.history=>",window.history)
     if (!id) {
       this.mui.toast("获取信息失败!", { duration: "long", type: "div" });
       return;
