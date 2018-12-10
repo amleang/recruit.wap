@@ -351,8 +351,6 @@ export default {
   mounted() {
     document.body.scrollTop = 0;
     const id = this.$route.query.id;
-    console.log("window.history=>",window.history)
-    console.log("this.$route=>",this.$route);
     if (!id) {
       this.mui.toast("获取信息失败!", { duration: "long", type: "div" });
       return;
@@ -451,8 +449,7 @@ export default {
       });
     },
     back_handle() {
-      if (window.history.length <= 1) this.$router.push({ path: "/" });
-      else  window.history.go(-1);
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
     },
     dialog_close_handle() {
       this.dialog = false;
