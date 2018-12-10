@@ -1,12 +1,15 @@
 <template>
-    <div>
-        <div class="bar-nav">
-            <span class="mui-icon mui-icon-arrowleft btn-back" @click="back_handle"></span>
-            <div class="head-title">
-                {{header}}
-            </div>
-        </div>
+  <div>
+    <div class="bar-nav">
+      <span
+        class="mui-icon mui-icon-arrowleft btn-back"
+        @click="back_handle"
+      ></span>
+      <div class="head-title">
+        {{header}}
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -17,10 +20,23 @@ export default {
       default: ""
     }
   },
-  methods:{
-      back_handle(){
-          this.$router.back();
-      }
+  data() {
+    return {
+      oldUrl: ""
+    };
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      // 通过 `vm` 访问组件实例,将值传入oldUrl
+      vm.oldUrl = from.path;
+      console.log("oldUrl=>", vm.oldUrl);
+    });
+  },
+  methods: {
+    back_handle() {
+      if (this.oldUrl) this.$router.back();
+      else this.$router.push({ path: "/" });
+    }
   }
 };
 </script>
@@ -28,7 +44,7 @@ export default {
 <style scoped>
 .bar-nav {
   height: 1.2rem;
-  background-color:#39a9f0;
+  background-color: #39a9f0;
   display: flex;
   align-items: center;
   position: fixed;
@@ -47,5 +63,4 @@ export default {
   font-size: 0.45rem;
   color: #fff;
 }
-
 </style>

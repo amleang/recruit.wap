@@ -351,7 +351,7 @@ export default {
     next(vm => {
       // 通过 `vm` 访问组件实例,将值传入oldUrl
       vm.oldUrl = from.path;
-      consult.log("oldUrl=>",vm.oldUrl);
+      console.log("oldUrl=>",vm.oldUrl);
     });
   },
   mounted() {
