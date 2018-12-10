@@ -17,7 +17,7 @@ export default {
     this.code = this.$route.query.code;
     const status = this.$route.query.status;
     this.http.get("/api/app/oathuser?code=" + this.code).then(res => {
-      this.http.post("/api/app/savewxuser", res).then(res2 => {
+      this.http.post("/api/app/savewxuser", res.data).then(res2 => {
         if (res2.data.status == 0) {
           //跳转到登录页面继续完善
           this.$router.push({path:"/login?status=true"});
