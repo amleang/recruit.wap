@@ -347,17 +347,11 @@ export default {
       recommends: [{}]
     };
   },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      // 通过 `vm` 访问组件实例,将值传入oldUrl
-      vm.oldUrl = from.path;
-      console.log("oldUrl=>",vm.oldUrl);
-    });
-  },
+
   mounted() {
     document.body.scrollTop = 0;
-
-    //console.log(this.$route);
+    console.log("route=》", this.$route);
+    console.log("router=》", this.$router);
     const id = this.$route.query.id;
     if (!id) {
       this.mui.toast("获取信息失败!", { duration: "long", type: "div" });
