@@ -452,7 +452,7 @@ export default {
     },
     back_handle() {
       if (window.history.length <= 1) this.$router.push({ path: "/" });
-      else this.$router.back();
+      else  window.history.go(-1);
     },
     dialog_close_handle() {
       this.dialog = false;
