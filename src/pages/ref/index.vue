@@ -16,6 +16,7 @@ export default {
     document.title = "用户授权";
     this.code = this.$route.query.code;
     const status = this.$route.query.status;
+    console.log("status=>",status);
     this.http.get("/api/app/oathuser?code=" + this.code).then(res => {
       this.http.post("/api/app/savewxuser", res.data).then(res2 => {
         if (res2.data.status == 0) {
