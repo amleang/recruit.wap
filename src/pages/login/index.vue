@@ -98,7 +98,7 @@ export default {
       isSend: false,
       time: 60,
       loginForm: {
-        username:"",
+        username: "",
         phone: "",
         code: "",
         idCode: ""
@@ -113,6 +113,10 @@ export default {
     } else {
       this.isType = true;
     }
+    document.addEventListener("WeixinJSBridgeReady", function onBridgeReady() {
+      // 通过下面这个API隐藏右上角按钮
+      WeixinJSBridge.call("hideOptionMenu");
+    });
   },
   methods: {
     /**
