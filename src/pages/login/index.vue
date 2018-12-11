@@ -98,6 +98,7 @@ export default {
       isType: true,
       isSend: false,
       time: 60,
+      rescode:"",
       loginForm: {
         username: "",
         phone: "",
@@ -197,7 +198,7 @@ export default {
       }
       if (this.loginForm.code) {
         if (this.rescode) {
-          if (form.code != this.rescode) {
+          if (this.loginForm.code != this.rescode) {
             this.mui.toast("验证码收入有误，请重新输入！", {
               duration: "long",
               type: "div"
