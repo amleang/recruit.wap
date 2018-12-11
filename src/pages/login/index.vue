@@ -242,7 +242,7 @@ export default {
           refForm.phone = postFomr.phone;
           refForm.idCode = postFomr.idCode;
           this.setWxItem(refForm);
-          var params = this.$router.query.ref;
+          var params = this.$route.query.ref;
           if (params) {
             params = params.replace("|", "?");
             this.$router.push({ path: "/" + params });
