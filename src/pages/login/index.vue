@@ -136,7 +136,7 @@ export default {
         }
         this.isSend = true;
         this.time = 60;
-        const wxUser = this.getWxItem();
+        const wxUser =JSON.parse(window.localStorage.getItem("djrhtemp"));
         //调取code
         this.http
           .post("/api/app/sendsms", {
