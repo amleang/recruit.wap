@@ -196,8 +196,8 @@ export default {
         return;
       }
       if (this.loginForm.code) {
-        if (rescode) {
-          if (form.code != rescode) {
+        if (this.rescode) {
+          if (form.code != this.rescode) {
             this.mui.toast("验证码收入有误，请重新输入！", {
               duration: "long",
               type: "div"
