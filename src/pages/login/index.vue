@@ -119,6 +119,7 @@ export default {
   },
   methods: {
     wxhideMenu,
+    setWxItem,
     /**
      * 发送验证码
      */
