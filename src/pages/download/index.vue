@@ -74,7 +74,7 @@ export default {
 }
 .download-App .load-wrap {
   position: absolute;
-  bottom: 30%;
+  bottom: 20%;
   left: 50%;
   transform: translateX(-50%);
 }

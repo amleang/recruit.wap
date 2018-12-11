@@ -232,7 +232,7 @@ export default {
 
       var postFomr = this.loginForm;
       postFomr.unionid = refForm.unionid;
-      postFomrstatus = 1;
+      postFomr.status = 1;
       this.http.post("/api/app/savereguser", postFomr).then(res => {
         if (res.code == 200) {
           //注册成功
