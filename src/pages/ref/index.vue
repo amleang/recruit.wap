@@ -13,6 +13,7 @@ export default {
     };
   },
   mounted() {
+    debugger;
     document.title = "用户授权";
     this.code = this.$route.query.code;
     const status = this.$route.query.status;
