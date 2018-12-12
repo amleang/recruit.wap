@@ -91,7 +91,6 @@
 
 <script>
 import { setWxItem } from "@/components/lib/util";
-import { wxhideMenu } from "@/components/lib/wxShare";
 export default {
   data() {
     return {
@@ -115,10 +114,8 @@ export default {
     } else {
       this.isType = true;
     }
-    this.wxhideMenu();
   },
   methods: {
-    wxhideMenu,
     setWxItem,
     /**
      * 发送验证码

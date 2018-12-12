@@ -20,7 +20,6 @@
 <script>
 import headTitle from "@/components/header";
 import { checkLogin, getWxItem } from "@/components/lib/util";
-import { wxhideMenu } from "@/components/lib/wxShare";
 export default {
   components: {
     headTitle
@@ -34,7 +33,6 @@ export default {
   },
   mounted() {
     document.title = "余额明细";
-    this.wxhideMenu();
     if (this.checkLogin()) {
       let wxUser = this.getWxItem();
       this.http.get("/api/app/balance?unionid=" + wxUser.unionid).then(res => {
@@ -52,7 +50,6 @@ export default {
   methods: {
     checkLogin,
     getWxItem,
-    wxhideMenu,
     detail_handle() {
       this.$router.push({ path: "/balancelist" });
     }

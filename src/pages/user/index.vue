@@ -178,7 +178,6 @@
 
 <script>
 import { checkLogin, getWxItem } from "@/components/lib/util";
-import { wxhideMenu } from "@/components/lib/wxShare";
 import bottom from "@/components/bottom";
 export default {
   components: {
@@ -192,7 +191,6 @@ export default {
   },
   mounted() {
     document.title = "个人中心";
-    this.wxhideMenu();
     this.isLogin = this.checkLogin();
     if (!this.isLogin) {
       this.$router.push({ path: "/login?ref=user" });
@@ -205,7 +203,6 @@ export default {
   methods: {
     checkLogin,
     getWxItem,
-    wxhideMenu,
     home_handle() {
       this.$router.push({ path: "/" });
     },

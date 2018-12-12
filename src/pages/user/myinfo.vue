@@ -33,7 +33,6 @@
 <script>
 import headTitle from "@/components/header";
 import { checkLogin, getWxItem, setWxItem } from "@/components/lib/util";
-import { wxhideMenu } from "@/components/lib/wxShare";
 export default {
   components: {
     headTitle
@@ -45,7 +44,6 @@ export default {
   },
   mounted() {
     document.title = "我的信息";
-    this.wxhideMenu();
     if (!this.checkLogin()) {
       this.$router.push({
         path: "/login?ref=myinfo"
@@ -66,7 +64,6 @@ export default {
     checkLogin,
     getWxItem,
     setWxItem,
-    wxhideMenu,
     submit_handle() {
       if (!this.form.username) {
         this.mui.toast("请输入姓名", {

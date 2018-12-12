@@ -38,7 +38,6 @@
 import headTitle from "@/components/header";
 import consult from "@/components/consult";
 import { checkLogin, getWxItem } from "@/components/lib/util";
-import { wxhideMenu } from "@/components/lib/wxShare";
 export default {
   components: {
     headTitle,
@@ -51,7 +50,6 @@ export default {
   },
   mounted() {
     document.title = "我的关注";
-    this.wxhideMenu();
     if (!this.checkLogin()) {
       this.$router.push({
         path: "/login?ref=follow"
@@ -73,7 +71,6 @@ export default {
   methods: {
     checkLogin,
     getWxItem,
-    wxhideMenu,
     detail_handle(item) {
       this.$router.push({ path: "/jobdetail?id=" + item.recruitid });
     }

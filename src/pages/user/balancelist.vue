@@ -23,7 +23,6 @@
 <script>
 import headTitle from "@/components/header";
 import { checkLogin, getWxItem, formatDate } from "@/components/lib/util";
-import { wxhideMenu } from "@/components/lib/wxShare";
 export default {
   components: {
     headTitle
@@ -35,7 +34,6 @@ export default {
   },
   mounted() {
     document.title = "余额详情";
-    this.wxhideMenu();
     if (!this.checkLogin()) {
       this.$router.push({
         path: "/login?ref=balancelist"
@@ -57,8 +55,7 @@ export default {
   methods: {
     checkLogin,
     getWxItem,
-    formatDate,
-    wxhideMenu
+    formatDate
   }
 };
 </script>

@@ -111,7 +111,7 @@
 import headTitle from "@/components/header";
 import bottom from "@/components/bottom";
 import { checkLogin, getWxItem } from "@/components/lib/util";
-import { wxhideMenu } from "@/components/lib/wxShare";
+import { wxShareConfig } from "@/components/lib/wxShare";
 import rankingForm from "@/components/ranking";
 export default {
   components: {
@@ -132,7 +132,7 @@ export default {
   },
   mounted() {
     document.title = "推荐好友";
-    this.wxhideMenu();
+    this.wxShareConfig();
     this.isLogin = this.checkLogin();
     if (!this.isLogin) {
       this.$router.push({ path: "/login?ref=recommend" });
@@ -142,7 +142,7 @@ export default {
   methods: {
     checkLogin,
     getWxItem,
-    wxhideMenu,
+    wxShareConfig,
     home_handle() {
       this.$router.push({ path: "/" });
     },

@@ -57,7 +57,6 @@
 import headTitle from "@/components/header";
 import consult from "@/components/consult";
 import { checkLogin, getWxItem, formatDate } from "@/components/lib/util";
-import { wxhideMenu } from "@/components/lib/wxShare";
 export default {
   components: {
     headTitle,
@@ -77,7 +76,6 @@ export default {
   },
   mounted() {
     document.title = "更换手机号码";
-    this.wxhideMenu();
     if (!this.checkLogin()) {
       this.$router.push({
         path: "/login?ref=phone"
@@ -89,7 +87,6 @@ export default {
     checkLogin,
     getWxItem,
     formatDate,
-    wxhideMenu,
     sendSMS_handle() {
       debugger;
       if (!this.isSend) {
