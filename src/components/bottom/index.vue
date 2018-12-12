@@ -38,7 +38,7 @@ export default {
 <style scoped>
 .bottom {
   position: fixed;
-  z-index: 10000000000000000;
+  z-index: 99999999;
   right: 0;
   left: 0;
   bottom: 0;

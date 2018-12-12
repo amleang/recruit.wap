@@ -100,7 +100,7 @@ export default {
 .dialog-close {
   position: absolute;
   right: 50%;
-  margin-top: 2rem;
+  margin:2rem 0;
   font-size: 0.5rem;
   width: 1rem;
   text-align: center;
