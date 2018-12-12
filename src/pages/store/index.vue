@@ -112,7 +112,7 @@ export default {
 .tencent-map {
   overflow: hidden;
   width: 100%;
-  height: 10rem;
+  height: 12rem;
   margin-top: 0.25rem;
 }
 .tencent-map iframe {
