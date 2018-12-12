@@ -86,7 +86,7 @@
             style="font-size:0.3rem;"
             v-if="form.subsidys.length>1"
             @click="isSubsidys=!isSubsidys"
-          >{{isSubsidys?'隐藏企业全部补贴':'查看企业全部补贴'}}" ></div>
+          >{{isSubsidys?'隐藏企业全部补贴':'查看企业全部补贴'}} ></div>
         </div>
         <div>
           <div v-html="form.subsidys[0].value"></div>

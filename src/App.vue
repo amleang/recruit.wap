@@ -19,4 +19,11 @@ npm
 * {
   touch-action: pan-y;
 }
+body {
+  width: 100%;
+  font-family: "华文细黑";
+  max-width: 480px;
+  min-width: 320px;
+  margin: 0 auto;
+}
 </style>
