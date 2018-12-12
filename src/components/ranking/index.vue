@@ -24,10 +24,10 @@
           <div>我</div>
           <div>{{my.total}}人</div>
         </div>
-         <div class="dialog-close" @click="close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
+        <div class="dialog-close" @click="close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
       </div>
     </div>
-   
+
   </div>
 </template>
 
@@ -89,14 +89,13 @@ export default {
 }
 .dialog {
   position: absolute;
-  top: 20vh;
+  top: 30vh;
   z-index: 99999999999;
   width: 80vw;
   margin: 0 10vw;
   background: #fff;
-  border-radius: 0.2rem;
   border-radius: 10px;
-  height: 50vh;
+  padding: 1rem 0.4rem;
 }
 .dialog-close {
   position: absolute;
