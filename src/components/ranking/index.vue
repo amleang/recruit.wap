@@ -1,31 +1,34 @@
 <template>
-    <div v-if="dialog">
-        <div class="mui-popup-backdrop"></div>
-        <div class="dialog">
-            <div class="title">{{new Date().getMonth()+1}}月份推荐排行榜TOP10</div>
-            <div class="empt" v-if="list.length==0">暂无推荐信息</div>
-            <div v-else>
-                <div class="item" v-for="(item,index) in list" :key="index">
-                    <div>
-                        <img v-if="index==0" src="../../assets/images/first.png" alt="">
-                        <img v-else-if="index==1" src="../../assets/images/second.png" alt="">
-                        <img v-else-if="index==2" src="../../assets/images/third.png" alt="">
-                        <div v-else>{{index+1}}</div>
-                    </div>
-                    <div class="name">{{item.username1}}</div>
-                    <div class="num">{{item.total}}人</div>
-                </div>
+  <div v-if="dialog">
+    <div class="mui-popup-backdrop"></div>
+    <div class="dialog">
+      <div style="position:relative">
+        <div class="title">{{new Date().getMonth()+1}}月份推荐排行榜TOP10</div>
+        <div class="empt" v-if="list.length==0">暂无推荐信息</div>
+        <div v-else>
+          <div class="item" v-for="(item,index) in list" :key="index">
+            <div>
+              <img v-if="index==0" src="../../assets/images/first.png" alt="">
+              <img v-else-if="index==1" src="../../assets/images/second.png" alt="">
+              <img v-else-if="index==2" src="../../assets/images/third.png" alt="">
+              <div v-else>{{index+1}}</div>
+            </div>
+            <div class="name">{{item.username1}}</div>
+            <div class="num">{{item.total}}人</div>
+          </div>
 
-            </div>
-            <div class="more">...</div>
-            <div class="bottom" v-if="list.length>0">
-                <div>{{my.ranking>0?'第'+my.ranking+'名':'无名次'}}</div>
-                <div>我</div>
-                <div>{{my.total}}人</div>
-            </div>
         </div>
-        <div class="dialog-close" @click="close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
+        <div class="more">...</div>
+        <div class="bottom" v-if="list.length>0">
+          <div>{{my.ranking>0?'第'+my.ranking+'名':'无名次'}}</div>
+          <div>我</div>
+          <div>{{my.total}}人</div>
+        </div>
+         <div class="dialog-close" @click="close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
+      </div>
     </div>
+   
+  </div>
 </template>
 
 <script>
@@ -48,7 +51,7 @@ export default {
   },
   methods: {
     close_handle() {
-        this.$emit("dialogHandle");
+      this.$emit("dialogHandle");
     }
   },
   watch: {
@@ -98,7 +101,7 @@ export default {
 .dialog-close {
   position: absolute;
   right: 50%;
-  top: 80vh;
+  margin-top: 2rem;
   font-size: 0.5rem;
   width: 1rem;
   text-align: center;
