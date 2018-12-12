@@ -18,7 +18,7 @@ export default {
 * {
   touch-action: pan-y;
 }
-body {
+#app {
   width: 100%;
   font-family: "华文细黑";
   max-width: 480px;
