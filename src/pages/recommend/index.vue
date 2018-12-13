@@ -226,6 +226,7 @@ export default {
   color: #f00;
   font-size: 0.45rem;
   font-weight: bold;
+  margin-bottom:20px;
 }
 .text-center {
   text-align: center;
