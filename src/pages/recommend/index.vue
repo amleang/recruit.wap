@@ -223,8 +223,9 @@ export default {
   max-width: 100%;
 }
 .recommend-txt {
-  color: #847d7d;
-  font-size: 0.35rem;
+  color: #f00;
+  font-size: 0.45rem;
+  font-weight: bold;
 }
 .text-center {
   text-align: center;
