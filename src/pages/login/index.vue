@@ -79,6 +79,7 @@ export default {
   },
   mounted() {
     document.title = "用户登录";
+    
     const status = this.$route.query.status;
     if (status) {
       this.isType = false;
@@ -201,6 +202,7 @@ export default {
         });
         return;
       } */
+
       var refForm = {};
       if (this.loginType == 0) {
         refForm = JSON.parse(localStorage.getItem("djrhtemp"));
@@ -209,8 +211,18 @@ export default {
       var postFomr = this.loginForm;
       postFomr.loginType = this.loginType;
       postFomr.unionid = this.loginType == 0 ? refForm.unionid : this.uuid;
-      postFomr.unionid2 = postFomr.unionid ;
+      postFomr.unionid2 = postFomr.unionid;
       postFomr.status = 1;
+      if (this.loginType == 0) {
+        postFomr.openid = refForm.openid;
+        postFomr.headimgurl = refForm.headimgurl;
+        postFomr.nickname = refForm.nickname;
+        postFomr.sex = refForm.sex;
+        postFomr.province = refForm.province;
+        postFomr.city = refForm.city;
+        postFomr.country = refForm.country;
+        postFomr.language = refForm.language;
+      }
       this.http.post("/api/app/savereguser", postFomr).then(res => {
         if (res.code == 200) {
           //注册成功
