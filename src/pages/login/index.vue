@@ -86,7 +86,7 @@ export default {
     } else {
       this.isType = true;
       this.uuid = this.guid();
-      console.log("uuid=>",this.uuid);
+      console.log("uuid=>", this.uuid);
     }
   },
   methods: {
@@ -147,6 +147,7 @@ export default {
      * 登录并注册
      */
     login_reg_handle() {
+      debugger;
       if (!this.loginForm.username) {
         this.mui.toast("请输入姓名！", {
           duration: "long",
@@ -203,12 +204,12 @@ export default {
       var refForm = {};
       if (this.loginType == 0) {
         refForm = JSON.parse(localStorage.getItem("djrhtemp"));
-        refForm.unionid2 = refForm.unionid;
       }
 
       var postFomr = this.loginForm;
       postFomr.loginType = this.loginType;
       postFomr.unionid = this.loginType == 0 ? refForm.unionid : this.uuid;
+      postFomr.unionid2 = postFomr.unionid ;
       postFomr.status = 1;
       this.http.post("/api/app/savereguser", postFomr).then(res => {
         if (res.code == 200) {
