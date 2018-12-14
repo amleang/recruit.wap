@@ -48,6 +48,11 @@
         <div>个人中心</div>
       </a>
     </div>
+    <div class="shangbiao">
+      <div>苏州德聚仁合招工网 szdejurenhe.com ©2013-2018</div>
+      <div>苏州德聚仁合信息服务有限公司 版权所有</div>
+      <div> <a href="http://www.miitbeian.gov.cn">------- 苏ICP备18065728号-1 -------</a></div>
+    </div>
     <div v-if="istop" class="tuijian" @click="$router.push({path:'/recommend'})">
       <img src="@/assets/images/01.3.jpg">
     </div>
@@ -391,7 +396,7 @@ export default {
 }
 
 .recruit-list {
-  padding-bottom: 50px;
+  padding-bottom: 3.8rem;
 }
 .recruit-item {
   display: flex;
@@ -475,7 +480,7 @@ export default {
   z-index: 99999999;
   right: 0;
   left: 0;
-  bottom: 0;
+  bottom: 2rem;
   width: 100%;
   height: 1.5rem;
   padding-top: 0.1rem;
@@ -514,7 +519,7 @@ export default {
 }
 .tuijian {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 3.5rem;
   left: 0;
   z-index: 99999;
   width: 100%;
@@ -526,5 +531,17 @@ export default {
 .tuijian img {
   height: 100%;
   width: 100%;
+}
+.shangbiao{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  font-size:0.3rem;
+  height:2rem;
+}
+.shangbiao div{
+  text-align:center;
+  margin-top:0.1rem;
 }
 </style>
