@@ -19,48 +19,89 @@
 
     <div class="content">
       <div class="promptRefer">
-        <img src="@/assets/images/recommend.png" alt="">
+        <img
+          src="@/assets/images/recommend.png"
+          alt=""
+        >
       </div>
       <p class="text-center recommend-txt">推荐好友入职满3天可领取100元推荐费</p>
       <p class="text-center recommend-txt">平台核对与打款需一周左右</p>
-      <div class="content-block" @click="just_handle">
+      <div
+        class="content-block"
+        @click="just_handle"
+      >
         立即推荐
       </div>
-      <div class="refer-ranking" @click="ranking_handle">
+      <div
+        class="refer-ranking"
+        @click="ranking_handle"
+      >
         查看排行榜
       </div>
     </div>
-    <div class="nav-index-foat" @click="$router.push({path:'/store'})">
+    <div
+      class="nav-index-foat"
+      @click="$router.push({path:'/store'})"
+    >
       <p class="nav-index-text">
         <a class="external">免费<br>咨询</a>
       </p>
     </div>
 
-    <div class="nav-index-foat-my" @click="$router.push({path:'/recommendlist'})">
+    <div
+      class="nav-index-foat-my"
+      @click="$router.push({path:'/recommendlist'})"
+    >
       <p class="nav-index-text-my">
         <a class="external">我的<br>推荐</a>
       </p>
     </div>
 
-    <div v-if="dialog" class="mui-popup-backdrop"></div>
-    <div v-if="dialog" class="dialog">
-      <div class="dialog-close" @click="dialog_close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
+    <div
+      v-if="dialog"
+      class="mui-popup-backdrop"
+    ></div>
+    <div
+      v-if="dialog"
+      class="dialog"
+    >
+      <div
+        class="dialog-close"
+        @click="dialog_close_handle"
+      ><span class="mui-icon mui-icon-closeempty"></span></div>
       <div class="form-item">
         <label for="">姓名</label>
         <div>
-          <input type="text" v-model="form.username" maxlength="10" placeholder="请输入推荐人姓名">
+          <input
+            type="text"
+            v-model="form.username"
+            maxlength="10"
+            placeholder="请输入推荐人姓名"
+          >
         </div>
       </div>
 
       <div class="form-item">
         <label for="">手机号</label>
         <div>
-          <input type="text" v-model="form.phone" maxlength="11" placeholder="请输入推荐人手机号">
+          <input
+            type="text"
+            v-model="form.phone"
+            maxlength="11"
+            placeholder="请输入推荐人手机号"
+          >
         </div>
       </div>
-      <div class="btn-success" @click="submit_handle">确定</div>
+      <div
+        class="btn-success"
+        @click="submit_handle"
+      >确定</div>
     </div>
-    <ranking-form :dialog="rankingdialog" :unionid="unionid" @dialogHandle="dialog_handle">
+    <ranking-form
+      :dialog="rankingdialog"
+      :unionid="unionid"
+      @dialogHandle="dialog_handle"
+    >
 
     </ranking-form>
   </div>
@@ -182,10 +223,10 @@ export default {
   max-width: 100%;
 }
 .recommend-txt {
-  color: red;
+  color: #f00;
   font-size: 0.45rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-weight: bold;
+  margin-bottom:0.5rem;
 }
 .text-center {
   text-align: center;
