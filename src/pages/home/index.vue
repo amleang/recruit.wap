@@ -540,6 +540,7 @@ export default {
   font-size:0.3rem;
   height:2rem;
   z-index: 99999999;
+  background-color: #fff;
 }
 .shangbiao div{
   text-align:center;
