@@ -118,16 +118,16 @@
     <div v-if="dialog" class="dialog">
       <div class="dialog-close" @click="dialog_close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
       <div class="form-item">
-        <label for="">邀请人姓名</label>
+        <label for="">邀请人</label>
         <div>
           <input type="text" v-model="enrollForm.inviter" maxlength="10" placeholder="请输入邀请人姓名">
         </div>
       </div>
 
       <div class="form-item">
-        <label for="">邀请码</label>
+        <label for="">邀请人码</label>
         <div>
-          <input type="text" v-model="enrollForm.inviterCode" placeholder="请输入邀请码">
+          <input type="text" v-model="enrollForm.inviterPhone" placeholder="邀请人手机号">
         </div>
       </div>
       <div class="btn-success" @click="enroll_submit_handle">确定</div>
@@ -196,7 +196,7 @@ export default {
         recruitid: "",
         unionid: "",
         inviter: "",
-        inviterCode: ""
+        inviterPhone: ""
       },
       /**纠错form */
       correctionForm: {
@@ -272,7 +272,7 @@ export default {
         recruitid: "",
         unionid: "",
         inviter: "",
-        inviterCode: ""
+        inviterPhone: ""
       };
     },
     /**关注 */
@@ -318,6 +318,23 @@ export default {
     /**免费报名 */
     enroll_submit_handle() {
       let wxUser = this.getWxItem();
+      if (this.enrollForm.inviter || this.enrollForm.inviterPhone) {
+        if (!this.enrollForm.inviter) {
+          this.mui.toast("请输入邀请人!", { duration: "long", type: "div" });
+          return;
+        }
+        if (!this.enrollForm.inviterPhone) {
+          this.mui.toast("请输入邀请码!", { duration: "long", type: "div" });
+          return;
+        }
+        if (!/^1[34578]\d{9}$/.test(this.enrollForm.inviterPhone)) {
+          this.mui.toast("手机号码有误", {
+            duration: "long",
+            type: "div"
+          });
+          return;
+        }
+      }
       this.enrollForm.recruitid = this.$route.query.id;
       this.enrollForm.unionid = wxUser.unionid;
       this.http.post("/api/app/enroll", this.enrollForm).then(res => {

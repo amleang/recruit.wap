@@ -1,27 +1,11 @@
 <template>
   <div>
-    <div
-      id="listSearch"
-      class="bar bar-header-secondary"
-      style="top:0;"
-    >
-      <div
-        class="searchbar searchbar-active"
-        style="background-color: #fff;"
-      >
-        <a
-          class="searchbar-cancel"
-          @click="search_handle"
-        >搜索</a>
+    <div id="listSearch" class="bar bar-header-secondary" style="top:0;">
+      <div class="searchbar searchbar-active" style="background-color: #fff;">
+        <a class="searchbar-cancel" @click="search_handle">搜索</a>
         <div class="search-input">
           <label class="search-label mui-icon mui-icon-search"></label>
-          <input
-            type="search"
-            id="search"
-            name="jobName"
-            placeholder="搜索岗位名称或关键字"
-            v-model="searchParam"
-          >
+          <input type="search" id="search" name="jobName" placeholder="搜索岗位名称或关键字" v-model="searchParam">
         </div>
       </div>
     </div>
@@ -46,14 +30,30 @@
         <span class="mui-tab-label">个人中心</span>
       </a>
     </nav> -->
-    <bottom :page="'/'"></bottom>
-
+    <div class="bottom">
+      <a v-if="istop" class="active" @click="go_head_handle">
+        <span class="mui-icon icon iconfont icon-back-top"></span>
+        <div>返回顶部</div>
+      </a>
+      <a v-else class="active" @click="$router.push({path:'/'})">
+        <span class="mui-icon icon iconfont icon-gongzuo"></span>
+        <div>找工作</div>
+      </a>
+      <a @click="$router.push({path:'/recommend'})">
+        <span class="mui-icon icon iconfont icon-tuijianyoujiang"></span>
+        <div>推荐有奖</div>
+      </a>
+      <a @click="$router.push({path:'/user'})">
+        <span class="mui-icon icon iconfont icon-yonghu"></span>
+        <div>个人中心</div>
+      </a>
+    </div>
+    <div v-if="istop" class="tuijian" @click="$router.push({path:'/recommend'})">
+      <img src="@/assets/images/01.3.jpg">
+    </div>
     <div class="main-win">
       <div class="mui-slider">
-        <div
-          class="mui-slider-group mui-slider-loop"
-          v-if="topImgList.length>1"
-        >
+        <div class="mui-slider-group mui-slider-loop" v-if="topImgList.length>1">
           <!--支持循环，需要重复图片节点-->
           <!-- <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div> -->
           <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[topImgList.length-1])"><img :src="topImgList[0].cover" /></a></div>
@@ -61,52 +61,26 @@
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/muwu.jpg" /></a></div>
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/cbd.jpg" /></a></div>
           <div class="mui-slider-item"><a href="#"><img src="../../assets/images/yuantiao.jpg" /></a></div> -->
-          <div
-            class="mui-slider-item"
-            v-for="(item,index) in topImgList"
-            :key="index"
-          ><a @click="top_detail_handle(item)"><img :src="item.cover" /></a></div>
+          <div class="mui-slider-item" v-for="(item,index) in topImgList" :key="index"><a @click="top_detail_handle(item)"><img :src="item.cover" /></a></div>
           <!--支持循环，需要重复图片节点-->
           <!--  <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="../../assets/images/shuijiao.jpg" /></a></div> -->
           <div class="mui-slider-item mui-slider-item-duplicate"><a @click="top_detail_handle(topImgList[0])"><img :src="topImgList[topImgList.length-1].cover" /></a></div>
         </div>
-        <div
-          class="mui-slider-group"
-          v-else
-        >
+        <div class="mui-slider-group" v-else>
           <div class="mui-slider-item"><a @click="top_detail_handle(topImgList[0])"><img :src="topImgList[0].cover" /></a></div>
         </div>
-        <div
-          class="mui-slider-indicator"
-          v-if="topImgList.length>1"
-        >
-          <div
-            :class="`mui-indicator ${index==0?'mui-active' :''}`"
-            v-for="(item,index) in topImgList"
-            :key="index"
-          ></div>
+        <div class="mui-slider-indicator" v-if="topImgList.length>1">
+          <div :class="`mui-indicator ${index==0?'mui-active' :''}`" v-for="(item,index) in topImgList" :key="index"></div>
         </div>
       </div>
 
       <div class="recruit-list">
         <div :class="`mui-table-view ${isNo?'no-bottom':''}`">
-          <div
-            class="recruit-item"
-            v-if="isNo"
-          >
+          <div class="recruit-item" v-if="isNo">
             <div class="nothing">暂无招工信息</div>
           </div>
-          <div
-            class="recruit-item"
-            v-for="(item,index) in list"
-            :key="index"
-            @click="detail_handle(item)"
-          >
-            <img
-              :src="item.cover"
-              alt=""
-              class="item-left"
-            >
+          <div class="recruit-item" v-for="(item,index) in list" :key="index" @click="detail_handle(item)">
+            <img :src="item.cover" alt="" class="item-left">
             <div class="item-con">
               <div class="title">{{item.name}}</div>
               <div class="subtitle">{{item.subname}}</div>
@@ -114,22 +88,16 @@
                 <span>{{item.salaryStart}}-{{item.salaryEnd}}</span> 元/月
               </div>
             </div>
-            <div  class="item-right" v-if="item.active==0">
+            <div class="item-right" v-if="item.active==0">
               <div class="btn-one" style="background: #859199!important;">已停招</div>
-               <div class="btn-span" v-if="item.type==1">{{item.laborPrice}}元/小时</div>
+              <div class="btn-span" v-if="item.type==1">{{item.laborPrice}}元/小时</div>
               <div class="btn-span" v-if="item.type==2">{{item.subsidyExplain}}</div>
             </div>
-            <div
-              class="item-right"
-              v-if="item.type==1 && item.active==1"
-            >
+            <div class="item-right" v-if="item.type==1 && item.active==1">
               <div class="btn-one">工价</div>
               <div class="btn-span">{{item.laborPrice}}元/小时</div>
             </div>
-            <div
-              class="item-right"
-              v-if="item.type==2 && item.active==1"
-            >
+            <div class="item-right" v-if="item.type==2 && item.active==1">
               <div class="btn-one">补贴</div>
               <div class="btn-span">{{item.subsidyExplain}}</div>
             </div>
@@ -147,12 +115,10 @@
 import { checkLogin } from "@/components/lib/util";
 import { wxShareConfig } from "@/components/lib/wxShare";
 import consult from "@/components/consult";
-import bottom from "@/components/bottom";
 import wx from "weixin-js-sdk";
 export default {
   components: {
-    consult,
-    bottom
+    consult
   },
   data() {
     return {
@@ -165,29 +131,14 @@ export default {
       rowCout: 100,
       isNo: false,
       isLoad: false,
-      list: []
+      list: [],
+      istop: false
     };
   },
   mounted() {
     document.title = "苏州德聚仁合招工网首页";
     this.wxShareConfig("苏州德聚仁合招工网首页");
-    //this.wxShareConfig();
-    /*     let wxuser = {
-      openid: "OPENID",
-      nickname: "NICKNAME",
-      sex: "1",
-      province: "PROVINCE",
-      city: "CITY",
-      country: "COUNTRY",
-      headimgurl:
-        "http://thirdwx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46",
-      unionid: "o6_bmasdasdsad6_2sgVt7hMZOPfL",
-      username: "赵安良",
-      phone: "15050473395"
-    };
-    let strWxUser = JSON.stringify(wxuser);
-    localStorage.setItem("hjct_user", strWxUser); */
-    /* localStorage.removeItem("hjct_user"); */
+
     document.body.scrollTop = 0;
     this.isLogin = this.checkLogin();
     console.log("isLogin=>", this.isLogin);
@@ -202,6 +153,7 @@ export default {
       interval: 3000
     });
     window.addEventListener("scroll", () => {
+     
       //下面这句主要是获取网页的总高度，主要是考虑兼容性所以把Ie支持的documentElement也写了，这个方法至少支持IE8
       var htmlHeight =
         document.body.scrollHeight || document.documentElement.scrollHeight;
@@ -212,6 +164,9 @@ export default {
       //scrollTop是浏览器滚动条的top位置，
       var scrollTop =
         document.body.scrollTop || document.documentElement.scrollTop;
+      if (scrollTop > 70) {
+        this.istop = true;
+      } else this.istop = false;
       /* console.log("htmlHeight", htmlHeight, scrollTop, clientHeight); */
       //通过判断滚动条的top位置与可视网页之和与整个网页的高度是否相等来决定是否加载内容；
       if (scrollTop != 0 && scrollTop + clientHeight == htmlHeight) {
@@ -223,6 +178,9 @@ export default {
   methods: {
     checkLogin,
     wxShareConfig,
+    go_head_handle(){
+      window.scroll(0,0);
+    },
     search_handle() {
       this.pageNo = 1;
       this.queryParam = this.searchParam;
@@ -281,17 +239,14 @@ export default {
     },
     home_handle() {
       //this.$router.push({ path: "/" });
-      alert("跳转首页");
       location.href = "/";
     },
     recommend_handle() {
-      alert("跳转推荐");
       if (this.isLogin) {
         location.href = "/recommend";
       } else this.$router.push({ path: "/login?ref=recommend" });
     },
     my_handle() {
-      alert("跳转会员");
       if (this.isLogin) {
         location.href = "/user";
       } else this.$router.push({ path: "/login?ref=user" });
@@ -428,8 +383,8 @@ export default {
   height: 100vh;
   padding-top: 1.1rem;
 }
-.mui-slider{
-  max-height:5rem;
+.mui-slider {
+  max-height: 5rem;
 }
 .mui-slider-item {
   height: 5rem !important;
@@ -513,5 +468,63 @@ export default {
 }
 .no-bottom {
   position: inherit !important;
+}
+
+.bottom {
+  position: fixed;
+  z-index: 99999999;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5rem;
+  padding-top: 0.1rem;
+  background-color: #f7f7f7;
+  display: flex;
+  align-items: center;
+}
+.bottom a {
+  display: block;
+  width: 33.33333333%;
+  text-align: center;
+  color: rgb(146, 146, 146);
+}
+.bottom a span {
+  font-size: 45px;
+}
+.bottom a div {
+  font-size: 22px;
+}
+.active {
+  color: rgb(0, 122, 255) !important;
+}
+.active a {
+  color: rgb(0, 122, 255) !important;
+}
+.icon-back-top:before {
+  content: "";
+  background-image: url("../../assets/images/backtop1.png");
+  background-size: 0.5rem 0.5rem;
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  z-index: 100;
+  margin-left: -0.25rem;
+  margin-top: -0.35rem;
+}
+.tuijian {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 0;
+  z-index: 99999;
+  width: 100%;
+  height: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.tuijian img {
+  height: 100%;
+  width: 100%;
 }
 </style>

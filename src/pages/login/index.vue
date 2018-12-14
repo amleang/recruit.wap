@@ -1,90 +1,59 @@
 <template>
   <div class="page">
     <div class="banner">
-      <img
-        src="@/assets/images/logo.png"
-        alt=""
-      >
+      <img src="@/assets/images/logo.png" alt="">
     </div>
-    <div
-      class="content-block"
-      v-if="isType"
-    >
+    <div class="content-block" v-if="isType">
       <div class="recommend-way">
         推荐登陆方式
       </div>
       <div class="reg">
-        <div
-          class="button button-fill login-btn"
-          @click="login_handle"
-        >
+        <div class="button button-fill login-btn" @click="login_handle">
           <i class="mui-icon mui-icon-weixin"></i>微信快捷登录
         </div>
       </div>
+      <div class="mobile" v-if="loginType==0" @click="mobile_handle">
+        使用手机登录注册
+      </div>
     </div>
-    <div
-      class="content-block"
-      v-else
-    >
+    <div class="content-block" v-else>
       <div class="form">
         <div class="form-item">
           <label for="">姓名</label>
           <div>
-            <input
-              type="text"
-              v-model="loginForm.username"
-              placeholder="请输入姓名"
-            >
+            <input type="text" v-model="loginForm.username" placeholder="请输入姓名">
           </div>
         </div>
         <div class="form-item">
           <label for="">手机号码</label>
           <div>
-            <input
-              type="text"
-              v-model="loginForm.phone"
-              placeholder="请输入手机号码"
-            >
+            <input type="text" v-model="loginForm.phone" placeholder="请输入手机号码">
           </div>
         </div>
         <div class="form-item">
           <label for="verificationCode">验证码</label>
           <div>
-            <input
-              id="verificationCode"
-              name="verificationCode"
-              type="text"
-              v-model="loginForm.code"
-              placeholder="请输入验证码"
-            >
+            <input id="verificationCode" name="verificationCode" type="text" v-model="loginForm.code" placeholder="请输入验证码">
           </div>
-          <div
-            class="form-yzm"
-            @click="sendSMS_handle"
-          >
+          <div class="form-yzm" @click="sendSMS_handle">
             {{isSend?time:'获取验证码'}}
           </div>
         </div>
-        <div class="form-item">
+        <!--  <div class="form-item">
           <label for="">身份证</label>
           <div>
-            <input
-              type="text"
-              v-model="loginForm.idCode"
-              placeholder="请输入身份证号码"
-            >
+            <input type="text" v-model="loginForm.idCode" placeholder="请输入身份证号码">
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="reg">
-        <div
-          class="button button-fill login-btn"
-          @click="login_reg_handle"
-        >
+        <div class="button button-fill login-btn" @click="login_reg_handle">
           登录/注册
         </div>
       </div>
-
+      <div v-if="loginType==1" class="mobile" @click="login_handle">
+        微信快捷登录
+      </div>
     </div>
   </div>
 </template>
@@ -97,13 +66,15 @@ export default {
       isType: true,
       isSend: false,
       time: 60,
-      rescode:"",
+      rescode: "",
       loginForm: {
         username: "",
         phone: "",
         code: "",
         idCode: ""
-      }
+      },
+      loginType: 0, //0：微信登录 1：手机登录
+      uuid: ""
     };
   },
   mounted() {
@@ -111,8 +82,11 @@ export default {
     const status = this.$route.query.status;
     if (status) {
       this.isType = false;
+      this.loginType = 0;
     } else {
       this.isType = true;
+      this.uuid = this.guid();
+      console.log("uuid=>",this.uuid);
     }
   },
   methods: {
@@ -135,7 +109,7 @@ export default {
         }
         this.isSend = true;
         this.time = 60;
-        const wxUser =JSON.parse(window.localStorage.getItem("djrhtemp"));
+        const wxUser = JSON.parse(window.localStorage.getItem("djrhtemp"));
         //调取code
         this.http
           .post("/api/app/sendsms", {
@@ -210,7 +184,7 @@ export default {
           type: "div"
         });
       }
-      if (!this.loginForm.idCode) {
+      /* if (!this.loginForm.idCode) {
         this.mui.toast("请输入身份证号码", {
           duration: "long",
           type: "div"
@@ -225,20 +199,29 @@ export default {
           type: "div"
         });
         return;
+      } */
+      var refForm = {};
+      if (this.loginType == 0) {
+        refForm = JSON.parse(localStorage.getItem("djrhtemp"));
+        refForm.unionid2 = refForm.unionid;
       }
-      var refForm = JSON.parse(localStorage.getItem("djrhtemp"));
 
       var postFomr = this.loginForm;
-      postFomr.unionid = refForm.unionid;
+      postFomr.loginType = this.loginType;
+      postFomr.unionid = this.loginType == 0 ? refForm.unionid : this.uuid;
       postFomr.status = 1;
       this.http.post("/api/app/savereguser", postFomr).then(res => {
         if (res.code == 200) {
           //注册成功
-          refForm.username = postFomr.username;
-          refForm.status = 1;
-          refForm.phone = postFomr.phone;
-          refForm.idCode = postFomr.idCode;
-          this.setWxItem(refForm);
+          if (this.loginType == 0) {
+            refForm.username = postFomr.username;
+            refForm.status = 1;
+            refForm.phone = postFomr.phone;
+            refForm.idCode = postFomr.idCode;
+            this.setWxItem(refForm);
+          } else {
+            this.setWxItem(res.data);
+          }
           var params = this.$route.query.ref;
           if (params) {
             params = params.replace("|", "?");
@@ -258,6 +241,22 @@ export default {
       let ua = window.navigator.userAgent.toLowerCase();
       return ua.match(/MicroMessenger/i) == "micromessenger";
     },
+    guid() {
+      var wxuser = localStorage.getItem("hjct_uuid");
+      if (wxuser) return wxuser;
+      else {
+        var hjct_uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+          /[xy]/g,
+          function(c) {
+            var r = (Math.random() * 16) | 0,
+              v = c == "x" ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+          }
+        );
+        localStorage.setItem("hjct_uuid", hjct_uuid);
+        return hjct_uuid;
+      }
+    },
     /**
      * 登陆
      */
@@ -273,7 +272,7 @@ export default {
         appid: "wx1124be6bc1512298"
       };
       var ref = this.$route.query.ref;
-      console.log("ref=>",ref);
+      console.log("ref=>", ref);
       //获取code
       const refUrl = encodeURI("http://www.szdejurenhe.com/ref");
       location.href =
@@ -284,6 +283,10 @@ export default {
         "&response_type=code&scope=snsapi_userinfo&state=" +
         ref +
         "#wechat_redirect";
+    },
+    mobile_handle() {
+      this.loginType = 1;
+      this.isType = false;
     }
   }
 };
@@ -355,5 +358,12 @@ export default {
   text-align: center;
   font-size: 0.4rem;
   color: #0794ec;
+}
+.mobile {
+  height: 1.2rem;
+  line-height: 1.2rem;
+  font-size: 0.45rem;
+  color: #0894ec;
+  text-align: center;
 }
 </style>

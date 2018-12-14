@@ -43,7 +43,8 @@ export default {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 100px;
+  height: 1.5rem;
+  padding-top:0.1rem;
   background-color: #f7f7f7;
   display: flex;
   align-items: center;
