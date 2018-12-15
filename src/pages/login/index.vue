@@ -9,11 +9,11 @@
       </div>
       <div class="reg">
         <div class="button button-fill login-btn" @click="login_handle">
-          <i class="mui-icon mui-icon-weixin"></i>微信快捷登录
+          <i class="mui-icon icon iconfont icon-weixin"></i>微信快捷登录
         </div>
       </div>
       <div class="mobile" v-if="loginType==0" @click="mobile_handle">
-        使用手机登录注册
+        <i class="mui-icon icon iconfont icon-shouji"></i> 手机登录注册
       </div>
     </div>
     <div class="content-block" v-else>
@@ -79,7 +79,7 @@ export default {
   },
   mounted() {
     document.title = "用户登录";
-    
+
     const status = this.$route.query.status;
     if (status) {
       this.isType = false;
@@ -342,7 +342,15 @@ export default {
   color: #fff;
   font-size: 0.45rem;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.login-btn .iconfont {
+  font-size: 0.7rem !important;
+  margin-right: 0.15rem;
+}
+
 .footer-login-btn {
   text-align: center;
   color: #0894ec;
@@ -376,7 +384,15 @@ export default {
   height: 1.2rem;
   line-height: 1.2rem;
   font-size: 0.45rem;
-  color: #0894ec;
+  color: #fff;
   text-align: center;
+  background-color: #0894ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile .iconfont {
+  font-size: 0.7rem;
+  margin-right: 0.15rem;
 }
 </style>

@@ -448,11 +448,11 @@ export default {
   background-color: #0894ec !important;
   line-height: 0.65rem;
   text-align: center;
-  font-size: 12px;
+  font-size: 0.35rem;
   color: #fff;
 }
 .recruit-item .item-right .btn-span {
-  font-size: 12px;
+  font-size: 0.35rem;
   color: rgb(255, 106, 15);
   height: 0.65rem;
   line-height: 0.65rem;
