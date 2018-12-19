@@ -118,21 +118,21 @@
     <div v-if="dialog" class="dialog">
       <div class="dialog-close" @click="dialog_close_handle"><span class="mui-icon mui-icon-closeempty"></span></div>
       <div class="form-item">
-        <label for="">邀请人</label>
+        <label for="">推荐人</label>
         <div>
-          <input type="text" v-model="enrollForm.inviter" maxlength="10" placeholder="请输入邀请人姓名">
+          <input type="text" v-model="enrollForm.inviter" maxlength="10" placeholder="请输入推荐人姓名">
         </div>
       </div>
 
       <div class="form-item">
-        <label for="">邀请人码</label>
+        <label for="">推荐码</label>
         <div>
-          <input type="text" v-model="enrollForm.inviterPhone" placeholder="邀请人手机号">
+          <input type="text" v-model="enrollForm.inviterPhone" placeholder="推荐人手机号">
         </div>
       </div>
       <div class="btn-success" @click="enroll_submit_handle">确定</div>
       <div class="enoll_remark">
-        邀请人与邀请码都没有，直接点击报名
+        推荐人与推荐码都没有，直接点击报名
       </div>
     </div>
     <!-- 纠错表单 -->
@@ -320,11 +320,11 @@ export default {
       let wxUser = this.getWxItem();
       if (this.enrollForm.inviter || this.enrollForm.inviterPhone) {
         if (!this.enrollForm.inviter) {
-          this.mui.toast("请输入邀请人!", { duration: "long", type: "div" });
+          this.mui.toast("请输入推荐人!", { duration: "long", type: "div" });
           return;
         }
         if (!this.enrollForm.inviterPhone) {
-          this.mui.toast("请输入邀请码!", { duration: "long", type: "div" });
+          this.mui.toast("请输入推荐码!", { duration: "long", type: "div" });
           return;
         }
         if (!/^1[34578]\d{9}$/.test(this.enrollForm.inviterPhone)) {

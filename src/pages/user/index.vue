@@ -16,17 +16,11 @@
     </nav> -->
     <bottom :page="'user'"></bottom>
     <div class="content">
-      <div
-        class="header-img"
-        @click="$router.push({path:'/myinfo'})"
-      >
+      <div class="header-img" @click="$router.push({path:'/myinfo'})">
         <div class="top"></div>
         <div class="avatar">
           <div class="user-img">
-            <img
-              :src="`/head/${wxUser.headimgurl?wxUser.headimgurl:'djrh.jpg'}`"
-              alt=""
-            >
+            <img :src="`/head/${wxUser.headimgurl?wxUser.headimgurl:'djrh.jpg'}`" alt="">
           </div>
           <div class="man-box">
             <div>{{wxUser.username}}</div>
@@ -42,10 +36,7 @@
           <div class="user-icon">
             <i class="iconfont icon-wallet_icon"></i>
           </div>
-          <div
-            class="item-title"
-            @click="$router.push({path:'/balance'})"
-          >我的余额</div>
+          <div class="item-title" @click="$router.push({path:'/balance'})">我的余额</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -54,10 +45,7 @@
           <div class="user-icon">
             <i class="iconfont icon-yinxingqia-copy"></i>
           </div>
-          <div
-            class="item-title"
-            @click="$router.push({path:'/bankcard'})"
-          >绑定补贴卡</div>
+          <div class="item-title" @click="$router.push({path:'/bankcard'})">绑定补贴卡</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -69,10 +57,7 @@
           <div class="user-icon">
             <i class="iconfont icon-job"></i>
           </div>
-          <div
-            class="item-title"
-            @click="$router.push({path:'/jobapplys'})"
-          >我的工作</div>
+          <div class="item-title" @click="$router.push({path:'/jobapplys'})">我的工作</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -81,10 +66,7 @@
           <div class="user-icon">
             <i class="iconfont icon-icon-guanzhu"></i>
           </div>
-          <div
-            class="item-title"
-            @click="$router.push({path:'/follow'})"
-          >我的关注</div>
+          <div class="item-title" @click="$router.push({path:'/follow'})">我的关注</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -93,10 +75,7 @@
           <div class="user-icon">
             <i class="iconfont icon-butie"></i>
           </div>
-          <div
-            class="item-title"
-            @click="$router.push({path:'/subsidy'})"
-          >我的补贴</div>
+          <div class="item-title" @click="$router.push({path:'/subsidy'})">我的补贴</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -113,10 +92,7 @@
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
         </div> -->
-        <div
-          class="item-content"
-          @click="$router.push({path:'/phone'})"
-        >
+        <div class="item-content" @click="$router.push({path:'/phone'})">
           <div class="user-icon">
             <i class="iconfont icon-shouji"></i>
           </div>
@@ -132,10 +108,7 @@
           <div class="user-icon">
             <i class="iconfont icon-mendian"></i>
           </div>
-          <div
-            class="item-title"
-            @click="$router.push({path:'/store'})"
-          >我的门店</div>
+          <div class="item-title" @click="$router.push({path:'/store'})">我的门店</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -144,10 +117,7 @@
           <div class="user-icon">
             <i class="iconfont icon-shouji"></i>
           </div>
-          <div
-            class="item-title"
-            @click="$router.push({path:'/download'})"
-          >下载App</div>
+          <div class="item-title" @click="$router.push({path:'/download'})">下载App</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
@@ -156,20 +126,14 @@
           <div class="user-icon">
             <i class="iconfont icon-guanyu"></i>
           </div>
-          <div
-            class="item-title"
-            @click="$router.push({path:'/about'})"
-          >关于我们</div>
+          <div class="item-title" @click="$router.push({path:'/about'})">关于我们</div>
           <div class="user-icon-right">
             <i class="mui-icon mui-icon-arrowright"></i>
           </div>
         </div>
       </div>
 
-      <div
-        class="login-bottom"
-        @click="outlogin_handle"
-      >退出登录</div>
+      <div class="login-bottom" @click="outlogin_handle">退出登录</div>
 
     </div>
   </div>
@@ -215,9 +179,19 @@ export default {
       else this.$router.push({ path: "/login?ref=user" });
     },
     outlogin_handle() {
-      window.localStorage.removeItem("hjct_user");
-      console.log(window.localStorage.getItem("hjct_user"));
-      this.$router.push("/login?ref=user");
+      this.mui.confirm(
+        "确定要退出吗？",
+        "系统提示",
+        ["取消", "确定"],
+        function(d) {
+          if (d.index == 1) {
+            window.localStorage.removeItem("hjct_user");
+            console.log(window.localStorage.getItem("hjct_user"));
+            this.$router.push("/login?ref=user");
+          }
+        },
+        "div"
+      );
     }
   }
 };

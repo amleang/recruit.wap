@@ -1,11 +1,17 @@
 <template>
   <div>
     <div id="listSearch" class="bar bar-header-secondary" style="top:0;">
-      <div class="searchbar searchbar-active" style="background-color: #fff;">
+      <div v-if="isSearch" class="searchbar searchbar-active" style="background-color: #fff;">
         <a class="searchbar-cancel" @click="search_handle">搜索</a>
         <div class="search-input">
           <label class="search-label mui-icon mui-icon-search"></label>
           <input type="search" id="search" name="jobName" placeholder="搜索岗位名称或关键字" v-model="searchParam">
+        </div>
+      </div>
+      <div v-else class="searchbar searchbar-active" style="background-color: #fff;">
+        <a class="searchbar-cancel" @click="isSearch=true;">搜索</a>
+        <div class="search-input home-text">
+          苏州德聚仁合信息招工网
         </div>
       </div>
     </div>
@@ -57,6 +63,11 @@
       <img src="@/assets/images/01.3.jpg">
     </div>
     <div class="main-win">
+      <div class="daytuijian" v-if="topImgList.length>0" @click="top_detail_handle(topImgList[0])">
+        <div class="name-title">今日推荐</div>
+        <div class="day-tuijian-title">{{topImgList[0].name}}</div>
+        <div class="day-tuijian-price">{{topImgList[0].salaryStart}}-{{topImgList[0].salaryEnd}}元</div>
+      </div>
       <div class="mui-slider">
         <div class="mui-slider-group mui-slider-loop" v-if="topImgList.length>1">
           <!--支持循环，需要重复图片节点-->
@@ -112,7 +123,11 @@
       </div>
 
     </div>
-    <consult></consult>
+    <div class="nav-index-foat">
+      <p class="nav-index-text" @click="$router.push({path:'/store'})">
+        <a class="external">免费<br>咨询</a>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -127,6 +142,7 @@ export default {
   },
   data() {
     return {
+      isSearch: false,
       topImgList: [{}],
       isLogin: false,
       searchParam: "",
@@ -158,7 +174,6 @@ export default {
       interval: 3000
     });
     window.addEventListener("scroll", () => {
-     
       //下面这句主要是获取网页的总高度，主要是考虑兼容性所以把Ie支持的documentElement也写了，这个方法至少支持IE8
       var htmlHeight =
         document.body.scrollHeight || document.documentElement.scrollHeight;
@@ -172,10 +187,10 @@ export default {
       if (scrollTop > 70) {
         this.istop = true;
       } else this.istop = false;
-      /* console.log("htmlHeight", htmlHeight, scrollTop, clientHeight); */
       //通过判断滚动条的top位置与可视网页之和与整个网页的高度是否相等来决定是否加载内容；
-      if (scrollTop != 0 && scrollTop + clientHeight == htmlHeight) {
+      if (scrollTop != 0 && htmlHeight - (scrollTop + clientHeight) < 1) {
         //上拉加载逻辑代码
+
         that.loadData(that);
       }
     });
@@ -183,8 +198,9 @@ export default {
   methods: {
     checkLogin,
     wxShareConfig,
-    go_head_handle(){
-      window.scroll(0,0);
+    top_tuijian_handle(row) {},
+    go_head_handle() {
+      window.scroll(0, 0);
     },
     search_handle() {
       this.pageNo = 1;
@@ -272,6 +288,11 @@ export default {
 </style>
 
 <style scoped>
+.home-text {
+  height: 0.7rem;
+  line-height: 0.7rem;
+  font-size: 0.45rem;
+}
 #listSearch {
   top: 0px;
   position: fixed;
@@ -387,6 +408,7 @@ export default {
 .main-win {
   height: 100vh;
   padding-top: 1.1rem;
+  /* position: relative; */
 }
 .mui-slider {
   max-height: 5rem;
@@ -532,18 +554,90 @@ export default {
   height: 100%;
   width: 100%;
 }
-.shangbiao{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  font-size:0.3rem;
-  height:2rem;
+.shangbiao {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 0.3rem;
+  height: 2rem;
   z-index: 99999999;
   background-color: #fff;
 }
-.shangbiao div{
-  text-align:center;
-  margin-top:0.1rem;
+.shangbiao div {
+  text-align: center;
+  margin-top: 0.1rem;
+}
+/* 页面的免费咨询 */
+.nav-index-foat {
+  position: fixed;
+  right: 0.3rem;
+  bottom: 6.5rem;
+  z-index: 9999999;
+}
+.nav-index-foat p {
+  width: 1.4rem;
+  height: 1.4rem;
+  background-color: rgba(57, 94, 169, 0.8);
+  border-radius: 100%;
+  text-align: center;
+  box-shadow: 0 0 10px 3px rgba(57, 94, 169, 0.45);
+}
+.nav-index-foat p a {
+  color: #fff;
+  font-size: 0.3rem;
+  margin-top: 0.15rem;
+  display: inline-block;
+}
+.daytuijian {
+  position: absolute;
+  top: 1.8rem;
+  left: 1rem;
+  width: 3.6rem;
+  border-radius: 0.1rem;
+  border: 0.03rem solid #bdbdbd;
+  border-bottom: none;
+  overflow: auto;
+  z-index: 9;
+  background-color: #fff;
+}
+.daytuijian .name-title {
+  background-color: rgba(255, 98, 98, 0.85);
+  margin: 0;
+  border-bottom: 1px solid #bdbdbd;
+  font-size: 0.35rem;
+  line-height: 0.7rem;
+  padding: 0 0.3rem;
+  color: #333;
+  height: 0.7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-weight: bold;
+}
+.day-tuijian-title {
+  margin: 0;
+  border-bottom: 1px solid #bdbdbd;
+  font-size: 0.35rem;
+  line-height: 0.7rem;
+  padding: 0 0.3rem;
+  color: #333;
+  height: 0.7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.day-tuijian-price {
+  margin: 0;
+  border-bottom: 1px solid #bdbdbd;
+  font-size: 0.35rem;
+  line-height: 0.7rem;
+  padding: 0 0.3rem;
+  color: #333;
+  height: 0.7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>

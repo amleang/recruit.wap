@@ -22,8 +22,7 @@ export default {
     this.http.get("/api/app/co").then(res => {
       if (res.code == 200) {
         this.abstract = res.data[0].abstract;
-      }
-      else{
+      } else {
         this.mui.toast(res.msg, { duration: "long", type: "div" });
       }
     });
@@ -43,5 +42,8 @@ export default {
   height: 100vh;
   width: 100vw;
   background-color: #eee;
+}
+.content img {
+  max-width: 100%;
 }
 </style>
