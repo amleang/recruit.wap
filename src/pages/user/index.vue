@@ -179,6 +179,7 @@ export default {
       else this.$router.push({ path: "/login?ref=user" });
     },
     outlogin_handle() {
+      const that = this;
       this.mui.confirm(
         "确定要退出吗？",
         "系统提示",
@@ -187,7 +188,7 @@ export default {
           if (d.index == 1) {
             window.localStorage.removeItem("hjct_user");
             console.log(window.localStorage.getItem("hjct_user"));
-            this.$router.push("/login?ref=user");
+            that.$router.push("/login?ref=user");
           }
         },
         "div"
