@@ -187,10 +187,15 @@ export default {
       if (scrollTop > 70) {
         this.istop = true;
       } else this.istop = false;
+      let ua = window.navigator.userAgent.toLowerCase();
+      console.log(
+        "scrollTop + clientHeight=>",
+        scrollTop + clientHeight,
+        htmlHeight
+      );
       //通过判断滚动条的top位置与可视网页之和与整个网页的高度是否相等来决定是否加载内容；
-      if (scrollTop != 0 && htmlHeight - (scrollTop + clientHeight) < 1) {
+      if (scrollTop != 0 && htmlHeight == scrollTop + clientHeight) {
         //上拉加载逻辑代码
-
         that.loadData(that);
       }
     });
@@ -605,7 +610,7 @@ export default {
   background-color: rgba(255, 98, 98, 0.85);
   margin: 0;
   border-bottom: 1px solid #bdbdbd;
-  font-size: 0.35rem;
+  font-size: 0.4rem;
   line-height: 0.7rem;
   padding: 0 0.3rem;
   color: #333;
@@ -619,7 +624,7 @@ export default {
 .day-tuijian-title {
   margin: 0;
   border-bottom: 1px solid #bdbdbd;
-  font-size: 0.35rem;
+  font-size: 0.4rem;
   line-height: 0.7rem;
   padding: 0 0.3rem;
   color: #333;
@@ -631,7 +636,7 @@ export default {
 .day-tuijian-price {
   margin: 0;
   border-bottom: 1px solid #bdbdbd;
-  font-size: 0.35rem;
+  font-size: 0.4rem;
   line-height: 0.7rem;
   padding: 0 0.3rem;
   color: #333;

@@ -127,7 +127,7 @@
       <div class="form-item">
         <label for="">推荐码</label>
         <div>
-          <input type="text" v-model="enrollForm.inviterPhone" placeholder="推荐人手机号">
+          <input type="text" v-model="enrollForm.inviterPhone" placeholder="请输入推荐人手机号">
         </div>
       </div>
       <div class="btn-success" @click="enroll_submit_handle">确定</div>
@@ -341,6 +341,7 @@ export default {
         if (res.code == 200) {
           this.mui.toast("报名成功!", { duration: "long", type: "div" });
           this.dialog = false;
+          this.form.signupCount = res.count;
         } else {
           this.mui.toast(res.msg, { duration: "long", type: "div" });
         }
