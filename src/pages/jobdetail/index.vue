@@ -62,10 +62,10 @@
         <div v-html="form.wages">
         </div>
       </re-panel>
-      <re-panle title="合同信息">
+      <re-panel title="合同信息">
         <div v-html="form.contract">
         </div>
-      </re-panle>
+      </re-panel>
       <re-panel title="岗位介绍">
         <div v-html="form.post">
         </div>
