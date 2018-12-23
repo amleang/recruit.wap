@@ -435,6 +435,7 @@ export default {
 }
 .panle-content p {
   margin-bottom: 1px;
+  color: #333 !important;
 }
 </style>
 <style scoped>
